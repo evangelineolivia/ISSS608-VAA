@@ -5,22 +5,306 @@ author: "Evangeline Olivia"
 date: "`r Sys.Date()`"
 ---
 
-### <span style="color:#2a3ec2;">Install and Launch R Packages</span>
+### [Install and Launch R Packages]{style="color:#2a3ec2;"}
 
 ```{r}
 pacman::p_load(tidyverse)
 ```
 
-### <span style="color:#2a3ec2;">Importing Data</span>
+### [Importing Data]{style="color:#2a3ec2;"}
 
 ```{r}
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-### <span style="color:#2a3ec2;">Plotting A Simple Bar Chart</span>
+### [Plotting A Simple Bar Chart]{style="color:#2a3ec2;"}
 
 ```{r}
 ggplot(data = exam_data,aes(x=RACE)) +
   geom_bar()
 ```
 
+### [R Graphics VS ggplot()]{style="color:#2a3ec2;"}
+
+::: panel-tabset
+#### R Graphics
+
+```{r}
+hist(exam_data$MATHS)
+```
+
+#### ggplot2
+
+```{r}
+ggplot(data=exam_data, aes(x = MATHS)) +
+  geom_histogram(bins=10, 
+                 boundary = 100,
+                 color="black", 
+                 fill="grey") +
+  ggtitle("Distribution of Maths scores")
+```
+:::
+
+### [Grammar of Graphics]{style="color:#2a3ec2;"}
+
+-   **Data**: The dataset being plotted.
+
+-   **Aesthetics** take attributes of the data and use them to influence visual characteristics, such as position, colours, size, shape, or transparency.
+
+-   **Geometrics**: The visual elements used for our data, such as point, bar or line.
+
+-   **Facets** split the data into subsets to create multiple variations of the same graph (paneling, multiple plots).
+
+-   **Statistics**, statiscal transformations that summarise data (e.g. mean, confidence intervals).
+
+-   **Coordinate systems** define the plane on which data are mapped on the graphic.
+
+-   **Themes** modify all non-data components of a plot, such as main title, sub-title, y-aixs title, or legend background.
+
+### [ggplot2:data]{style="color:#2a3ec2;"}
+
+```{r}
+ggplot(data=exam_data)
+```
+
+::: callout-note
+## Note
+
+-   A blank canvas appears.
+-   `ggplot()` initializes a ggplot object.
+-   The `data` argument defines the dataset to be used for plotting.
+-   If the dataset is not already a data.frame, it will be converted to one by `fortify()`.
+:::
+
+### [ggplot2: Aesthetic mappings]{style="color:#2a3ec2;"}
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS))
+```
+
+::: callout-note
+## Note
+
+-   ggplot includes the x-axis and the axis’s label.
+:::
+
+### [ggplot2: geom]{style="color:#2a3ec2;"}
+
+Geometric objects are the actual marks we put on a plot. Examples include:
+
+-   geom_point for drawing individual points (e.g., a scatter plot)
+-   geom_line for drawing lines (e.g., for a line charts) - geom_smooth for drawing smoothed lines (e.g., for simple trends or approximations)
+-   geom_bar for drawing bars (e.g., for bar charts)
+-   geom_histogram for drawing binned values (e.g. a histogram)
+-   geom_polygon for drawing arbitrary shapes
+-   geom_map for drawing polygons in the shape of a map! (You can access the data to use for these maps by using the map_data() function).
+
+::: panel-tabset
+#### geom_bar
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()
+```
+
+#### geom_dotplot
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(binwidth=2.5,         
+               dotsize = 0.5) +      
+  scale_y_continuous(NULL,           
+                     breaks = NULL)  
+```
+
+#### geom_histogram()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_histogram()      
+```
+
+#### geom-density()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS, 
+           colour = GENDER)) +
+  geom_density() 
+```
+
+#### geom_boxplot()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS,       
+           x= GENDER)) +    
+  geom_boxplot()  
+```
+
+#### geom_boxplot() : notches
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot(notch=TRUE) 
+```
+
+#### geom_violin()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_violin()
+```
+
+#### geom_point()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point()     
+```
+:::
+
+#### combined geom objects
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot() +                    
+  geom_point(position="jitter", 
+             size = 0.5)           
+```
+
+### [ggplot2: stat]{style="color:#2a3ec2;"}
+
+#### [Working with Stat()]{style="color:#2a3ec2;"}
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  stat_summary(geom = "point",       
+               fun = "mean",         
+               colour ="red",        
+               size=4)           
+```
+
+#### [Working with Geom()]{style="color:#2a3ec2;"}
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun="mean",           
+             colour="red",          
+             size=4)                 
+```
+
+### [Best Fit Curve for Scatterplot]{style="color:#2a3ec2;"}
+
+geom_smooth() is used to plot a best fit curve on the scatterplot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(size=0.5)      
+```
+
+The default smoothing line method can be overwritten as :
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              linewidth=0.5)
+```
+
+### [ggplot2: Facets]{style="color:#2a3ec2;"}
+
+::: panel-tabset
+#### facet_wrap()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_wrap(~ CLASS)
+```
+
+#### facet_grid()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_grid(~ CLASS)
+```
+:::
+
+### [ggplot2: Coordinates]{style="color:#2a3ec2;"}
+
+::: panel-tabset
+#### coord_flip()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip()
+```
+#### coord_cartesian()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+```
+:::
+
+-   [`coord_cartesian()`](https://ggplot2.tidyverse.org/reference/coord_cartesian.html): the default cartesian coordinate systems, where you specify x and y values (e.g. allows you to zoom in or out).
+-   [`coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.html): a cartesian system with the x and y flipped.
+-   [`coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html): a cartesian system with a "fixed" aspect ratio (e.g. 1.78 for a "widescreen" plot).
+-   [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html): a coordinate system that approximates a good aspect ratio for maps.
+
+### [ggplot2: themes]{style="color:#2a3ec2;"}
+::: panel-tabset
+#### theme_gray()
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()+
+  theme_gray()
+```
+
+#### theme_classic()
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()+
+  theme_classic()
+```
+#### theme_light()
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()+
+  theme_light()
+```
