@@ -22,5 +22,4 @@ exam_data <- read_csv("data/Exam_data.csv")
 ```{r}
 ggplot(data = exam_data,aes(x=RACE)) +
   geom_bar()
-
 ```
