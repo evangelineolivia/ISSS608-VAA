@@ -1,0 +1,25 @@
+---
+title: "Hands on Exercise 1"
+subtitle : "A Layered Grammar of Graphics: ggplot2 methods"
+author: "Evangeline Olivia"
+date: "`r Sys.Date()`"
+---
+
+### <span style="color:#2a3ec2;">Install and Launch R Packages</span>
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+### <span style="color:#2a3ec2;">Importing Data</span>
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+### <span style="color:#2a3ec2;">Plotting A Simple Bar Chart</span>
+
+```{r}
+ggplot(data = exam_data,aes(x=RACE)) +
+  geom_bar()
+```

@@ -1,1 +1,5 @@
 /* css styles */
+.navbar-brand,
+.navbar-nav li a {
+  font-size: 18px !important;
+}
