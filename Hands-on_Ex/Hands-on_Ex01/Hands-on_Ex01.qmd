@@ -1,6 +1,7 @@
 ---
 title: "Hands on Exercise 1"
 subtitle : "A Layered Grammar of Graphics: ggplot2 methods"
+author: "Evangeline Olivia"
 date: 2025-04-18
 date-modified: "last-modified"
 ---
