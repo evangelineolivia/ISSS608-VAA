@@ -1,40 +1,38 @@
 ---
 title: "Hands on Exercise 1"
-subtitle : "A Layered Grammar of Graphics: ggplot2 methods"
-author: "Evangeline Olivia"
 date: 2025-04-18
 date-modified: "last-modified"
 ---
-
-### [Install and Launch R Packages]{style="color:#2a3ec2;"}
+# A Layered Grammar of Graphics: ggplot2 methods
+## Install and Launch R Packages
 
 ```{r}
 pacman::p_load(tidyverse)
 ```
 
-### [Importing Data]{style="color:#2a3ec2;"}
+## Importing Data
 
 ```{r}
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-### [Plotting A Simple Bar Chart]{style="color:#2a3ec2;"}
+## Plotting A Simple Bar Chart
 
 ```{r}
 ggplot(data = exam_data,aes(x=RACE)) +
   geom_bar()
 ```
 
-### [R Graphics VS ggplot()]{style="color:#2a3ec2;"}
+## R Graphics VS ggplot()
 
 ::: panel-tabset
-#### R Graphics
+### R Graphics
 
 ```{r}
 hist(exam_data$MATHS)
 ```
 
-#### ggplot2
+### ggplot2
 
 ```{r}
 ggplot(data=exam_data, aes(x = MATHS)) +
@@ -46,7 +44,7 @@ ggplot(data=exam_data, aes(x = MATHS)) +
 ```
 :::
 
-### [Grammar of Graphics]{style="color:#2a3ec2;"}
+## Grammar of Graphics
 
 -   **Data**: The dataset being plotted.
 
@@ -62,14 +60,14 @@ ggplot(data=exam_data, aes(x = MATHS)) +
 
 -   **Themes** modify all non-data components of a plot, such as main title, sub-title, y-aixs title, or legend background.
 
-### [ggplot2:data]{style="color:#2a3ec2;"}
+## ggplot2:data
 
 ```{r}
 ggplot(data=exam_data)
 ```
 
 ::: callout-note
-## Note
+### Note
 
 -   A blank canvas appears.
 -   `ggplot()` initializes a ggplot object.
@@ -77,7 +75,7 @@ ggplot(data=exam_data)
 -   If the dataset is not already a data.frame, it will be converted to one by `fortify()`.
 :::
 
-### [ggplot2: Aesthetic mappings]{style="color:#2a3ec2;"}
+## ggplot2: Aesthetic mappings
 
 ```{r}
 ggplot(data=exam_data, 
@@ -85,12 +83,12 @@ ggplot(data=exam_data,
 ```
 
 ::: callout-note
-## Note
+### Note
 
 -   ggplot includes the x-axis and the axis’s label.
 :::
 
-### [ggplot2: geom]{style="color:#2a3ec2;"}
+## ggplot2: geom
 
 Geometric objects are the actual marks we put on a plot. Examples include:
 
@@ -102,7 +100,7 @@ Geometric objects are the actual marks we put on a plot. Examples include:
 -   geom_map for drawing polygons in the shape of a map! (You can access the data to use for these maps by using the map_data() function).
 
 ::: panel-tabset
-#### geom_bar
+### geom_bar
 
 ```{r}
 ggplot(data=exam_data, 
@@ -110,7 +108,7 @@ ggplot(data=exam_data,
   geom_bar()
 ```
 
-#### geom_dotplot
+### geom_dotplot
 
 ```{r}
 ggplot(data=exam_data, 
@@ -121,7 +119,7 @@ ggplot(data=exam_data,
                      breaks = NULL)  
 ```
 
-#### geom_histogram()
+### geom_histogram()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -129,7 +127,7 @@ ggplot(data=exam_data,
   geom_histogram()      
 ```
 
-#### geom-density()
+### geom-density()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -138,7 +136,7 @@ ggplot(data=exam_data,
   geom_density() 
 ```
 
-#### geom_boxplot()
+### geom_boxplot()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -147,7 +145,7 @@ ggplot(data=exam_data,
   geom_boxplot()  
 ```
 
-#### geom_boxplot() : notches
+### geom_boxplot() : notches
 
 ```{r}
 ggplot(data=exam_data, 
@@ -156,7 +154,7 @@ ggplot(data=exam_data,
   geom_boxplot(notch=TRUE) 
 ```
 
-#### geom_violin()
+### geom_violin()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -165,7 +163,7 @@ ggplot(data=exam_data,
   geom_violin()
 ```
 
-#### geom_point()
+### geom_point()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -175,7 +173,7 @@ ggplot(data=exam_data,
 ```
 :::
 
-#### combined geom objects
+### combined geom objects
 
 ```{r}
 ggplot(data=exam_data, 
@@ -186,9 +184,9 @@ ggplot(data=exam_data,
              size = 0.5)           
 ```
 
-### [ggplot2: stat]{style="color:#2a3ec2;"}
+## ggplot2: stat
 
-#### [Working with Stat()]{style="color:#2a3ec2;"}
+### Working with Stat()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -200,7 +198,7 @@ ggplot(data=exam_data,
                size=4)           
 ```
 
-#### [Working with Geom()]{style="color:#2a3ec2;"}
+### Working with Geom()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -212,7 +210,7 @@ ggplot(data=exam_data,
              size=4)                 
 ```
 
-### [Best Fit Curve for Scatterplot]{style="color:#2a3ec2;"}
+## Best Fit Curve for Scatterplot
 
 geom_smooth() is used to plot a best fit curve on the scatterplot.
 
@@ -234,10 +232,10 @@ ggplot(data=exam_data,
               linewidth=0.5)
 ```
 
-### [ggplot2: Facets]{style="color:#2a3ec2;"}
+## ggplot2: Facets
 
 ::: panel-tabset
-#### facet_wrap()
+### facet_wrap()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -246,7 +244,7 @@ ggplot(data=exam_data,
     facet_wrap(~ CLASS)
 ```
 
-#### facet_grid()
+### facet_grid()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -256,10 +254,10 @@ ggplot(data=exam_data,
 ```
 :::
 
-### [ggplot2: Coordinates]{style="color:#2a3ec2;"}
+## ggplot2: Coordinates
 
 ::: panel-tabset
-#### coord_flip()
+### coord_flip()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -267,7 +265,8 @@ ggplot(data=exam_data,
   geom_bar() +
   coord_flip()
 ```
-#### coord_cartesian()
+
+### coord_cartesian()
 
 ```{r}
 ggplot(data=exam_data, 
@@ -285,9 +284,11 @@ ggplot(data=exam_data,
 -   [`coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html): a cartesian system with a "fixed" aspect ratio (e.g. 1.78 for a "widescreen" plot).
 -   [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html): a coordinate system that approximates a good aspect ratio for maps.
 
-### [ggplot2: themes]{style="color:#2a3ec2;"}
+## ggplot2: themes
+
 ::: panel-tabset
-#### theme_gray()
+### theme_gray()
+
 ```{r}
 ggplot(data=exam_data, 
        aes(x=RACE)) +
@@ -295,17 +296,21 @@ ggplot(data=exam_data,
   theme_gray()
 ```
 
-#### theme_classic()
+### theme_classic()
+
 ```{r}
 ggplot(data=exam_data, 
        aes(x=RACE)) +
   geom_bar()+
   theme_classic()
 ```
-#### theme_light()
+
+### theme_light()
+
 ```{r}
 ggplot(data=exam_data, 
        aes(x=RACE)) +
   geom_bar()+
   theme_light()
 ```
+:::

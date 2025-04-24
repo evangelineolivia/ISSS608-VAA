@@ -26,6 +26,19 @@
   max-height: 100%; 
 }
 
+.dropdown-menu a.dropdown-item {
+  color: #DBA39A !important; /* Resting color */
+  font-weight: normal;
+}
+
+.dropdown-menu a.dropdown-item:hover,
+.dropdown-menu a.dropdown-item:focus,
+.dropdown-menu a.dropdown-item:active {
+  color: #DBA39A !important; 
+  font-weight: bold;
+  background-color: #F0DBDB !important;
+}
+
 
 /* Body */ 
 
@@ -38,9 +51,87 @@ body {
   line-height: 1.5;
 }
 
+/* Table Of Content */
+/* Sidebar title */
+.sidebar-title {
+  color: #DBA39A !important;
+}
+
+/* TOC link default color */
+.nav-link,
+.sidebar nav[role="doc-toc"] .nav-link {
+  color: #DBA39A !important;
+}
+
+/* TOC link on hover */
+.sidebar nav[role="doc-toc"] .nav-link:hover {
+  color: #B15E5E !important;
+  text-decoration: underline;
+}
+
+/* TOC link when active or current section */
+.sidebar nav[role="doc-toc"] .nav-link.active,
+.sidebar nav[role="doc-toc"] .nav-link[aria-current="true"] {
+  color: #A94442 !important;
+  font-weight: bold;
+}
+
 /* Headings */
+h1.title {
+  font-size: 36px;
+  color: #A94442;
+  font-weight: bold;
+}
 
 h1 {
     font-size: 2em;
     font-weight: bold; 
+    color: #DBA39A;
+}
+
+h2 {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: #DBA39A;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #DBA39A;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #DBA39A;
+}
+
+h5, h6 {
+    font-size: 1em;
+    font-weight: bold;
+    color: #DBA39A;
+}
+
+.header-section-number {
+  color: #DBA39A !important;
+}
+
+/* Link */
+/* Default link color */
+a {
+  color: #A94442; /* Change to any color you like */
+}
+
+/* Link color on hover */
+a:hover {
+  color: #A94442; /* Change to any color you like */
+  text-decoration: underline;
+}
+
+/* Code Chunks */
+
+code {
+  color: #DBA39A; /* Change to your preferred color */
+  font-weight: bold;
 }

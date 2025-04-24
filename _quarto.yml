@@ -20,5 +20,7 @@ format:
   html:
     css: styles.css
     toc: true
+    toc_float: true
+    number-sections: true
 
 editor: visual
