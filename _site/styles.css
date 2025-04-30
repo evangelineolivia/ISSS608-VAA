@@ -1,29 +1,39 @@
 /* css styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 .navbar-brand,
 .navbar-nav li a {
-  font-size: 18px !important;
+  font-size: 12px !important;
 }
 
 /* Navigation Bar */
-
 .navbar {
-  height: 100px; 
+  height: 60px; 
   background-color: #F5EBE0 !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.navbar-brand, .navbar-nav > li > a {
-  font-weight: bold; 
-  font-size: 18px; 
-  color: #DBA39A; 
+/* Navbar text and links */
+.navbar-brand, 
+.navbar-nav > li > a {
+  font-weight: bold;
+  font-size: 16px; 
+  color: #DBA39A;
+  line-height: 50px; 
 }
 
+/* Navbar brand logo */
 .navbar-brand {
-  height: 100px; 
-  text-align: center;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
+/* Navbar logo image */
 .navbar-brand img {
-  max-height: 100%; 
+  max-height: 50px; 
 }
 
 .dropdown-menu a.dropdown-item {
@@ -77,6 +87,10 @@ body {
 }
 
 /* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Nunito", sans-serif;
+}
+
 h1.title {
   font-size: 36px;
   color: #A94442;
@@ -132,6 +146,32 @@ a:hover {
 /* Code Chunks */
 
 code {
-  color: #DBA39A; /* Change to your preferred color */
+  color: #A94442; 
   font-weight: bold;
+}
+
+div.sourceCode {
+  border：none;
+  background-color: rgba(203, 191, 161, 0.1) !important;
+  padding: 5px; 
+  color: #333333; /* dark text inside pink background */
+  font-size: 16px;
+}
+
+pre.sourceCode code {
+  font-weight: bold;
+}
+
+/* callout-note */
+div.callout {
+  border: dotted 2px !important;
+  border-radius: 20px; 
+  padding: 1em; 
+  margin: 1em 0; 
+
+}
+div.callout-note {
+  border-color: #F2C6DE !important;
+  background-color: rgba(250, 237, 203, 0.3);
+  border-style: dashed;
 }
