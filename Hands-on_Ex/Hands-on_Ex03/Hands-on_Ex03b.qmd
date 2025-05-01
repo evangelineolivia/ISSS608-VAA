@@ -1,5 +1,6 @@
 ---
 title: "Hands on Exercise 3b"
+description : Programming Animated Statistical Graphics with R
 date: 2025-04-29
 date-modified: "last-modified"
 execute:

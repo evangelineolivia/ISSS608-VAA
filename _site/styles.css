@@ -175,3 +175,42 @@ div.callout-note {
   background-color: rgba(250, 237, 203, 0.3);
   border-style: dashed;
 }
+
+.quarto-grid-item .card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #A94442;
+}
+
+.quarto-grid-item .card-description {
+  color: #555;
+  font-size: 1rem;
+}
+
+.quarto-grid-item .card-date {
+  font-style: italic;
+  color: #888;
+}
+
+/* Unselected page button */
+.pagination .page-item .page-link {
+  color: #A94442;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Hover state */
+.pagination .page-item .page-link:hover {
+  background-color: #F5EBE0;
+  color: #A94442;
+  font-weight: bold;
+}
+
+/* Active page button */
+.pagination .page-item.active .page-link {
+  background-color: #A94442;  /* Change to your desired color */
+  border-color: #A94442;
+  color: white;
+  font-weight: bold;
+}

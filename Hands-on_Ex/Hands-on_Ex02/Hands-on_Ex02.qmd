@@ -1,5 +1,6 @@
 ---
 title: "Hands on Exercise 2"
+description : Beyond ggplot2 Fundamentals
 date: 2025-04-22
 date-modified: "last-modified"
 execute:
@@ -119,8 +120,8 @@ ggplot(data=exam_data,
 ggplot2 comes with eight [built-in themes](https://ggplot2.tidyverse.org/reference/ggtheme.html), they are: `theme_gray()`, `theme_bw()`, `theme_classic()`, `theme_dark()`, `theme_light()`, `theme_linedraw()`, `theme_minimal()`, and `theme_void()`.
 
 ::: panel-tabset
-
 ## theme_gray()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -130,6 +131,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_bw()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -139,6 +141,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_classic()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -148,6 +151,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_dark()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -157,6 +161,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_light()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -166,6 +171,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_linedraw()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -175,6 +181,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_minimal()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -184,6 +191,7 @@ ggplot(data = exam_data, aes(x = MATHS)) +
 ```
 
 ## theme_void()
+
 ```{r}
 ggplot(data = exam_data, aes(x = MATHS)) +
   geom_histogram(bins = 20, boundary = 100, color = "#A94442", fill = "#DBA39A") +
@@ -191,10 +199,10 @@ ggplot(data = exam_data, aes(x = MATHS)) +
   ggtitle("Distribution of Maths scores with theme_void()")+
   theme(plot.background = element_rect(fill = "#FEFCF3",color = NA))
 ```
-
 :::
 
 ### Working with ggtheme package
+
 [**ggthemes**](https://cran.r-project.org/web/packages/ggthemes/index.html) provides ['ggplot2' themes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/) that replicate the look of plots by Edward Tufte, Stephen Few, [Fivethirtyeight](https://fivethirtyeight.com/), [The Economist](https://www.economist.com/graphic-detail), 'Stata', 'Excel', and [The Wall Street Journal](https://www.pinterest.com/wsjgraphics/wsj-graphics/), among others.
 
 In the example below, *The Economist* theme is used.
@@ -214,14 +222,15 @@ ggplot(data=exam_data,
 
 [**hrbrthemes**](https://cran.r-project.org/web/packages/hrbrthemes/index.html) package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.
 
-:::: callout-note
+::: callout-note
 -   `axis_title_size` argument is used to increase the font size of the axis title to 18,
 -   `base_size` argument is used to increase the default axis label to 15, and
 -   `grid` argument is used to remove the x-axis grid lines.
-::::
+:::
 
 ::: panel-tabset
 ## Default
+
 ```{r}
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
@@ -235,6 +244,7 @@ ggplot(data=exam_data,
 ```
 
 ## Customized
+
 ```{r}
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
@@ -251,9 +261,11 @@ ggplot(data=exam_data,
 :::
 
 ## Beyond Single Graph
+
 It's common to need multiple graphs to effectively convey a visual story. Several ggplot2 extensions offer tools for combining multiple plots into a single figure.
 
 First, let us create three statistical graphics:
+
 ```{r}
 p1 <- ggplot(data=exam_data, 
              aes(x = MATHS)) +
@@ -286,6 +298,7 @@ p3 <- ggplot(data=exam_data,
   ggtitle("English scores versus Maths scores for Primary 3")+
   theme(plot.background = element_rect(fill = "#FEFCF3",color = NA))
 ```
+
 ### Creating Composite Graphics: pathwork methods
 
 There are several ggplot2 extension's functions support the needs to prepare composite figure by combining several graphs such as [`grid.arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) of **gridExtra** package and [`plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) of [**cowplot**](https://wilkelab.org/cowplot/index.html) package. In this section, I am going to shared with you an ggplot2 extension called [**patchwork**](https://patchwork.data-imaginist.com/index.html) which is specially designed for combining separate ggplot2 graphs into a single figure.
@@ -297,6 +310,7 @@ Patchwork package has a very simple syntax where we can create layouts super eas
 -   Two-Row Layout using the Division Sign `/`
 
 ### Combining two ggplot2 graphs
+
 ```{r}
 p1 + p2
 ```
@@ -314,6 +328,7 @@ We can plot more complex composite by using appropriate operators. For example, 
 ```
 
 ### Creating a composite figure with tag
+
 In order to identify subplots in text, **patchwork** also provides auto-tagging capabilities as shown in the figure below.
 
 ::: panel-tabset
@@ -348,13 +363,13 @@ p3 + inset_element(p2, left = 0.02, bottom = 0.7, right = 0.5,top = 1)
 ```
 
 ### Creating a composite figure by using patchwork and ggtheme
+
 Figure below is created by combining patchwork and `theme_economist()` of ggthemes package discussed earlier.
 
 ```{r}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_economist()
 ```
-
 
 ## Reference
 

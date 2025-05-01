@@ -1,5 +1,6 @@
 ---
 title: "Hands on Exercise 3a"
+description : Programming Interactive Data Visualisation with R
 date: 2025-04-29
 date-modified: "last-modified"
 execute:

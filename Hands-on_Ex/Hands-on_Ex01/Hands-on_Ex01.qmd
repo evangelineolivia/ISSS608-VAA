@@ -1,9 +1,12 @@
 ---
 title: "Hands on Exercise 1"
+description : A Layered Grammar of Graphics ggplot2 methods
 date: 2025-04-18
 date-modified: "last-modified"
 ---
+
 # A Layered Grammar of Graphics: ggplot2 methods
+
 ## Install and Launch R Packages
 
 ```{r}
