@@ -176,7 +176,8 @@ div.callout-note {
   border-style: dashed;
 }
 .quarto-grid-item , .quarto-listing-item {
-  border: 2px solid #A94442;  
+  border: 2px solid #A94442;
+  border-radius: 20px; 
 }
 .quarto-grid-item .card-title {
   font-size: 1.1rem;
