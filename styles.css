@@ -175,11 +175,14 @@ div.callout-note {
   background-color: rgba(250, 237, 203, 0.3);
   border-style: dashed;
 }
-
+.quarto-grid-item , .quarto-listing-item {
+  border: 2px solid #A94442;  
+}
 .quarto-grid-item .card-title {
   font-size: 1.1rem;
   font-weight: bold;
   color: #A94442;
+  
 }
 
 .quarto-grid-item .card-description {
