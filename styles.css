@@ -218,3 +218,10 @@ div.callout-note {
   color: white;
   font-weight: bold;
 }
+
+.footnote {
+  font-size: 0.9em;
+  color: #333333;
+  font-style: italic;
+  margin-top: 0.5em;
+}

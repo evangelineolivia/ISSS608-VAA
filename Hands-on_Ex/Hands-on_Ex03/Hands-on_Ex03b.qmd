@@ -31,13 +31,13 @@ When creating animations, the plot does not actually move. Instead, many individ
 
 Before we dive into the steps for creating an animated statistical graph, it’s important to understand some of the key concepts and terminology related to this type of visualization.
 
-- **Frame**: In an animated line graph, a frame shows data at a specific time or for a specific category. As the frame changes, the graph updates accordingly.
+-   **Frame**: In an animated line graph, a frame shows data at a specific time or for a specific category. As the frame changes, the graph updates accordingly.
 
-- **Animation Attributes**: These are settings that control the animation’s behavior—such as frame duration, transition style (easing), and whether the animation starts fresh or continues from the current frame.
+-   **Animation Attributes**: These are settings that control the animation’s behavior—such as frame duration, transition style (easing), and whether the animation starts fresh or continues from the current frame.
 
 ::: {.callout-note appearance="simple"}
-- If we are conducting an exploratory data analysis, a animated graphic may not be worth the time investment. 
-- However, if we are giving a presentation, a few well-placed animated graphics can help an audience connect with your topic remarkably better than static counterparts.
+-   If we are conducting an exploratory data analysis, a animated graphic may not be worth the time investment.
+-   However, if we are giving a presentation, a few well-placed animated graphics can help an audience connect with your topic remarkably better than static counterparts.
 :::
 
 ## Getting Started
@@ -60,7 +60,6 @@ pacman::p_load(readxl, gifski, gapminder,
 ### Importing the data
 
 In this hands-on exercise, the *Data* worksheet from *GlobalPopulation* Excel workbook will be used.
-
 
 ```{r}
 col <- c("Country", "Continent")
@@ -86,9 +85,7 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
   mutate(Year = as.integer(Year))
 ```
 
-
 Instead of using `mutate_at()`, [`across()`](https://dplyr.tidyverse.org/reference/across.html) can be used to derive the same outputs.
-
 
 ```{r}
 col <- c("Country", "Continent")
@@ -111,7 +108,6 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 ### Building a Static Population Bubble Plot
 
 In the code chunk below, the basic ggplot2 functions are used to create a static bubble plot.
-
 
 ```{r}
 #| code-fold: true
@@ -136,7 +132,6 @@ In the code chunk below,
 -   [`transition_time()`](https://gganimate.com/reference/transition_time.html) of **gganimate** is used to create transition through distinct states in time (i.e. Year).
 -   `ease_aes()` is used to control easing of aesthetics. The default is `linear`. Other methods are: quadratic, cubic, quartic, quintic, sine, circular, exponential, elastic, back, and bounce.
 
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show Code"
@@ -156,6 +151,7 @@ ggplot(globalPop, aes(x = Old, y = Young,
 ```
 
 ## Animated Data Visualisation: plotly
+
 In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame animations through the `frame` argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
 
 ### Building an animated bubble plot: `ggplotly()` method
@@ -213,6 +209,7 @@ gg <- ggplot(globalPop,
 
 ggplotly(gg)
 ```
+
 ### Building an animated bubble plot: `plot_ly()` method
 
 In this sub-section, we will learn how to create an animated bubble plot by using `plot_ly()` method.
