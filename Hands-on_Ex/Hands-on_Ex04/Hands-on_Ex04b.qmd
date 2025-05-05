@@ -194,6 +194,7 @@ exam1 <- exam %>%
 )
 ```
 
+
 In this code chunk below [*ggbarstats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html) is used to build a visual for Significant Test of Association
 
 ```{r}
