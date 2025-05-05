@@ -105,7 +105,6 @@ funnel_plot(
 
 ### FunnelPlotR methods: Makeover 2
 
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show Code"
@@ -125,7 +124,6 @@ funnel_plot(
 ```
 
 ::: {.callout-note appearance="simple"}
-
 -   `label = NA` argument is to removed the default label outliers feature.
 -   `title` argument is used to add plot title.
 -   `x_label` and `y_label` arguments are used to add/edit x-axis and y-axis titles.
@@ -241,4 +239,3 @@ fp_ggplotly
 -   [Changing funnel plot options](https://nhs-r-community.github.io/FunnelPlotR/articles/changing_funnel_plot_options.html)
 
 -   [ggplot2](https://ggplot2.tidyverse.org/) package.
-
