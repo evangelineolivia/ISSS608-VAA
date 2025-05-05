@@ -1,6 +1,6 @@
 /* css styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap');
 
 .navbar-brand,
 .navbar-nav li a {
@@ -53,6 +53,7 @@
 /* Body */ 
 
 body {
+  font-family: 'Roboto', sans-serif;
   width: 90%;
   margin: 30;
   padding: 20;
@@ -60,6 +61,7 @@ body {
   font-size: 15px;
   line-height: 1.5;
 }
+
 
 /* Table Of Content */
 /* Sidebar title */
@@ -224,4 +226,10 @@ div.callout-note {
   color: #333333;
   font-style: italic;
   margin-top: 0.5em;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
