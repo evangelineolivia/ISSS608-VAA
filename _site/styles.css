@@ -233,9 +233,3 @@ div.callout-note {
   margin-left: auto;
   margin-right: auto;
 }
-
-.quarto-title-block .title {
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-}
