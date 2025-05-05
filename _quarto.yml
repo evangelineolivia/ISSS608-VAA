@@ -5,7 +5,7 @@ website:
   title: "ISSS608"
   favicon: images/minilogo.png
   navbar:
-    logo: images/mylogo.png
+    logo: images/navbar.png
     title : false
     left:
       - text : "Hands on Exercise"
