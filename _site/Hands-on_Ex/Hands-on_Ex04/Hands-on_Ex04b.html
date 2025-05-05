@@ -481,14 +481,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="6.3.9" class="anchored" data-anchor-id="significant-test-of-association-depedence-ggbarstats-methods"><span class="header-section-number">6.3.9</span> Significant Test of Association (Depedence) : <em>ggbarstats()</em> methods</h3>
 <p>In the code chunk below, the Maths scores is binned into a 4-class variable by using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut"><em>cut()</em></a>.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>exam1 <span class="ot">&lt;-</span> exam <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MATHS_bins =</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">cut</span>(MATHS, </span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>,<span class="dv">75</span>,<span class="dv">85</span>,<span class="dv">100</span>))</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>In this code chunk below <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html"><em>ggbarstats()</em></a> is used to build a visual for Significant Test of Association</p>
 <div class="cell">
