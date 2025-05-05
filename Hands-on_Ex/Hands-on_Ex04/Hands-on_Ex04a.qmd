@@ -277,7 +277,6 @@ ggplot(exam,
   theme_economist()
 ```
 
-
 ## Reference
 
 -   [Introducing Ridgeline Plots (formerly Joyplots)](https://blog.revolutionanalytics.com/2017/07/joyplots.html)

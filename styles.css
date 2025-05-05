@@ -2,6 +2,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap');
 
+#quarto-announcement.alert-light {
+  background-color: #FFFACD !important;  /* custom background */
+  color: black !important;             /* white text */
+  border: none !important;
+}
+
+#quarto-announcement.alert-light a {
+  color: #A94442 !important;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .navbar-brand,
 .navbar-nav li a {
   font-size: 18px !important;
@@ -177,6 +189,7 @@ div.callout-note {
   background-color: rgba(250, 237, 203, 0.3);
   border-style: dashed;
 }
+
 .quarto-grid-item , .quarto-listing-item {
   border: 2px solid #A94442;
   border-radius: 20px; 
@@ -232,4 +245,10 @@ div.callout-note {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+img {
+  display: block;              
+  margin: 0 auto;              
+  max-width: 100%;             
 }
