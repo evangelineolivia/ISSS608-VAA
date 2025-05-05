@@ -3,6 +3,7 @@ project:
 
 website:
   title: ""
+  favicon: images/miniicon
   navbar:
     logo: images/mylogo.png
     left:
