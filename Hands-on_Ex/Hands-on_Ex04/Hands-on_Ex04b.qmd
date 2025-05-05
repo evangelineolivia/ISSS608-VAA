@@ -1,0 +1,68 @@
+---
+title: "Hands on Exercise 4a"
+description : Visual Statistical Analysis
+date: 2025-04-29
+date-modified: "last-modified"
+execute:
+  warning: false
+  freeze: true
+format:
+  html:
+    number-offset: 5
+---
+
+# Visual Statistical Analysis
+
+## Learning Outcome
+
+In this hands-on exercise, we will gain hands-on experience on using:
+
+-   ggstatsplot package to create visual graphics with rich statistical information,
+
+-   performance package to visualise model diagnostics, and
+
+-   parameters package to visualise model parameters
+
+
+## Visual Statistical Analysis with **ggstatsplot**
+
+[**ggstatsplot**](https://indrajeetpatil.github.io/ggstatsplot/index.html) is an extension of [**ggplot2**](https://ggplot2.tidyverse.org/) package for creating graphics with details from statistical tests included in the information-rich plots themselves.
+
+-   To provide alternative statistical inference methods by default.
+-   To follow best practices for statistical reporting. For all statistical tests reported in the plots, the default template abides by the [APA](https://my.ilstu.edu/~jhkahn/apastats.html) gold standard for statistical reporting. For example, here are results from a robust t-test:
+
+## Getting Started
+
+### Installing and launching R packages
+
+In this exercise, **ggstatsplot** and **tidyverse** will be used.
+
+```{r}
+pacman::p_load(ggstatsplot, tidyverse)
+```
+
+### Importing data
+
+```{r}
+exam <- read_csv("data/Exam_data.csv")
+head(exam)
+```
+
+### One-sample test: *gghistostats()* method
+
+In the code chunk below, [*gghistostats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html) is used to to build an visual of one-sample test on English scores.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+
+set.seed(1234)
+
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  xlab = "English scores"
+)
+```
