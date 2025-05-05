@@ -205,3 +205,4 @@ ggbarstats(exam1,
            y = GENDER)
 ```
 
+
