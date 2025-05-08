@@ -1,6 +1,6 @@
 ---
 title: "Hands on Exercise 4a"
-description : Visualising Likert Scale Data with Divergining Stacked Bar Chart
+description : Visualising Distribution
 date: 2025-05-04
 date-modified: "last-modified"
 execute:
@@ -11,7 +11,7 @@ format:
     number-offset: 4
 ---
 
-# Visualising Likert Scale Data with Divergining Stacked Bar Chart
+# Visualising Distribution
 
 ## Learning Outcome
 
