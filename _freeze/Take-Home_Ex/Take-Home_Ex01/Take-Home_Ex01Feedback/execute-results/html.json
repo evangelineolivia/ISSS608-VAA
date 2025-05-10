@@ -1,0 +1,17 @@
+{
+  "hash": "c9f33de4425b89df54a40b330c5c5029",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Take Home Exercise 1 Feedback\"\ndescription : Learn from Peers \ndate: 2025-05-08\ndate-modified: \"last-modified\"\nexecute:\n  warning: false\n  freeze: true\nformat: \n  html:\n    number-sections: false\neditor: visual\n---\n\n\n\n## Task\n\nChoose one of my classmate’s submissions and identify three strengths based on good design principles, as well as three aspects that could be improved. Based our your critique, create an improved version of the data visualization.\n\n## Peer Review\n\nThis review is based on one of my classmate submission which is available at [here](https://isss608vaarajesh01.netlify.app/takehomeexercises/take_homeexercise1/take_homeexercise1)\n\n## The Data\n\nThe dataset titled “Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024”, published by the [Department of Statistics Singapore (DOS)]((https://www.singstat.gov.sg/)) was used for our class assignment\n\n## Loading Packages\n\nBelow is the package that was downloaded by the peer.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n\n\nHere is some additional packages that I use for this peer review :\n\n\n\n::: {.cell}\n\n:::\n\n\n\nI notice that there is some missing library to make the plot (dplyr)\n\n## Loading Data\n\nThe code chunk below loads the data. I’ve prepared two datasets, one for the original plot and another is for the makeover.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\noriginaldata <- read_csv(\"data/respopagesex2024.csv\")\n\nmakeover <- read_csv(\"data/respopagesex2024.csv\")\n```\n:::\n\n\n\n## Visualization Review\n\n### Visualisation 2: Top 10 Planning Areas by Total Population\n\n#### The Original Visualization\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntop_pa <- originaldata %>%\n  group_by(PA) %>%\n  summarise(Total_Pop = sum(Pop)) %>%\n  arrange(desc(Total_Pop)) %>%\n  slice_head(n = 10)\n\nggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop)) +\n  geom_col(fill = \"steelblue\") +\n  coord_flip() +\n  labs(title = \"Top 10 Most Populous Planning Areas (2024)\",\n       x = \"Planning Area\", y = \"Total Population\") +\n  theme_minimal()\n```\n\n::: {.cell-output-display}\n![](Take-Home_Ex01Feedback_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n\n\n#### Makeover Visualization\n\n\n\n::: {.cell}\n\n:::\n\n\n\n## Feedbacks\n\n### Good Design Points :\n\n1.  Well Ordered from Highest Population to Lowest\n\n### Areas for Improvement :\n",
+    "supporting": [
+      "Take-Home_Ex01Feedback_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

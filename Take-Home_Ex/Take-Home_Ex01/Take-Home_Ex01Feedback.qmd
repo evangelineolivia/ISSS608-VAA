@@ -1,4 +1,90 @@
 ---
-title: "Take-Home_Ex01Feedback"
-format: html
+title: "Take Home Exercise 1 Feedback"
+description : Learn from Peers 
+date: 2025-05-08
+date-modified: "last-modified"
+execute:
+  warning: false
+  freeze: true
+format: 
+  html:
+    number-sections: false
+editor: visual
 ---
+
+## Task
+
+Choose one of my classmate’s submissions and identify three strengths based on good design principles, as well as three aspects that could be improved. Based our your critique, create an improved version of the data visualization.
+
+## Peer Review
+
+This review is based on one of my classmate submission which is available at [here](https://isss608vaarajesh01.netlify.app/takehomeexercises/take_homeexercise1/take_homeexercise1)
+
+## The Data
+
+The dataset titled “Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024”, published by the [Department of Statistics Singapore (DOS)]((https://www.singstat.gov.sg/)) was used for our class assignment
+
+## Loading Packages
+
+Below is the package that was downloaded by the peer.
+
+```{r}
+library(tidyverse)
+```
+
+Here is some additional packages that I use for this peer review :
+
+```{r}
+
+```
+
+
+## Loading Data
+
+The code chunk below loads the data. I’ve prepared two datasets, one for the original plot and another is for the makeover.
+
+```{r}
+originaldata <- read_csv("data/respopagesex2024.csv")
+
+makeover <- read_csv("data/respopagesex2024.csv")
+```
+
+## Visualization Review
+
+### Visualisation 2: Top 10 Planning Areas by Total Population
+
+#### The Original Visualization
+
+```{r}
+top_pa <- originaldata %>%
+  group_by(PA) %>%
+  summarise(Total_Pop = sum(Pop)) %>%
+  arrange(desc(Total_Pop)) %>%
+  slice_head(n = 10)
+
+ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Top 10 Most Populous Planning Areas (2024)",
+       x = "Planning Area", y = "Total Population") +
+  theme_minimal()
+```
+
+#### Makeover Visualization
+
+```{r}
+
+
+```
+
+## Feedbacks
+
+### Good Design Points :
+
+1.  Well Ordered from Highest Population to Lowest
+2.  Clear Axis Label
+
+### Areas for Improvement :
+
+1.  X-Axis Values Format :
+I believe as a general audiance especially for those who does not have any mathemathical background, scientific notation
