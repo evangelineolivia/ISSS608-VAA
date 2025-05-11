@@ -156,6 +156,7 @@ ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop, fill = Total_Pop))
 
 -   `scale_fill_gradient(low = "#D6EAF8", high = "#154360")` was added to apply gradient color scheme to the bars.
 
+-    The `labs(..., subtitle = "Source: Department of Statistics, Singapore (DOS), ...)"` was also added to provide data source information so that the reader could understand the credibillity of the chart.
 
 ## References
 

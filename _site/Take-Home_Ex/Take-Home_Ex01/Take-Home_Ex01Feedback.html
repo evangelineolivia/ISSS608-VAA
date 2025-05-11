@@ -375,7 +375,7 @@ Areas for Improvement
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Planning Area"</span>, </span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Population"</span></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#AED6F1"</span>, <span class="at">high =</span> <span class="st">"#2E86C1"</span>) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#D6EAF8"</span>, <span class="at">high =</span> <span class="st">"#154360"</span>) <span class="sc">+</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
@@ -393,7 +393,10 @@ Areas for Improvement
 </div>
 <ul>
 <li><p><code>fill = Total_Pop</code> was added inside <code>aes()</code> to create a color gradient that represents population.</p></li>
-<li><p><code>geom_text(aes(label = comma(Total_Pop)), hjust = -0.1, size = 3.5)</code> was added to display population values on each bar.</p></li>
+<li><p><code>geom_text(aes(label = comma(Total_Pop)), ...)</code> was added to display population values on each bar.</p></li>
+<li><p><code>scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.15)))</code> was added to format the y-axis with commas instead of scientific notation and also expand the axis range so that the text labels per bar could fit into the chart.</p></li>
+<li><p><code>scale_fill_gradient(low = "#D6EAF8", high = "#154360")</code> was added to apply gradient color scheme to the bars.</p></li>
+<li><p>The <code>labs(..., subtitle = "Source: Department of Statistics, Singapore (DOS), ...)"</code> was also added to provide data source information so that the reader could understand the credibillity of the chart.</p></li>
 </ul>
 </section>
 </section>
