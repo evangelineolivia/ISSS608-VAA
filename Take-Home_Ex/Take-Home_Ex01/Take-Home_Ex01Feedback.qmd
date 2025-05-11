@@ -127,9 +127,10 @@ top_pa <- makeover %>%
   arrange(desc(Total_Pop)) %>%
   slice_head(n = 10)
 
-ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop, fill = Total_Pop)) +
+ggplot(top_pa, 
+  aes(x = reorder(PA, Total_Pop), y = Total_Pop, fill = Total_Pop)) +
   geom_col(show.legend = FALSE) +
-  geom_text(aes(label = comma(Total_Pop)), hjust = -0.1, size = 3.5) +
+  geom_text(aes(label = comma(Total_Pop)), hjust = -0.15, size = 3) +
   coord_flip() +
   scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.15))) +
   labs(
@@ -139,7 +140,7 @@ ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop, fill = Total_Pop))
     y = "Total Population"
   ) +
   scale_fill_gradient(low = "#D6EAF8", high = "#154360") +
-  theme_minimal(base_size = 12) +
+  theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14),
     plot.subtitle = element_text(size = 10),
