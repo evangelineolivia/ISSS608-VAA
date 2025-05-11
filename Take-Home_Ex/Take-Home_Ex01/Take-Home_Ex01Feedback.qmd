@@ -35,9 +35,8 @@ library(tidyverse)
 Here is some additional packages that I use for this peer review :
 
 ```{r}
-
+library(scales)
 ```
-
 
 ## Loading Data
 
@@ -45,7 +44,8 @@ The code chunk below loads the data. I’ve prepared two datasets, one for the o
 
 ```{r}
 originaldata <- read_csv("data/respopagesex2024.csv")
-
+```
+```{r}
 makeover <- read_csv("data/respopagesex2024.csv")
 ```
 
@@ -70,21 +70,93 @@ ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop)) +
   theme_minimal()
 ```
 
+<h2 style="color:#A94442;">Feedbacks</h2>
+
+<h3 style="color:#A94442;">Overall Rating – Quadrant III:</h3>
+![](data/img.jpg){width=50%}
+
+Referring to the Clarity vs. Aesthetics framework by Ben Jones, I would place this chart in Quadrant III, which represents visualizations that are both confusing and unattractive. Visually, the chart could be enhanced with better spacing, labeling, and color contrast to improve its aesthetic appeal and overall clarity.
+
+<h3 style="color:#2ECC71;">Good Design Points :</h3>
+
+**1.  Well Ordered from Highest Population to Lowest**
+
+<div style="margin-left: 2em;">
+The bars are arranged in descending order, starting from the planning area with the highest population at the top to the lowest at the bottom. With this type of ordering it helps the audience especially for general readers to quickly grasp the ranking of each area without the need to compare individual values. Thus, this type of graph enhance the readanility and allows easy visual comparison across planning areas.
+</div>
+
+**2.  Clear Axis Label**
+
+<div style="margin-left: 2em;">
+Both the x-axis and y-axis title are clearly labeled which ensure the readers can immediately understand what the chart is showing without additional need of explanation.
+</div>
+
+**3.   Horizontal Layout **
+
+<div style="margin-left: 2em;">
+Using horizontal bars is well considered design choice, especially dealing with long category names such as "Jurong West" and "Choa Chu Kang". If the writer decided to use vertical bar charts, lenghty category names often will become overlaped which can significantly reduce readability.
+</div>
+
+
+<h3 style="color:#E74C3C;">Areas for Improvement</h3>
+
+**1.  X-Axis Values Format**
+
+<div style="margin-left: 2em;">
+I believe as a general audience especially for those who does not have any mathemathical background, scientific notation like `1e+05` would be hard to understand and confusing. It is not immediately clear so instead I would suggest using some basic mathemathical formatting like (comma) would be more friendly and easier to interpret for general audience.
+</div>
+
+**2.  Lack of Data Labels on Bars**
+
+<div style="margin-left: 2em;">
+In this case, since the chart is presented using a static chart (without interactive features), as an audience it is impossible for us to know the exact population per planning areas. As a result this chart becomes somewhat limited in usefulness eventhough it clearly shows the ranking of the planning area. In my opinion, adding data labels would greatly enhance the clarity and make the chart more informative.
+</div>
+
+**3.  Monochromatic Color Scheme**
+
+<div style="margin-left: 2em;">
+Since the chart uses a single color (steelblue) for all bars, it is harder to distinguish or emphasize which one is the top ranked area. In my opinion choosing this kind of visualization makes a limitation for the visual impact. Including color variation (gradient) based on the population size would make the chart more engaging and help the readers to draw attention to the most important values.
+</div>
+
 #### Makeover Visualization
 
 ```{r}
+top_pa <- makeover %>%
+  group_by(PA) %>%
+  summarise(Total_Pop = sum(Pop), .groups = "drop") %>%
+  arrange(desc(Total_Pop)) %>%
+  slice_head(n = 10)
 
-
+ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop, fill = Total_Pop)) +
+  geom_col(show.legend = FALSE) +
+  geom_text(aes(label = comma(Total_Pop)), hjust = -0.1, size = 3.5) +
+  coord_flip() +
+  scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title = "Top 10 Most Populous Planning Areas (2024)",
+    subtitle = "Source: Department of Statistics, Singapore (DOS)",
+    x = "Planning Area", 
+    y = "Total Population"
+  ) +
+  scale_fill_gradient(low = "#D6EAF8", high = "#154360") +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 10),
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10))
+  )
 ```
 
-## Feedbacks
+-   `fill = Total_Pop` was added inside `aes()` to create a color gradient that represents population.
 
-### Good Design Points :
+-   `geom_text(aes(label = comma(Total_Pop)), ...)` was added to display population values on each bar.
 
-1.  Well Ordered from Highest Population to Lowest
-2.  Clear Axis Label
+-   `scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.15)))` was added to format the y-axis with commas instead of scientific notation and also expand the axis range so that the text labels per bar could fit into the chart.
 
-### Areas for Improvement :
+-   `scale_fill_gradient(low = "#D6EAF8", high = "#154360")` was added to apply gradient color scheme to the bars.
 
-1.  X-Axis Values Format :
-I believe as a general audiance especially for those who does not have any mathemathical background, scientific notation
+
+## References
+
+[**Data visualization: Clarity or aesthetics?**](https://dataremixed.com/2012/05/data-visualization-clarity-or-aesthetics/)

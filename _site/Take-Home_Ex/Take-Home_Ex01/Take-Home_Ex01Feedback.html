@@ -213,11 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#visualisation-2-top-10-planning-areas-by-total-population" id="toc-visualisation-2-top-10-planning-areas-by-total-population" class="nav-link" data-scroll-target="#visualisation-2-top-10-planning-areas-by-total-population">Visualisation 2: Top 10 Planning Areas by Total Population</a></li>
   </ul></li>
-  <li><a href="#feedbacks" id="toc-feedbacks" class="nav-link" data-scroll-target="#feedbacks">Feedbacks</a>
-  <ul class="collapse">
-  <li><a href="#good-design-points" id="toc-good-design-points" class="nav-link" data-scroll-target="#good-design-points">Good Design Points :</a></li>
-  <li><a href="#areas-for-improvement" id="toc-areas-for-improvement" class="nav-link" data-scroll-target="#areas-for-improvement">Areas for Improvement :</a></li>
-  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -249,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 10, 2025</p>
+      <p class="date-modified">May 11, 2025</p>
     </div>
   </div>
     
@@ -279,63 +275,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is some additional packages that I use for this peer review :</p>
-<p>I notice that there is some missing library to make the plot (dplyr)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="loading-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-data">Loading Data</h2>
 <p>The code chunk below loads the data. I’ve prepared two datasets, one for the original plot and another is for the makeover.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>originaldata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>makeover <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>originaldata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>makeover <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualization-review" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-review">Visualization Review</h2>
 <section id="visualisation-2-top-10-planning-areas-by-total-population" class="level3">
-<h3 class="anchored" data-anchor-id="visualisation-2-top-10-planning-areas-by-total-population">Visualisation 2: Top 10 Planning Areas by Total Population</h3>
+<h3 class="anchored">Visualisation 2: Top 10 Planning Areas by Total Population</h3>
 <section id="the-original-visualization" class="level4">
-<h4 class="anchored" data-anchor-id="the-original-visualization">The Original Visualization</h4>
+<h4 class="anchored">The Original Visualization</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>top_pa <span class="ot">&lt;-</span> originaldata <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PA) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Pop =</span> <span class="fu">sum</span>(Pop)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Pop)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_pa, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(PA, Total_Pop), <span class="at">y =</span> Total_Pop)) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top 10 Most Populous Planning Areas (2024)"</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Planning Area"</span>, <span class="at">y =</span> <span class="st">"Total Population"</span>) <span class="sc">+</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>top_pa <span class="ot">&lt;-</span> originaldata <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PA) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Pop =</span> <span class="fu">sum</span>(Pop)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Pop)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_pa, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(PA, Total_Pop), <span class="at">y =</span> Total_Pop)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top 10 Most Populous Planning Areas (2024)"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Planning Area"</span>, <span class="at">y =</span> <span class="st">"Total Population"</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-Home_Ex01Feedback_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-Home_Ex01Feedback_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<h2 style="color:#A94442;" class="anchored" data-anchor-id="the-original-visualization">
+Feedbacks
+</h2>
+<h3 style="color:#A94442;" class="anchored">
+Overall Rating – Quadrant III:
+</h3>
+<p><img src="data/img.jpg" class="img-fluid" style="width:50.0%"></p>
+<p>Referring to the Clarity vs.&nbsp;Aesthetics framework by Ben Jones, I would place this chart in Quadrant III, which represents visualizations that are both confusing and unattractive. Visually, the chart could be enhanced with better spacing, labeling, and color contrast to improve its aesthetic appeal and overall clarity.</p>
+<h3 style="color:#2ECC71;" class="anchored">
+Good Design Points :
+</h3>
+<p><strong>1. Well Ordered from Highest Population to Lowest</strong></p>
+<div style="margin-left: 2em;">
+<p>The bars are arranged in descending order, starting from the planning area with the highest population at the top to the lowest at the bottom. With this type of ordering it helps the audience especially for general readers to quickly grasp the ranking of each area without the need to compare individual values. Thus, this type of graph enhance the readanility and allows easy visual comparison across planning areas.</p>
+</div>
+<p><strong>2. Clear Axis Label</strong></p>
+<div style="margin-left: 2em;">
+<p>Both the x-axis and y-axis title are clearly labeled which ensure the readers can immediately understand what the chart is showing without additional need of explanation.</p>
+</div>
+<p><strong>3. Horizontal Layout </strong></p>
+<div style="margin-left: 2em;">
+<p>Using horizontal bars is well considered design choice, especially dealing with long category names such as “Jurong West” and “Choa Chu Kang”. If the writer decided to use vertical bar charts, lenghty category names often will become overlaped which can significantly reduce readability.</p>
+</div>
+<h3 style="color:#E74C3C;" class="anchored">
+Areas for Improvement
+</h3>
+<p><strong>1. X-Axis Values Format</strong></p>
+<div style="margin-left: 2em;">
+<p>I believe as a general audience especially for those who does not have any mathemathical background, scientific notation like <code>1e+05</code> would be hard to understand and confusing. It is not immediately clear so instead I would suggest using some basic mathemathical formatting like (comma) would be more friendly and easier to interpret for general audience.</p>
+</div>
+<p><strong>2. Lack of Data Labels on Bars</strong></p>
+<div style="margin-left: 2em;">
+<p>In this case, since the chart is presented using a static chart (without interactive features), as an audience it is impossible for us to know the exact population per planning areas. As a result this chart becomes somewhat limited in usefulness eventhough it clearly shows the ranking of the planning area. In my opinion, adding data labels would greatly enhance the clarity and make the chart more informative.</p>
+</div>
+<p><strong>3. Monochromatic Color Scheme</strong></p>
+<div style="margin-left: 2em;">
+<p>Since the chart uses a single color (steelblue) for all bars, it is harder to distinguish or emphasize which one is the top ranked area. In my opinion choosing this kind of visualization makes a limitation for the visual impact. Including color variation (gradient) based on the population size would make the chart more engaging and help the readers to draw attention to the most important values.</p>
+</div>
 </section>
 <section id="makeover-visualization" class="level4">
 <h4 class="anchored" data-anchor-id="makeover-visualization">Makeover Visualization</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>top_pa <span class="ot">&lt;-</span> makeover <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PA) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Pop =</span> <span class="fu">sum</span>(Pop), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Pop)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_pa, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(PA, Total_Pop), <span class="at">y =</span> Total_Pop, <span class="at">fill =</span> Total_Pop)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">comma</span>(Total_Pop)), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 Most Populous Planning Areas (2024)"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Source: Department of Statistics, Singapore (DOS)"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Planning Area"</span>, </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Population"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#AED6F1"</span>, <span class="at">high =</span> <span class="st">"#2E86C1"</span>) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>)),</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">r =</span> <span class="dv">10</span>))</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-Home_Ex01Feedback_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><code>fill = Total_Pop</code> was added inside <code>aes()</code> to create a color gradient that represents population.</p></li>
+<li><p><code>geom_text(aes(label = comma(Total_Pop)), hjust = -0.1, size = 3.5)</code> was added to display population values on each bar.</p></li>
+</ul>
 </section>
 </section>
 </section>
-<section id="feedbacks" class="level2">
-<h2 class="anchored" data-anchor-id="feedbacks">Feedbacks</h2>
-<section id="good-design-points" class="level3">
-<h3 class="anchored" data-anchor-id="good-design-points">Good Design Points :</h3>
-<ol type="1">
-<li>Well Ordered from Highest Population to Lowest</li>
-</ol>
-</section>
-<section id="areas-for-improvement" class="level3">
-<h3 class="anchored" data-anchor-id="areas-for-improvement">Areas for Improvement :</h3>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p><a href="https://dataremixed.com/2012/05/data-visualization-clarity-or-aesthetics/"><strong>Data visualization: Clarity or aesthetics?</strong></a></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
