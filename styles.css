@@ -65,7 +65,7 @@
 /* Body */ 
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Nunito';
   width: 90%;
   margin: 30;
   padding: 20;
@@ -114,46 +114,42 @@ h1.title {
 h1 {
     font-size: 2em;
     font-weight: bold; 
-    color: #DBA39A;
+    color: #A94442;
 }
 
 h2 {
     font-size: 1.7em;
     font-weight: bold;
-    color: #DBA39A;
+    color: #A94442;
 }
 
 h3 {
     font-size: 1.5em;
     font-weight: bold;
-    color: #DBA39A;
+    color: #A94442;
 }
 
 h4 {
     font-size: 1.2em;
     font-weight: bold;
-    color: #DBA39A;
+    color: #A94442;
 }
 
 h5, h6 {
     font-size: 1em;
     font-weight: bold;
-    color: #DBA39A;
-}
-
-.header-section-number {
-  color: #DBA39A !important;
+    color: #A94442;
 }
 
 /* Link */
 /* Default link color */
 a {
-  color: #A94442; /* Change to any color you like */
+  color: #A94442; 
 }
 
 /* Link color on hover */
 a:hover {
-  color: #A94442; /* Change to any color you like */
+  color: #A94442; 
   text-decoration: underline;
 }
 
@@ -251,4 +247,9 @@ img {
   display: block;              
   margin: 0 auto;              
   max-width: 100%;             
+}
+
+.header-section-number {
+  color: #333333 !important;
+  font-weight: bold;
 }
