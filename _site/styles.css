@@ -178,12 +178,15 @@ div.callout {
   border-radius: 20px; 
   padding: 1em; 
   margin: 1em 0; 
-
 }
 div.callout-note {
   border-color: #F2C6DE !important;
-  background-color: rgba(250, 237, 203, 0.3);
+  background-color: rgba(169, 68, 66, 0.1);
   border-style: dashed;
+}
+
+.callout ul, .callout ol {
+  padding-left: 1.2em;
 }
 
 .quarto-grid-item , .quarto-listing-item {
