@@ -1,0 +1,294 @@
+/* css styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap');
+
+#quarto-announcement.alert-light {
+  background-color: #FFFACD !important;  /* custom background */
+  color: black !important;             /* white text */
+  border: none !important;
+}
+
+#quarto-announcement.alert-light a {
+  color: #A94442 !important;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  font-size: 18px !important;
+}
+
+/* Navigation Bar */
+.navbar {
+  height: 80px; 
+  background-color: #F5EBE0 !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* Navbar text and links */
+.navbar-brand, 
+.navbar-nav > li > a {
+  font-weight: bold;
+  font-size: 16px; 
+  color: #DBA39A;
+  line-height: 50px; 
+}
+
+/* Navbar brand logo */
+.navbar-brand {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar logo image */
+.navbar-brand img {
+  max-height: 80px; 
+}
+
+.dropdown-menu a.dropdown-item {
+  color: #DBA39A !important; /* Resting color */
+  font-weight: normal;
+}
+
+.dropdown-menu a.dropdown-item:hover,
+.dropdown-menu a.dropdown-item:focus,
+.dropdown-menu a.dropdown-item:active {
+  color: #DBA39A !important; 
+  font-weight: bold;
+  background-color: #F0DBDB !important;
+}
+
+
+/* Body */ 
+
+body {
+  font-family: 'Nunito';
+  width: 90%;
+  margin: 30;
+  padding: 20;
+  background-color: #FEFCF3;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+/* Table Of Content */
+/* Sidebar title */
+.sidebar-title {
+  color: #DBA39A !important;
+}
+
+/* TOC link default color */
+.nav-link,
+.sidebar nav[role="doc-toc"] .nav-link {
+  color: #DBA39A !important;
+}
+
+/* TOC link on hover */
+.sidebar nav[role="doc-toc"] .nav-link:hover {
+  color: #B15E5E !important;
+  text-decoration: underline;
+}
+
+/* TOC link when active or current section */
+.sidebar nav[role="doc-toc"] .nav-link.active,
+.sidebar nav[role="doc-toc"] .nav-link[aria-current="true"] {
+  color: #A94442 !important;
+  font-weight: bold;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Nunito", sans-serif;
+}
+
+h1.title {
+  font-size: 36px;
+  color: #A94442;
+  font-weight: bold;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold; 
+    color: #A94442;
+}
+
+h2 {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: #A94442;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #A94442;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #A94442;
+}
+
+h5, h6 {
+    font-size: 1em;
+    font-weight: bold;
+    color: #A94442;
+}
+
+/* Link */
+/* Default link color */
+a {
+  color: #A94442; 
+}
+
+/* Link color on hover */
+a:hover {
+  color: #A94442; 
+  text-decoration: underline;
+}
+
+/* Code Chunks */
+
+code {
+  color: #A94442; 
+  font-weight: bold;
+}
+
+div.sourceCode {
+  border：none;
+  background-color: rgba(203, 191, 161, 0.1) !important;
+  padding: 5px; 
+  color: #333333; /* dark text inside pink background */
+  font-size: 16px;
+}
+
+pre.sourceCode code {
+  font-weight: bold;
+}
+
+/* callout-note */
+div.callout {
+  border: dotted 2px !important;
+  border-radius: 20px; 
+  padding: 1em; 
+  margin: 1em 0; 
+}
+div.callout-note {
+  border-color: #F2C6DE !important;
+  background-color: rgba(169, 68, 66, 0.1);
+  border-style: dashed;
+}
+
+.callout ul, .callout ol {
+  padding-left: 1.2em;
+}
+
+.quarto-grid-item , .quarto-listing-item {
+  border: 2px solid #A94442;
+  border-radius: 20px; 
+}
+.quarto-grid-item .card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #A94442;
+  
+}
+
+.quarto-grid-item .card-description {
+  color: #555;
+  font-size: 1rem;
+}
+
+.quarto-grid-item .card-date {
+  font-style: italic;
+  color: #888;
+}
+
+/* Unselected page button */
+.pagination .page-item .page-link {
+  color: #A94442;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Hover state */
+.pagination .page-item .page-link:hover {
+  background-color: #F5EBE0;
+  color: #A94442;
+  font-weight: bold;
+}
+
+/* Active page button */
+.pagination .page-item.active .page-link {
+  background-color: #A94442;  /* Change to your desired color */
+  border-color: #A94442;
+  color: white;
+  font-weight: bold;
+}
+
+.footnote {
+  font-size: 0.9em;
+  color: #333333;
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  display: block;              
+  margin: 0 auto;              
+  max-width: 100%;             
+}
+
+.header-section-number {
+  color: #333333 !important;
+  font-weight: bold;
+}
+
+
+.nav-tabs .nav-link.active {
+  background-color: #DBA39A;
+  color: #FFF !important;
+  font-weight:bold;
+  border:2px solid black;
+}
+
+.nav-tabs .nav-link {
+  color: #a88b8b;
+  font-weight:bold;
+  background-color: #FFF;
+  border:2px solid black;
+}
+
+.tab-content {
+  border: 2px solid black;
+  padding: 15px;
+  margin-top: -1px;
+  background-color: #FFF;
+}
+
+.underlined-heading {
+  border-bottom: 2px solid #aab0b5;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.scroll-output pre {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgba(203, 191, 161, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
