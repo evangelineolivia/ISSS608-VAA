@@ -1,5 +1,6 @@
 ---
 title: "Take Home Exercise 1"
+description: Singapore Population Analysis
 date: 2025-05-01
 date-modified: "last-modified"
 execute:

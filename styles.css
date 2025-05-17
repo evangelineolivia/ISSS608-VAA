@@ -292,3 +292,11 @@ img {
   padding: 10px;
   border-radius: 5px;
 }
+
+.description {
+  font-family: Nunito;
+  font-size: 1.1em;
+  font-weight : bold;
+  color: #e3a6ab; 
+  margin-bottom: 1em;
+}
