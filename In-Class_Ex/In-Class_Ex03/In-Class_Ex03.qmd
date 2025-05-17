@@ -90,7 +90,7 @@ set.seed(1234)
 
 ### Visualising the Whole Graph
 
-```{r}
+```{r eval=FALSE}
 ggraph(graph,layout = "fr")+
   geom_edge_link(alpha = 0.3,
                  colour = "gray") +

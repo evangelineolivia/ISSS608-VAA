@@ -92,7 +92,11 @@ hr_wkday <- function(ts, sc, tz) {
 
 ```
 
-::: callout-note {appearance="simple"} - [`ymd_hms()`](https://lubridate.tidyverse.org/reference/ymd_hms.html) and [`hour()`](https://lubridate.tidyverse.org/reference/hour.html) are from [**lubridate**](https://lubridate.tidyverse.org/) package, and - [`weekdays()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays) is a **base** R function. :::
+::: {.callout-note appearance="simple"}
+
+- [`ymd_hms()`](https://lubridate.tidyverse.org/reference/ymd_hms.html) and [`hour()`](https://lubridate.tidyverse.org/reference/hour.html) are from [**lubridate**](https://lubridate.tidyverse.org/) package, and [`weekdays()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays) is a **base** R function. 
+
+:::
 
 **Step 2 : Deriving the attacks tibble data frame**
 
@@ -116,7 +120,11 @@ attacks <- attacks %>%
 attacks
 ```
 
-::: callout-note {appearance="simple"} Beside extracting the necessary data into *attacks* data frame, `mutate()` of **dplyr** package is used to convert *wkday* and *hour* fields into **factor** so they'll be ordered when plotting :::
+::: {.callout-note appearance="simple"}
+
+Beside extracting the necessary data into *attacks* data frame, `mutate()` of **dplyr** package is used to convert *wkday* and *hour* fields into **factor** so they'll be ordered when plotting 
+
+:::
 
 Table below shows the tidy tibble table after processing.
 
