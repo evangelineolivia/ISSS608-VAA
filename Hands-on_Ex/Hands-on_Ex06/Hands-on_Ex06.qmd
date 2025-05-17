@@ -17,13 +17,13 @@ format:
 
 By the end of this hands-on exercise, we will be able to create the following data visualizations using R packages:
 
-- Calendar heatmap using ggplot2 functions
+-   Calendar heatmap using ggplot2 functions
 
-- Cycle plot using ggplot2 functions
+-   Cycle plot using ggplot2 functions
 
-- Slopegraph
+-   Slopegraph
 
-- Horizon chart
+-   Horizon chart
 
 ## Getting Started
 
@@ -41,13 +41,13 @@ pacman::p_load(scales, viridis, lubridate, ggthemes,
 
 By the end of this section, we will be able to:
 
-- Create a calendar heatmap using `ggplot2` and its extensions
+-   Create a calendar heatmap using `ggplot2` and its extensions
 
-- Write custom functions in R
+-   Write custom functions in R
 
-- Extract and manipulate date- and time-related fields using base R and the lubridate package
+-   Extract and manipulate date- and time-related fields using base R and the lubridate package
 
-- Carry out data preparation tasks using the `tidyr` and `dplyr` packages
+-   Carry out data preparation tasks using the `tidyr` and `dplyr` packages
 
 ### The Data
 
@@ -69,15 +69,15 @@ kable(head(attacks))
 
 There are three columns, timestamp, source_country and tz.
 
-- `timestamp` field stores date-time values in POSIXct format.
-- `source_country` field stores the source of the attack. It is in ISO 3166-1 alpha-2 country code.
-- `tz` field stores time zone of the source IP address.
+-   `timestamp` field stores date-time values in POSIXct format.
+-   `source_country` field stores the source of the attack. It is in ISO 3166-1 alpha-2 country code.
+-   `tz` field stores time zone of the source IP address.
 
 ### Data Preparation
 
-**Step 1 : Deriving weekday and hour of day fields **
+**Step 1 : Deriving weekday and hour of day fields**
 
-Before we can plot the calender heatmap, two new fields namely wkday and hour need to be derived. 
+Before we can plot the calender heatmap, two new fields namely wkday and hour need to be derived.
 
 ```{r}
 hr_wkday <- function(ts, sc, tz) {
@@ -92,12 +92,9 @@ hr_wkday <- function(ts, sc, tz) {
 
 ```
 
-::: callout-note {appearance="simple"}
--   [`ymd_hms()`](https://lubridate.tidyverse.org/reference/ymd_hms.html) and [`hour()`](https://lubridate.tidyverse.org/reference/hour.html) are from [**lubridate**](https://lubridate.tidyverse.org/) package, and
--   [`weekdays()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays) is a **base** R function.
-:::
+::: callout-note {appearance="simple"} - [`ymd_hms()`](https://lubridate.tidyverse.org/reference/ymd_hms.html) and [`hour()`](https://lubridate.tidyverse.org/reference/hour.html) are from [**lubridate**](https://lubridate.tidyverse.org/) package, and - [`weekdays()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays) is a **base** R function. :::
 
-**Step 2 : Deriving the attacks tibble data frame **
+**Step 2 : Deriving the attacks tibble data frame**
 
 ```{r}
 wkday_levels <- c('Saturday', 'Friday', 
@@ -119,9 +116,7 @@ attacks <- attacks %>%
 attacks
 ```
 
-::: callout-note {appearance="simple"}
-Beside extracting the necessary data into *attacks* data frame, `mutate()` of **dplyr** package is used to convert *wkday* and *hour* fields into **factor** so they'll be ordered when plotting
-:::
+::: callout-note {appearance="simple"} Beside extracting the necessary data into *attacks* data frame, `mutate()` of **dplyr** package is used to convert *wkday* and *hour* fields into **factor** so they'll be ordered when plotting :::
 
 Table below shows the tidy tibble table after processing.
 
