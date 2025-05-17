@@ -1,6 +1,7 @@
 ---
 title: "In Class Exercise 3"
 description: Exploring VAST 2025 Mini Challenge 1
+date: 2025-05-17
 format: html
 ---
 
