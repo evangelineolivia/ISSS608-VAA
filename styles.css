@@ -256,3 +256,39 @@ img {
   color: #333333 !important;
   font-weight: bold;
 }
+
+
+.nav-tabs .nav-link.active {
+  background-color: #DBA39A;
+  color: #FFF !important;
+  font-weight:bold;
+  border:2px solid black;
+}
+
+.nav-tabs .nav-link {
+  color: #a88b8b;
+  font-weight:bold;
+  background-color: #FFF;
+  border:2px solid black;
+}
+
+.tab-content {
+  border: 2px solid black;
+  padding: 15px;
+  margin-top: -1px;
+  background-color: #FFF;
+}
+
+.underlined-heading {
+  border-bottom: 2px solid #aab0b5;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.scroll-output pre {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgba(203, 191, 161, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}

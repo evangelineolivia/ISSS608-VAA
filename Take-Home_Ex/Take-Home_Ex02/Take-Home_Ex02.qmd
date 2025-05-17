@@ -1,0 +1,142 @@
+---
+title: "Take Home Exercise 2"
+description: VAST Challenge 2025 Mini-Challenge 1
+date: 2025-05-13
+date-modified: "last-modified"
+execute:
+  warning: false
+  freeze: true
+format: 
+  html:
+    number-sections: false
+---
+
+# Overview
+
+For this take-home exercise, we will be working on **Mini-Challenge 1** from the [**VAST Challenge 2025**](https://vast-challenge.github.io/2025/index.html). The objective of this exercise is to design visual analytics methods to track the emergence of a rising artist and forecast the next potential breakout star.
+
+We will address the following questions from the mini-challenge:
+
+#### 1. The Profile of Sailor Shift's Career :
+
+-   Who has Sailor Shift been most influenced by over time?
+-   Who has she collaborated with and directly or indirectly influenced?
+-   How has she influenced collaborators within the broader **Oceanus Folk** community?
+
+#### 2. The Influence of Oceantus Folk to the Music World :
+
+-   Was this influence **intermittent** or did it show a **gradual rise**?
+-   What **genres** and **top artists** have been most influenced by Oceanus Folk?
+-   On the conveerse, how has Oceantus Folk changed the rise of Sailor Shift? From which **genre** does it draw most of its contemporary inspiration?
+
+#### 3. Profile of What it Means to be a Rising Star in the Music Industry
+
+-   Visualize the careers of **3 Artist**
+-   Compare and Contrast their rise in **Popularity** and **Influence**
+-   Using this characterization, gives **3 Predictions** of the next Oceanus Folk stars with be over the next **5 Years**
+
+# The Data 
+
+We will use the dataset provided in the VAST Challenge 2025 Mini-Challenge 1.
+
+::: {.panel-tabset .nav-pills}
+#### File Overview
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| results: 'asis'
+
+library(knitr)
+library(tibble)
+
+dataset_info <- tibble(
+  Attribute = c("File Name", "Graph Type", "Number of Nodes", "Number of Edges", "Connected Components"),
+  Value = c("MC1_graph.json", "Directed Multigraph", "17,412", "37,857", "18")
+)
+
+kable(dataset_info)
+```
+
+#### Node
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| results: 'asis'
+node <- tibble(
+  Node_Type = c("Person", "Song", "RecordLabel", "Album", "MusicalGroup")
+)
+
+kable(node)
+```
+
+#### Edge
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| results: 'asis'
+edge <- tibble(
+  Edge_Type = c(
+    "MemberOf", "PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf",
+    "InStyleOf", "InterpolatesFrom", "CoverOf", "LyricalReferenceTo",
+    "DirectlySamples", "RecordedBy", "DistributedBy"
+  )
+)
+
+kable(edge)
+```
+:::
+
+# Setting Up 
+
+## Loading Packages
+::: {.panel-tabset .nav-pills}
+#### Packages
+
+```{r}
+pacman::p_load(jsonlite,tidyverse)
+```
+
+#### Packages Information
+| **Library** | **Description** |
+|-------------------------------|-----------------------------------------|
+| [**pacman**](https://cran.r-project.org/package=pacman) | A package management tool that helps load, install, and manage R packages more easily. |
+| [**tidyverse**](https://www.tidyverse.org/) | A collection of R packages designed for data science, sharing an underlying design philosophy, grammar, and data structures. |
+| [**jsonlite**](https://cran.r-project.org/package=jsonlite) | A robust and flexible R package for parsing and generating JSON data, commonly used for working with web APIs and structured data files. |
+
+:::
+
+::: {.scroll-output}
+## Loading Data 
+```{r}
+data <- fromJSON("data/MC1_graph.json")
+glimpse(data)
+```
+:::
+
+# Data Cleaning
+
+## Extracting Edges
+
+```{r}
+edges <- as_tibble(data$links) %>% 
+  distinct() 
+glimpse(edges)
+```
+## Extracting Nodes
+```{r}
+nodes <- as_tibble(data$nodes) %>%
+  distinct()
+
+glimpse(nodes)
+```
+
+
+# References 
+[**VAST Challenge Kickstarter 2**] (https://isss608-ay2023-24apr.netlify.app/vast/kickstarter2)
+

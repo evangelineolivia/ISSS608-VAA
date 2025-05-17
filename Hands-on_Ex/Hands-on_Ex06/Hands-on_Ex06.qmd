@@ -1,0 +1,158 @@
+---
+title: "Hands on Exercise 6"
+description : Visualising and Analysing Time-Oriented Data
+date: 2025-05-17
+date-modified: "last-modified"
+execute:
+  warning: false
+  freeze: true
+format:
+  html:
+    number-offset: 9
+---
+
+# Visualising and Analysing Time-Oriented Data
+
+## Learning Outcome
+
+By the end of this hands-on exercise, we will be able to create the following data visualizations using R packages:
+
+- Calendar heatmap using ggplot2 functions
+
+- Cycle plot using ggplot2 functions
+
+- Slopegraph
+
+- Horizon chart
+
+## Getting Started
+
+We will first load the following R packages: scales, viridis, lubridate, ggthemes, gridExtra, readxl, knitr, data.table, and tidyverse.
+
+```{r}
+pacman::p_load(scales, viridis, lubridate, ggthemes,
+               gridExtra, readxl, knitr, data.table,
+               CGPfunctions, ggHoriPlot, tidyverse)
+```
+
+## Plotting Calendar Heatmap
+
+![](img/image01.png)
+
+By the end of this section, we will be able to:
+
+- Create a calendar heatmap using `ggplot2` and its extensions
+
+- Write custom functions in R
+
+- Extract and manipulate date- and time-related fields using base R and the lubridate package
+
+- Carry out data preparation tasks using the `tidyr` and `dplyr` packages
+
+### The Data
+
+For the purpose of this hands-on exercise, eventlog.csv file will be used. This data file consists of 199,999 rows of time-series cyber attack records by country.
+
+### Importing the Data
+
+```{r}
+attacks <- read_csv("data/eventlog.csv")
+```
+
+### Examining the Data Structure
+
+The `kable()` function can be used to display and review the structure of an imported data frame in a clean, readable table format.
+
+```{r}
+kable(head(attacks))
+```
+
+There are three columns, timestamp, source_country and tz.
+
+- `timestamp` field stores date-time values in POSIXct format.
+- `source_country` field stores the source of the attack. It is in ISO 3166-1 alpha-2 country code.
+- `tz` field stores time zone of the source IP address.
+
+### Data Preparation
+
+**Step 1 : Deriving weekday and hour of day fields **
+
+Before we can plot the calender heatmap, two new fields namely wkday and hour need to be derived. 
+
+```{r}
+hr_wkday <- function(ts, sc, tz) {
+  real_times <- ymd_hms(ts, 
+                        tz = tz[1], 
+                        quiet = TRUE)
+  dt <- data.table(source_country = sc,
+                   wkday = weekdays(real_times),
+                   hour = hour(real_times))
+  return(dt)
+  }
+
+```
+
+::: callout-note {appearance="simple"}
+-   [`ymd_hms()`](https://lubridate.tidyverse.org/reference/ymd_hms.html) and [`hour()`](https://lubridate.tidyverse.org/reference/hour.html) are from [**lubridate**](https://lubridate.tidyverse.org/) package, and
+-   [`weekdays()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/weekdays) is a **base** R function.
+:::
+
+**Step 2 : Deriving the attacks tibble data frame **
+
+```{r}
+wkday_levels <- c('Saturday', 'Friday', 
+                  'Thursday', 'Wednesday', 
+                  'Tuesday', 'Monday', 
+                  'Sunday')
+
+attacks <- attacks %>%
+  group_by(tz) %>%
+  do(hr_wkday(.$timestamp, 
+                   .$source_country, 
+                   .$tz)) %>% 
+  ungroup() %>% 
+  mutate(wkday = factor(
+    wkday, levels = wkday_levels),
+    hour  = factor(
+      hour, levels = 0:23))
+
+attacks
+```
+
+::: callout-note {appearance="simple"}
+Beside extracting the necessary data into *attacks* data frame, `mutate()` of **dplyr** package is used to convert *wkday* and *hour* fields into **factor** so they'll be ordered when plotting
+:::
+
+Table below shows the tidy tibble table after processing.
+
+```{r}
+kable(head(attacks))
+```
+
+### Building the Calendar Heatmaps
+
+```{r}
+grouped <- attacks %>% 
+  count(wkday, hour) %>% 
+  ungroup() %>%
+  na.omit()
+
+ggplot(grouped, 
+       aes(hour, 
+           wkday, 
+           fill = n)) + 
+geom_tile(color = "white", 
+          size = 0.1) + 
+theme_tufte() + 
+coord_equal() +
+scale_fill_gradient(name = "# of attacks",
+                    low = "sky blue", 
+                    high = "dark blue") +
+labs(x = NULL, 
+     y = NULL, 
+     title = "Attacks by weekday and time of day") +
+theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+```

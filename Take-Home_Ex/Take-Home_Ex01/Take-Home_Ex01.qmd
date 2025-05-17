@@ -279,14 +279,15 @@ The total population for female : 2,041,480 <br> The total population for male :
 :::
 
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
-The Singapore’s 2024 population pyramid reveals a balanced distribution between males and females, with 2,152,050 males and 2,041,480 females. 
+The Singapore’s 2024 population pyramid reveals a balanced distribution between males and females, with 2,152,050 males and 2,041,480 females.
 
-The largest population groups are concentrated in the 25–54 age range, which suggest to a strong and stable working-age demographic. 
+The largest population groups are concentrated in the 25–54 age range, which suggest to a strong and stable working-age demographic.
 
 In contrast, the younger age groups make up a smaller share.
 :::
+
 ## Singapore Total Population by Planning Area (2024)
 
 ```{r, fig.width=12, fig.height=8}
@@ -348,14 +349,14 @@ girafe(
 ```
 
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
 Based on Singapore’s 2024 population data, **Tampines**, **Bedok**, and **Sengkang** emerge as the top three most populous planning areas. Together with **Jurong West** and **Woodlands**, these regions comprise a substantial portion of the national population. In contrast, central areas such as **Downtown Core** and **Museum** have significantly smaller populations, reflecting their primary use as commercial or institutional zones rather than residential neighborhoods.
 :::
 
 ## Age Distribution in the Top 5 Planning Areas (2024)
 
-::: panel-tabset
+:::::::: panel-tabset
 ### Tampines
 
 ```{r}
@@ -431,11 +432,11 @@ girafe(
   )
 )
 ```
-::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
 
-Singapore’s 2024 demographic data highlights a significant concentration of Tampines residents in the 30-34 age range.
-This pattern suggests that Tampines is a hub for individuals in career-building phases of life. Despite this concentration, the population remains fairly balanced across other age groups, indicating a well-rounded and sustainable community structure.
+::: {.callout-note appearance="simple"}
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
+
+Singapore’s 2024 demographic data highlights a significant concentration of Tampines residents in the 30-34 age range. This pattern suggests that Tampines is a hub for individuals in career-building phases of life. Despite this concentration, the population remains fairly balanced across other age groups, indicating a well-rounded and sustainable community structure.
 :::
 
 ### Bedok
@@ -493,8 +494,9 @@ girafe(
   )
 )
 ```
+
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
 Bedok exhibits a population structure heavily represented by residents aged 60-64. This mature demographic suggests Bedok is home more for aging residents. Compared to younger age groups, the higher population in older brackets may indicate that Bedok is a more settled community.
 :::
@@ -550,12 +552,12 @@ girafe(
   )
 )
 ```
+
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
-Sengkang’s population is heavily concentrated in the 35–49 age group, reflecting a younger family demographic. The notable presence of children and newborns aged 0–14 further suggests that Sengkang is a preferred residential area for young families. 
+Sengkang’s population is heavily concentrated in the 35–49 age group, reflecting a younger family demographic. The notable presence of children and newborns aged 0–14 further suggests that Sengkang is a preferred residential area for young families.
 :::
-
 
 ### Jurong West
 
@@ -609,12 +611,12 @@ girafe(
   )
 )
 ```
+
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
 Jurong West presents a more balanced age distribution, with the largest population concentrated in the 35–59 age group.This suggests the area is home to many established families and individuals nearing retirement age. The balanced spread across other age groups also reflects a stable residential base, demonstrating Jurong West’s role as a settled community in Singapore.
 :::
-
 
 ### Woodlands
 
@@ -669,12 +671,11 @@ girafe(
 ```
 
 ::: {.callout-note appearance="simple"}
-### <span style="color:#A94442;"><b><u>Insights</u></b></span>
+### [<b><u>Insights</u></b>]{style="color:#A94442;"}
 
 Woodlands displays a diverse age distribution, with notable peaks in both younger and older working-age groups. The 25–29 and 55–59 age brackets hold the highest concentrations, indicating a mix of young adults entering the workforce and seasoned professionals nearing retirement.
 :::
-
-:::
+::::::::
 
 # Summary
 
@@ -682,15 +683,15 @@ The 2024 demographic analysis of Singapore reveals several noteworthy trends. Th
 
 Each top planning area showcases unique demographic characteristics:
 
-- Tampines has a large concentration of young working adults (25–39).
+-   Tampines has a large concentration of young working adults (25–39).
 
-- Bedok reflects an aging population, particularly those aged 60–64.
+-   Bedok reflects an aging population, particularly those aged 60–64.
 
-- Sengkang exhibits a family-oriented profile with peaks in both parents (35–49) and children (0–14).
+-   Sengkang exhibits a family-oriented profile with peaks in both parents (35–49) and children (0–14).
 
-- Jurong West shows a balanced age distribution, supporting diverse community needs.
+-   Jurong West shows a balanced age distribution, supporting diverse community needs.
 
-- Woodlands features dual peaks in both early-career and near-retirement age groups.
+-   Woodlands features dual peaks in both early-career and near-retirement age groups.
 
 # References
 
