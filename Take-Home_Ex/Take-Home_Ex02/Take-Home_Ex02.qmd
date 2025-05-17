@@ -138,5 +138,7 @@ glimpse(nodes)
 
 
 # References 
-[**VAST Challenge Kickstarter 2**] (https://isss608-ay2023-24apr.netlify.app/vast/kickstarter2)
+
+[**VAST Challenge Kickstarter 2**](https://isss608-ay2023-24apr.netlify.app/vast/kickstarter2)
+
 
