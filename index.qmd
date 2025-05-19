@@ -13,7 +13,9 @@ listing:
     - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.qmd
     - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.qmd
     - Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.qmd
-    - In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html
+    - In-Class_Ex/In-Class_Ex01/In-Class_Ex01.qmd
+    - In-Class_Ex/In-Class_Ex03/In-Class_Ex03.qmd
+    - Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.qmd
   type: grid
   sort: "date desc"
   fields: [title, date, description]
