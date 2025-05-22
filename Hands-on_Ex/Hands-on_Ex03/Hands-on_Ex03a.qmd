@@ -370,6 +370,7 @@ plot_ly(data = exam_data,
              x = ~MATHS, 
              y = ~ENGLISH)
 ```
+
 ### Working with Visual Variable: plot_ly() Method
 
 **color** argument is mapped to a qualitative visual variable.
@@ -407,7 +408,6 @@ ggplotly(p)
 -   two scatterplots will be created by using ggplot2 functions.
 -   lastly, [*subplot()*](https://plotly.com/r/subplots/) of **plotly** package is used to place them next to each other side-by-side.
 
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show Code"
@@ -432,8 +432,7 @@ subplot(ggplotly(p1),
 
 ### Interactive Data Visualisation - crosstalk methods!
 
-[Crosstalk](https://rstudio.github.io/crosstalk/index.html) is an add-on to the htmlwidgets package. 
-It extends htmlwidgets with a set of classes, functions, and conventions for implementing cross-widget interactions (currently, linked brushing and filtering).
+[Crosstalk](https://rstudio.github.io/crosstalk/index.html) is an add-on to the htmlwidgets package. It extends htmlwidgets with a set of classes, functions, and conventions for implementing cross-widget interactions (currently, linked brushing and filtering).
 
 #### Interactive Data Table: DT package
 
@@ -468,10 +467,9 @@ crosstalk::bscols(gg,
 ```
 
 ::: {.callout-note appearance="simple"}
--  `highlight()` : from the **plotly** package sets options for interactive brushing, mainly for linking multiple plotly plots.
-- `bscols()` : from the **crosstalk** package arranges HTML elements side by side, especially useful in R Markdown.
+-   `highlight()` : from the **plotly** package sets options for interactive brushing, mainly for linking multiple plotly plots.
+-   `bscols()` : from the **crosstalk** package arranges HTML elements side by side, especially useful in R Markdown.
 :::
-
 
 ## Reference
 

@@ -280,31 +280,35 @@ hline.data <- Vietnam %>%
 
 ### Step 5 : Plotting the Cycle Plot
 
-```{r eval=FALSE}
+```{r fig.width= 15}
 ggplot() + 
   geom_line(data=Vietnam,
             aes(x=year, 
                 y=`Vietnam`, 
                 group=month), 
             colour="black") +
+  scale_x_continuous(
+    breaks = seq(2010, 2019, 1),
+    labels = as.character(2010:2019)
+  )+
   geom_hline(aes(yintercept=avgvalue), 
              data=hline.data, 
              linetype=6, 
              colour="red", 
              size=0.5) + 
   facet_grid(~month) +
-  labs(axis.text.x = element_blank(),
-       title = "Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019") +
+  labs(axis.text.x = element_text(),
+    title = "Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019") +
   xlab("") +
   ylab("No. of Visitors") +
-  theme_tufte(base_family = "Helvetica")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1,size = 5))
 ```
 
 ## Plotting Slopegraph
 
 In this section, we will learn how to create a [slopegraph](https://www.storytellingwithdata.com/blog/2020/7/27/what-is-a-slopegraph) using R.
 
-To learn more about how to use the `newggslopegraph()` function, refer to the official [vignette](https://cran.r-project.org/web/packages/CGPfunctions/vignettes/Using-newggslopegraph.html).  
+To learn more about how to use the `newggslopegraph()` function, refer to the official [vignette](https://cran.r-project.org/web/packages/CGPfunctions/vignettes/Using-newggslopegraph.html).
 
 ### Step 1 : Data Import
 
@@ -323,6 +327,7 @@ rice %>%
                 SubTitle = "1961-1980",
                 Caption = "Prepared by: Evangeline Olivia")
 ```
+
 ::: {.callout-note appearance="simple"}
 For effective data visualisation design, `factor()` is used convert the value type of *Year* field from numeric to factor.
 :::

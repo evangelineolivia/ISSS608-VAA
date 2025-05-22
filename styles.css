@@ -185,6 +185,11 @@ div.callout-note {
   border-style: dashed;
 }
 
+div.callout-tip {
+  border-color: #FFFACD !important;
+  background-color: rgba(168, 230, 207, 0.1);
+  border-style: dashed;
+}
 .callout ul, .callout ol {
   padding-left: 1.2em;
 }
@@ -268,7 +273,7 @@ img {
 .nav-tabs .nav-link {
   color: #a88b8b;
   font-weight:bold;
-  background-color: #FFF;
+  background-color: #FEFCF3;
   border:2px solid black;
 }
 
@@ -276,7 +281,7 @@ img {
   border: 2px solid black;
   padding: 15px;
   margin-top: -1px;
-  background-color: #FFF;
+  background-color: #FEFCF3;
 }
 
 .underlined-heading {

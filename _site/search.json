@@ -11,7 +11,7 @@
     "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#loading-packages",
     "title": "Take Home Exercise 2",
     "section": "Loading Packages",
-    "text": "Loading Packages\n\nPackagesPackages Information\n\n\n\npacman::p_load(jsonlite,tidyverse)\n\n\n\n\n\n\nLibrary\nDescription\n\n\n\n\npacman\nA package management tool that helps load, install, and manage R packages more easily.\n\n\ntidyverse\nA collection of R packages designed for data science, sharing an underlying design philosophy, grammar, and data structures.\n\n\njsonlite\nA robust and flexible R package for parsing and generating JSON data, commonly used for working with web APIs and structured data files."
+    "text": "Loading Packages\n\nPackagesPackages Information\n\n\n\npacman::p_load(tidyverse, jsonlite,\n               tidygraph, ggraph, igraph, plotly, visNetwork)\n\n\n\n\n\n\nLibrary\nDescription\n\n\n\n\npacman\nA package management tool that helps load, install, and manage R packages more easily.\n\n\ntidyverse\nA collection of R packages designed for data science, sharing an underlying design philosophy, grammar, and data structures.\n\n\njsonlite\nA robust and flexible R package for parsing and generating JSON data, commonly used for working with web APIs and structured data files."
   },
   {
     "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#loading-data",
@@ -21,18 +21,88 @@
     "text": "Loading Data\n\ndata &lt;- fromJSON(\"data/MC1_graph.json\")\nglimpse(data)\n\nList of 5\n $ directed  : logi TRUE\n $ multigraph: logi TRUE\n $ graph     :List of 2\n  ..$ node_default: Named list()\n  ..$ edge_default: Named list()\n $ nodes     :'data.frame': 17412 obs. of  10 variables:\n  ..$ Node Type     : chr [1:17412] \"Song\" \"Person\" \"Person\" \"Person\" ...\n  ..$ name          : chr [1:17412] \"Breaking These Chains\" \"Carlos Duffy\" \"Min Qin\" \"Xiuying Xie\" ...\n  ..$ single        : logi [1:17412] TRUE NA NA NA NA FALSE ...\n  ..$ release_date  : chr [1:17412] \"2017\" NA NA NA ...\n  ..$ genre         : chr [1:17412] \"Oceanus Folk\" NA NA NA ...\n  ..$ notable       : logi [1:17412] TRUE NA NA NA NA TRUE ...\n  ..$ id            : int [1:17412] 0 1 2 3 4 5 6 7 8 9 ...\n  ..$ written_date  : chr [1:17412] NA NA NA NA ...\n  ..$ stage_name    : chr [1:17412] NA NA NA NA ...\n  ..$ notoriety_date: chr [1:17412] NA NA NA NA ...\n $ links     :'data.frame': 37857 obs. of  4 variables:\n  ..$ Edge Type: chr [1:37857] \"InterpolatesFrom\" \"RecordedBy\" \"PerformerOf\" \"ComposerOf\" ...\n  ..$ source   : int [1:37857] 0 0 1 1 2 2 3 5 5 5 ...\n  ..$ target   : int [1:37857] 1841 4 0 16180 0 16180 0 5088 14332 11677 ...\n  ..$ key      : int [1:37857] 0 0 0 0 0 0 0 0 0 0 ..."
   },
   {
-    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting-edges",
-    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting-edges",
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting",
     "title": "Take Home Exercise 2",
-    "section": "Extracting Edges",
-    "text": "Extracting Edges\n\nedges &lt;- as_tibble(data$links) %&gt;% \n  distinct() \nglimpse(edges)\n\nRows: 37,857\nColumns: 4\n$ `Edge Type` &lt;chr&gt; \"InterpolatesFrom\", \"RecordedBy\", \"PerformerOf\", \"Composer…\n$ source      &lt;int&gt; 0, 0, 1, 1, 2, 2, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5…\n$ target      &lt;int&gt; 1841, 4, 0, 16180, 0, 16180, 0, 5088, 14332, 11677, 2479, …\n$ key         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…"
+    "section": "Extracting",
+    "text": "Extracting\n\nEdgesNodes\n\n\n\nedges &lt;- as_tibble(data$links)\nedge\n\n# A tibble: 12 × 1\n   Edge_Type         \n   &lt;chr&gt;             \n 1 MemberOf          \n 2 PerformerOf       \n 3 ComposerOf        \n 4 ProducerOf        \n 5 LyricistOf        \n 6 InStyleOf         \n 7 InterpolatesFrom  \n 8 CoverOf           \n 9 LyricalReferenceTo\n10 DirectlySamples   \n11 RecordedBy        \n12 DistributedBy     \n\n\n\n\n\nnodes &lt;- as_tibble(data$nodes)\nnodes\n\n# A tibble: 17,412 × 10\n   `Node Type` name         single release_date genre notable    id written_date\n   &lt;chr&gt;       &lt;chr&gt;        &lt;lgl&gt;  &lt;chr&gt;        &lt;chr&gt; &lt;lgl&gt;   &lt;int&gt; &lt;chr&gt;       \n 1 Song        Breaking Th… TRUE   2017         Ocea… TRUE        0 &lt;NA&gt;        \n 2 Person      Carlos Duffy NA     &lt;NA&gt;         &lt;NA&gt;  NA          1 &lt;NA&gt;        \n 3 Person      Min Qin      NA     &lt;NA&gt;         &lt;NA&gt;  NA          2 &lt;NA&gt;        \n 4 Person      Xiuying Xie  NA     &lt;NA&gt;         &lt;NA&gt;  NA          3 &lt;NA&gt;        \n 5 RecordLabel Nautical Mi… NA     &lt;NA&gt;         &lt;NA&gt;  NA          4 &lt;NA&gt;        \n 6 Song        Unshackled … FALSE  2026         Lo-F… TRUE        5 &lt;NA&gt;        \n 7 Person      Luke Payne   NA     &lt;NA&gt;         &lt;NA&gt;  NA          6 &lt;NA&gt;        \n 8 Person      Xiulan Zeng  NA     &lt;NA&gt;         &lt;NA&gt;  NA          7 &lt;NA&gt;        \n 9 Person      David Frank… NA     &lt;NA&gt;         &lt;NA&gt;  NA          8 &lt;NA&gt;        \n10 RecordLabel Colline-Cas… NA     &lt;NA&gt;         &lt;NA&gt;  NA          9 &lt;NA&gt;        \n# ℹ 17,402 more rows\n# ℹ 2 more variables: stage_name &lt;chr&gt;, notoriety_date &lt;chr&gt;"
   },
   {
-    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting-nodes",
-    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#extracting-nodes",
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#check-missing-values",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#check-missing-values",
     "title": "Take Home Exercise 2",
-    "section": "Extracting Nodes",
-    "text": "Extracting Nodes\n\nnodes &lt;- as_tibble(data$nodes) %&gt;%\n  distinct()\n\nglimpse(nodes)\n\nRows: 17,412\nColumns: 10\n$ `Node Type`    &lt;chr&gt; \"Song\", \"Person\", \"Person\", \"Person\", \"RecordLabel\", \"S…\n$ name           &lt;chr&gt; \"Breaking These Chains\", \"Carlos Duffy\", \"Min Qin\", \"Xi…\n$ single         &lt;lgl&gt; TRUE, NA, NA, NA, NA, FALSE, NA, NA, NA, NA, TRUE, NA, …\n$ release_date   &lt;chr&gt; \"2017\", NA, NA, NA, NA, \"2026\", NA, NA, NA, NA, \"2020\",…\n$ genre          &lt;chr&gt; \"Oceanus Folk\", NA, NA, NA, NA, \"Lo-Fi Electronica\", NA…\n$ notable        &lt;lgl&gt; TRUE, NA, NA, NA, NA, TRUE, NA, NA, NA, NA, TRUE, NA, N…\n$ id             &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…\n$ written_date   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \"2020\", NA, NA,…\n$ stage_name     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…\n$ notoriety_date &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…"
+    "section": "Check Missing Values",
+    "text": "Check Missing Values\n\nEdgesNodes\n\n\n\ncolSums(is.na(edges))\n\nEdge Type    source    target       key \n        0         0         0         0 \n\n\n\n\n\ncolSums(is.na(nodes))\n\n     Node Type           name         single   release_date          genre \n             0              0          13797          12801          12801 \n       notable             id   written_date     stage_name notoriety_date \n         12801              0          15957          16889          16763"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#check-for-duplicates",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#check-for-duplicates",
+    "title": "Take Home Exercise 2",
+    "section": "Check for Duplicates",
+    "text": "Check for Duplicates\n\nEdgesNodes\n\n\n\nedges[duplicated(edges),]\n\n# A tibble: 0 × 4\n# ℹ 4 variables: Edge Type &lt;chr&gt;, source &lt;int&gt;, target &lt;int&gt;, key &lt;int&gt;\n\n\n\n\n\nnodes[duplicated(nodes),]\n\n# A tibble: 0 × 10\n# ℹ 10 variables: Node Type &lt;chr&gt;, name &lt;chr&gt;, single &lt;lgl&gt;,\n#   release_date &lt;chr&gt;, genre &lt;chr&gt;, notable &lt;lgl&gt;, id &lt;int&gt;,\n#   written_date &lt;chr&gt;, stage_name &lt;chr&gt;, notoriety_date &lt;chr&gt;"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#mapping-from-node-id-to-row-index",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#mapping-from-node-id-to-row-index",
+    "title": "Take Home Exercise 2",
+    "section": "Mapping from node id to row index",
+    "text": "Mapping from node id to row index\n\nid_map &lt;- tibble(id = nodes$id,\n                 index = seq_len(\n                   nrow(nodes)))"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#map-source-and-target-ids-to-row-indices",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#map-source-and-target-ids-to-row-indices",
+    "title": "Take Home Exercise 2",
+    "section": "Map source and target IDs to row indices",
+    "text": "Map source and target IDs to row indices\n\nedges &lt;- edges %&gt;%\n  left_join(id_map, by = c(\"source\" = \"id\")) %&gt;%\n  rename(from = index) %&gt;%\n  left_join(id_map, by = c(\"target\" = \"id\")) %&gt;%\n  rename(to = index)"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#filtering-out-unmatched-edges",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#filtering-out-unmatched-edges",
+    "title": "Take Home Exercise 2",
+    "section": "Filtering out unmatched edges",
+    "text": "Filtering out unmatched edges\n\nedges &lt;- edges %&gt;%\n  filter(!is.na(from), !is.na(to))"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#plotting-the-whole-graph",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#plotting-the-whole-graph",
+    "title": "Take Home Exercise 2",
+    "section": "Plotting the Whole Graph",
+    "text": "Plotting the Whole Graph\n\ngraph &lt;- tbl_graph(nodes = nodes, edges = edges, directed = data$directed)"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#distribution-of-edge-type",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#distribution-of-edge-type",
+    "title": "Take Home Exercise 2",
+    "section": "Distribution of Edge Type",
+    "text": "Distribution of Edge Type\n\nggplot(data = edges,\n       aes(y = `Edge Type`)) +\n  geom_bar() +\n  theme_classic() +\n  theme(plot.background = element_rect(fill = \"#FEFCF3\",color = NA))"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#distribution-of-node-type",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#distribution-of-node-type",
+    "title": "Take Home Exercise 2",
+    "section": "Distribution of Node Type",
+    "text": "Distribution of Node Type\n\nggplot(data = nodes,\n       aes(y = `Node Type`)) +\n  geom_bar() +\n  theme_classic() +\n  theme(plot.background = element_rect(fill = \"#FEFCF3\",color = NA))"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#understanding-the-most-connected-nodes",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#understanding-the-most-connected-nodes",
+    "title": "Take Home Exercise 2",
+    "section": "Understanding the Most Connected Nodes",
+    "text": "Understanding the Most Connected Nodes\n\nmost_connected &lt;- graph %&gt;%\n  activate(nodes) %&gt;%\n  mutate(degree = centrality_degree()) %&gt;%\n  as_tibble() %&gt;%\n  arrange(desc(degree)) %&gt;%\n  slice_head(n = 10) %&gt;%\n  ggplot(aes(x = reorder(name, degree), \n             y = degree, \n             fill = `Node Type`, \n             text = paste(\"Name:\", name, \"&lt;br&gt;Degree:\", degree))) +\n  geom_col() +\n  coord_flip() +\n  labs(title = \"Top 10 Most Connected Nodes\", x = \"Name\", y = \"Degree\") + \n  scale_fill_manual(values = c(\n    \"Person\" = \"#A8E6CF\",        \n    \"MusicalGroup\" = \"#FFD3B6\",  \n    \"RecordLabel\" = \"#FFAAA5\",   \n    \"Song\" = \"#DCD3FF\"          \n  ))+\n  theme_classic() +\n  theme(plot.background = element_rect(fill = \"#FEFCF3\",color = NA))\n\nggplotly(most_connected, tooltip = \"text\")\n\n\n\n\n\n\n\n\n\n\n\nObservations\n\n\n\n\n\n\nDegree is a measure in network analysis that represents the number of direct connections a node has to other nodes.\nHere I plot Top 10 Most Connected Nodes Plot to quickly see the key collaborators and influencers based on their direct connections within the community."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#top-genres",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#top-genres",
+    "title": "Take Home Exercise 2",
+    "section": "Top Genres",
+    "text": "Top Genres\n\nnodes %&gt;%\n  filter(!is.na(genre)) %&gt;%\n  count(genre, sort = TRUE) %&gt;%\n  slice_max(n, n = 10) %&gt;%\n  ggplot(aes(x = reorder(genre, n), y = n, fill = n)) +\n  geom_col() +\n  scale_fill_gradient(low = \"#cce5ff\", high = \"#08306b\") +\n  coord_flip() +\n  labs(title = \"Top 10 Genres\", x = \"Genre\", y = \"Count\") +\n  theme(plot.background = element_rect(fill = \"#FEFCF3\",color = NA)) +\n  theme_classic() \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nObservations\n\n\n\n\n\n\nOceanus Folk is among the top genres which align with the narrative that Sailor Shift’s rise helped the Oceanus Folk genre into the mainstream music genres.\nDream Pop, Indie Folk, and Synthwave are the most represented genres in the dataset."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#sailor-shifts-collaborations",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#sailor-shifts-collaborations",
+    "title": "Take Home Exercise 2",
+    "section": "Sailor Shift’s Collaborations",
+    "text": "Sailor Shift’s Collaborations\n\nsailor_collab &lt;- graph %&gt;% \n  activate(edges) %&gt;%\n  filter(`Edge Type` %in% c(\"PerformerOf\", \"MemberOf\", \"ComposerOf\", \"ProducerOf\"))\n\nsailor_index &lt;- sailor_collab %N&gt;%\n  mutate(row_id = row_number()) %&gt;%\n  filter(name == \"Sailor Shift\") %&gt;%\n  pull(row_id)\n\nneigh_nodes &lt;- neighborhood(sailor_collab, order = 2, nodes = sailor_index)[[1]]\nneigh_nodes &lt;- as.integer(neigh_nodes) \n\nsailor_collab_subgraph &lt;- induced_subgraph(sailor_collab, vids = neigh_nodes)\n\nsailor_collab_subgraph &lt;- as_tbl_graph(sailor_collab_subgraph)\n\nnodes_df &lt;- as_tibble(sailor_collab_subgraph %N&gt;%\n                        mutate(id = row_number(),\n                               label = name,\n                               group = `Node Type`))\n\nedges_df &lt;- as_tibble(sailor_collab_subgraph %E&gt;%\n                        mutate(from = as.integer(from),\n                               to = as.integer(to)))\n\nvisNetwork(nodes_df, edges_df) %&gt;%\n  visOptions(highlightNearest = TRUE, selectedBy = \"group\") %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123) %&gt;%\n  visInteraction(navigationButtons = TRUE) %&gt;% \n  htmlwidgets::onRender(\"\n    function(el, x) {\n      el.style.background = '#FEFCF3';\n    }\n  \")"
   },
   {
     "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html",
