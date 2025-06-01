@@ -36,7 +36,7 @@ pacman::p_load(tidyverse,patchwork,ggthemes, DT, dplyr, knitr, ggiraph, scales, 
 ```
 
 | **Library** | **Description** |
-|-------------------------------|-----------------------------------------|
+|----|----|
 | [**pacman**](https://cran.r-project.org/package=pacman) | A package management tool that helps load, install, and manage R packages more easily. |
 | [**tidyverse**](https://www.tidyverse.org/) | A collection of R packages designed for data science, sharing an underlying design philosophy, grammar, and data structures. |
 | [**patchwork**](https://patchwork.data-imaginist.com/) | Helps combine multiple ggplot2 plots into a single composite figure. |

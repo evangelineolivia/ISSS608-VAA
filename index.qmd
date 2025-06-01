@@ -2,22 +2,23 @@
 title: "Evangeline Olivia's Visual Analytics Coursework"
 listing:
   contents:
-    - Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd
-    - Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.qmd
-    - Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.qmd
-    - Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.qmd
-    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.qmd
-    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.qmd
-    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.qmd
-    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.qmd
-    - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.qmd
-    - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.qmd
-    - Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.qmd
-    - In-Class_Ex/In-Class_Ex01/In-Class_Ex01.qmd
-    - In-Class_Ex/In-Class_Ex03/In-Class_Ex03.qmd
+    - Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.qmd
     - Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.qmd
+    - In-Class_Ex/In-Class_Ex03/In-Class_Ex03.qmd
+    - In-Class_Ex/In-Class_Ex01/In-Class_Ex01.qmd
+    - Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.qmd
+    - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.qmd
+    - Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.qmd
+    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.qmd
+    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.qmd
+    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.qmd
+    - Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.qmd
+    - Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.qmd
+    - Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.qmd
+    - Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.qmd
+    - Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd
+    
   type: grid
-  sort: "date desc"
   fields: [title, date, description]
   page-size: 3
   date-format: "MMM DD, YYYY"

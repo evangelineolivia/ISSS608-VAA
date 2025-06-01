@@ -41,8 +41,8 @@ website:
           href : "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
         - text : "Take Home Exercise 1 Feedback"
           href : "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.html"
-        #- text : "Take Home Exercise 2"
-        #  href : "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html"
+        - text : "Take Home Exercise 2"
+          href : "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html"
       - text : "In Class Exercise"
         menu :
         - text : "In Class Exercise 1"
