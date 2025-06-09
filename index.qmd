@@ -2,6 +2,15 @@
 title: "Evangeline Olivia's Visual Analytics Coursework"
 listing:
   contents:
+    #- Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.qmd
+    #- Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.qmd
+    #- Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09d.qmd
+    #- Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09c.qmd
+    #- Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09b.qmd
+    #- Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09a.qmd
+    - Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08c.qmd
+    - Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08b.qmd
+    - Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08a.qmd
     - Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.qmd
     - Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.qmd
     - In-Class_Ex/In-Class_Ex03/In-Class_Ex03.qmd
@@ -20,6 +29,7 @@ listing:
     
   type: grid
   fields: [title, date, description]
+  sort: date
   page-size: 3
   date-format: "MMM DD, YYYY"
 ---
