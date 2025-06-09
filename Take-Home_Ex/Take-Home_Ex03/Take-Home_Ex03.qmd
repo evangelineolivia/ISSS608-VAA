@@ -1,0 +1,22 @@
+---
+title: "Take Home Exercise 3"
+description: "Prototype Module for Shiny Application"
+format: 
+  html:
+    number-offset: 0
+---
+
+# The Task
+
+In this take-home exercise, we are required to select one of the modules of our proposed Shiny application (Group Project) and complete the following tasks
+
+- To evaluate and determine the necessary R packages needed for our Shiny application are supported in R CRAN,
+
+- To prepare and test that the specific R codes can run and returns the correct output as expected,
+
+- To determine the parameters and outputs that will be exposed on the Shiny applications,
+
+- To select the appropriate Shiny UI components for exposing the parameters determined above, and
+
+- To include a section called UI design for the different components of the UIs for the proposed design.
+

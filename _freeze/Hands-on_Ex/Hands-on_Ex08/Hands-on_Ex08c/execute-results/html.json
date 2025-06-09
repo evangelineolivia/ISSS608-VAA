@@ -1,0 +1,17 @@
+{
+  "hash": "05a7befe66521b3df7ac8585410817d4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hands on Exercise 8c\"\ndescription : Choropleth Mapping with R\ndate: 2025-06-06\ndate-modified: \"last-modified\"\nexecute:\n  warning: false\n  freeze: true\nformat:\n  html:\n    number-offset: 12\n---\n\n\n\n# Choropleth Mapping with R\n\n## Overview \n\n### Objectives\nIn this in-class exercise, you will gain hands-on experience on using appropriate R methods to plot analytical maps.\n\n### Learning Outcome\n\nBy the end of this in-class exercise, you will be able to use appropriate functions of tmap and tidyverse to perform the following tasks:\n\n-   Importing geospatial data in rds format into R environment.\n-   Creating cartographic quality choropleth maps by using appropriate tmap functions.\n-   Creating rate map\n-   Creating percentile map\n-   Creating boxmap\n\n## Getting Started\n\n### Installing and Loading Packages\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(tmap, tidyverse, sf)\n```\n:::\n\n\n\n## Importing Data\n\nFor the purpose of this hands-on exercise, a prepared data set called *NGA_wp.rds* will be used. The data set is a polygon feature data.frame providing information on water point of Nigeria at the LGA level. You can find the data set in the *rds* sub-direct of the hands-on *data* folder.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nNGA_wp <- read_rds(\"data/rds/NGA_wp.rds\")\n```\n:::\n\n\n\n## Basic Choropleth Mapping\n\n### Visualising distribution of non-functional water point\n\nPlot a choropleth map showing the distribution of non-function water point by LGA\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\np1 <- tm_shape(NGA_wp) +\n  tm_polygons(fill = \"wp_functional\",\n             fill.scale = tm_scale_intervals(\n               style = \"equal\",\n               n = 10,\n               values = \"brewer.blues\"),\n             fill.legend = tm_legend(\n               position = c(\"right\", \"bottom\"))) +\n  tm_borders(lwd = 0.1,\n             fill_alpha = 1) +\n  tm_title(\"Distribution of functional water point by LGAs\")\n\np2 <- tm_shape(NGA_wp) + \n  tm_polygons(fill = \"total_wp\", \n              fill.scale = tm_scale_intervals(\n                style = \"equal\",\n                n = 10,\n                values = \"brewer.blues\"),\n              fill.legend = tm_legend(\n                position = c(\"right\", \"bottom\"))) +\n  tm_borders(lwd = 0.1, \n             fill_alpha = 1) + \n  tm_title(\"Distribution of total  water point by LGAs\")\n\ntmap_arrange(p2, p1, nrow = 1)\n```\n\n::: {.cell-output-display}\n![](Hands-on_Ex08c_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n\n## Choropleth Map for Rates",
+    "supporting": [
+      "Hands-on_Ex08c_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

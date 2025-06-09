@@ -10,6 +10,7 @@ format:
   html:
     number-offset: 0
 ---
+
 # Overview
 
 For this take-home exercise, we will be working on **Mini-Challenge 1** from the [**VAST Challenge 2025**](https://vast-challenge.github.io/2025/index.html). The objective of this exercise is to design visual analytics methods to track the emergence of a rising artist and forecast the next potential breakout star.
@@ -123,7 +124,7 @@ pacman::p_load(tidyverse, jsonlite,
 #### Packages Information
 
 | **Library** | **Description** |
-|-------------|------------------|
+|------------------------------|-----------------------------------------|
 | `pacman` | A package management tool that simplifies the process of installing, loading, and managing R packages with a single function. Ideal for scripts requiring multiple libraries. |
 | `tidyverse` | A cohesive collection of R packages for data science, including `ggplot2`, `dplyr`, `tidyr`, `readr`, and more—providing consistent grammar for data wrangling and visualization. |
 | `jsonlite` | A fast and flexible JSON parser/serializer, useful for importing and exporting structured data such as API responses or configuration files. |
@@ -1501,10 +1502,10 @@ The score combines multiple aspects of an artist’s career to highlight those w
 -   Collaboration Count and Creative Contributions show how engaged and versatile an artist is behind the scenes.
 -   All of these are adjusted by Freshness, which penalizes long inactivity artists who started early but went quiet get lower scores.
 
-**Additional Notes**: 
+**Additional Notes**:
 
-- The current year is assumed to be 2040. 
-- We filter artists whose works have release years between 2030 and 2040, and only artists with at least 3 releases during this period are included.This filtering helps exclude inactive or minimally active artists.
+-   The current year is assumed to be 2040.
+-   We filter artists whose works have release years between 2030 and 2040, and only artists with at least 3 releases during this period are included.This filtering helps exclude inactive or minimally active artists.
 :::
 
 # References

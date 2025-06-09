@@ -45,6 +45,7 @@ The code chunk below loads the data. I’ve prepared two datasets, one for the o
 ```{r}
 originaldata <- read_csv("data/respopagesex2024.csv")
 ```
+
 ```{r}
 makeover <- read_csv("data/respopagesex2024.csv")
 ```
@@ -70,53 +71,69 @@ ggplot(top_pa, aes(x = reorder(PA, Total_Pop), y = Total_Pop)) +
   theme_minimal()
 ```
 
-<h2 style="color:#A94442;">Feedbacks</h2>
+<h2 style="color:#A94442;">
 
-<h3 style="color:#A94442;">Overall Rating – Quadrant III:</h3>
-![](data/img.jpg){width=50%}
+Feedbacks
+
+</h2>
+
+<h3 style="color:#A94442;">
+
+Overall Rating – Quadrant III:
+
+</h3>
+
+![](data/img.jpg){width="50%"}
 
 Referring to the Clarity vs. Aesthetics framework by Ben Jones, I would place this chart in Quadrant III, which represents visualizations that are both confusing and unattractive. Visually, the chart could be enhanced with better spacing, labeling, and color contrast to improve its aesthetic appeal and overall clarity.
 
-<h3 style="color:#2ECC71;">Good Design Points :</h3>
+<h3 style="color:#2ECC71;">
 
-**1.  Well Ordered from Highest Population to Lowest**
+Good Design Points :
 
-<div style="margin-left: 2em;">
+</h3>
+
+**1. Well Ordered from Highest Population to Lowest**
+
+::: {style="margin-left: 2em;"}
 The bars are arranged in descending order, starting from the planning area with the highest population at the top to the lowest at the bottom. With this type of ordering it helps the audience especially for general readers to quickly grasp the ranking of each area without the need to compare individual values. Thus, this type of graph enhance the readanility and allows easy visual comparison across planning areas.
-</div>
+:::
 
-**2.  Clear Axis Label**
+**2. Clear Axis Label**
 
-<div style="margin-left: 2em;">
+::: {style="margin-left: 2em;"}
 Both the x-axis and y-axis title are clearly labeled which ensure the readers can immediately understand what the chart is showing without additional need of explanation.
-</div>
+:::
 
-**3.   Horizontal Layout **
+**3. Horizontal Layout**
 
-<div style="margin-left: 2em;">
+::: {style="margin-left: 2em;"}
 Using horizontal bars is well considered design choice, especially dealing with long category names such as "Jurong West" and "Choa Chu Kang". If the writer decided to use vertical bar charts, lenghty category names often will become overlaped which can significantly reduce readability.
-</div>
+:::
 
+<h3 style="color:#E74C3C;">
 
-<h3 style="color:#E74C3C;">Areas for Improvement</h3>
+Areas for Improvement
 
-**1.  X-Axis Values Format**
+</h3>
 
-<div style="margin-left: 2em;">
+**1. X-Axis Values Format**
+
+::: {style="margin-left: 2em;"}
 I believe as a general audience especially for those who does not have any mathemathical background, scientific notation like `1e+05` would be hard to understand and confusing. It is not immediately clear so instead I would suggest using some basic mathemathical formatting like (comma) would be more friendly and easier to interpret for general audience.
-</div>
+:::
 
-**2.  Lack of Data Labels on Bars**
+**2. Lack of Data Labels on Bars**
 
-<div style="margin-left: 2em;">
+::: {style="margin-left: 2em;"}
 In this case, since the chart is presented using a static chart (without interactive features), as an audience it is impossible for us to know the exact population per planning areas. As a result this chart becomes somewhat limited in usefulness eventhough it clearly shows the ranking of the planning area. In my opinion, adding data labels would greatly enhance the clarity and make the chart more informative.
-</div>
+:::
 
-**3.  Monochromatic Color Scheme**
+**3. Monochromatic Color Scheme**
 
-<div style="margin-left: 2em;">
+::: {style="margin-left: 2em;"}
 Since the chart uses a single color (steelblue) for all bars, it is harder to distinguish or emphasize which one is the top ranked area. In my opinion choosing this kind of visualization makes a limitation for the visual impact. Including color variation (gradient) based on the population size would make the chart more engaging and help the readers to draw attention to the most important values.
-</div>
+:::
 
 #### Makeover Visualization
 
@@ -157,9 +174,13 @@ ggplot(top_pa,
 
 -   `scale_fill_gradient(low = "#D6EAF8", high = "#154360")` was added to apply gradient color scheme to the bars.
 
--    The `labs(..., subtitle = "Source: Department of Statistics, Singapore (DOS), ...)"` was also added to provide data source information so that the reader could understand the credibillity of the chart.
+-   The `labs(..., subtitle = "Source: Department of Statistics, Singapore (DOS), ...)"` was also added to provide data source information so that the reader could understand the credibillity of the chart.
 
-<h4 style="color:#E74C3C;">Additional Critique :</h3>
+<h4 style="color:#E74C3C;">
+
+Additional Critique :
+
+</h3>
 
 Besides evaluating the visualization itself, I would like to offer a critique on the data preparation process. As analysts, one of our most important responsibilities before diving into visualization is to question and examine the data quality. Data cleaning and recoding are essential steps in ensuring that the information we present is accurate and meaningful.
 
