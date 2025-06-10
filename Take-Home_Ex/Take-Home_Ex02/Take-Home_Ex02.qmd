@@ -124,7 +124,7 @@ pacman::p_load(tidyverse, jsonlite,
 #### Packages Information
 
 | **Library** | **Description** |
-|------------------------------|-----------------------------------------|
+|-------------------------------|-----------------------------------------|
 | `pacman` | A package management tool that simplifies the process of installing, loading, and managing R packages with a single function. Ideal for scripts requiring multiple libraries. |
 | `tidyverse` | A cohesive collection of R packages for data science, including `ggplot2`, `dplyr`, `tidyr`, `readr`, and more—providing consistent grammar for data wrangling and visualization. |
 | `jsonlite` | A fast and flexible JSON parser/serializer, useful for importing and exporting structured data such as API responses or configuration files. |

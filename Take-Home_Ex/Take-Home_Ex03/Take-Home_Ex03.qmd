@@ -6,17 +6,326 @@ format:
     number-offset: 0
 ---
 
-# The Task
+# Prototype Module for Shiny Application
+
+## The Task
 
 In this take-home exercise, we are required to select one of the modules of our proposed Shiny application (Group Project) and complete the following tasks
 
-- To evaluate and determine the necessary R packages needed for our Shiny application are supported in R CRAN,
+-   To evaluate and determine the necessary R packages needed for our Shiny application are supported in R CRAN,
 
-- To prepare and test that the specific R codes can run and returns the correct output as expected,
+-   To prepare and test that the specific R codes can run and returns the correct output as expected,
 
-- To determine the parameters and outputs that will be exposed on the Shiny applications,
+-   To determine the parameters and outputs that will be exposed on the Shiny applications,
 
-- To select the appropriate Shiny UI components for exposing the parameters determined above, and
+-   To select the appropriate Shiny UI components for exposing the parameters determined above, and
 
-- To include a section called UI design for the different components of the UIs for the proposed design.
+-   To include a section called UI design for the different components of the UIs for the proposed design.
+
+- We are required to prepare the prototype module report as Take-home Exercise 3 submission.
+
+- We are required to include a section called UI design for the different components of the UIs for the proposed design.
+
+## Getting Started
+
+Our project will be using data from the [VAST Challenge 2025](https://vast-challenge.github.io/2025/index.html) Mini-Challenge 1.
+
+Specifically, our project will focus on Mini-Challenge 1, where participants are provided with a knowledge graph containing recording artists, albums, collaborations, concerts, influences, and more. The goal is to develop visual analytics approaches to trace the rise of one artist and predict who will be the next to break out.
+
+In addition, we plan to develop the following Shiny applications:
+
+- **Shiny App 1: Sailor Shift’s Career Explorer**
+- **Shiny App 2: Oceanus Folk Influence Tracker**
+- **Shiny App 3: Rising Star Prediction Dashboard**
+
+For this take-home exercise, I will be providing the prototype module report and the UIs designed for the above applications.
+
+## Loading R Packages
+
+```{r}
+pacman::p_load(tidyverse, jsonlite,
+               tidygraph, ggraph, igraph, plotly, visNetwork,ggtext, ggiraph,patchwork,
+               kableExtra, showtext,lubridate)
+library(dplyr)
+```
+
+## Importing and Loading Data
+```{r}
+data <- fromJSON("data/MC1_graph.json")
+```
+
+## Custom Theme
+```{r}
+font_add_google("Montserrat", "montserrat")
+theme <- list(
+  font = 'montserrat',
+  size=14,
+  background = element_rect(fill = "#FEFCF3",color = NA),
+  title = element_text(
+      size = 16,
+      face = "bold",
+      color = "black"),
+  fill = "#96b3c2",
+  panel = element_rect(fill = "#FEFCF3", color = NA),
+  grid = element_line(color = "#E6DCD0")
+)
+```
+
+## Data Preparation and Cleaning
+
+### Extracting Edges & Nodes
+
+::: panel-tabset
+#### Edges
+```{r}
+edges <- as_tibble(data$links)
+edge
+```
+
+#### Nodes
+```{r}
+nodes <- as_tibble(data$nodes)
+nodes
+```
+:::
+
+```{r}
+colnames(nodes)[colnames(nodes) == "Node Type"] <- "type"
+colnames(edges)[colnames(edges) == "Edge Type"] <- "relation"
+```
+
+### Checking Missing Values
+
+```{r}
+colSums(is.na(nodes))
+```
+
+
+## Knowledge Graph
+
+### Mapping from Node ID to Row Index
+
+```{r}
+id_map <- tibble(id = nodes$id,
+                 index = seq_len(
+                   nrow(nodes)))
+```
+
+### Map Source and Target IDs to Row Indices
+
+```{r}
+edges <- edges %>%
+  left_join(id_map, by = c("source" = "id")) %>%
+  rename(from = index) %>%
+  left_join(id_map, by = c("target" = "id")) %>%
+  rename(to = index)
+```
+
+### Filtering Unmatched Edges
+```{r}
+edges <- edges %>%
+  filter(!is.na(from), !is.na(to))
+```
+
+### Plotting the Graph
+```{r}
+graph <- tbl_graph(nodes = nodes, edges = edges, directed = data$directed)
+```
+
+## Sailor Shift’s Career Explorer
+
+```{r}
+nodes <- graph %>%
+  activate(nodes) %>%
+  as_tibble() %>%
+  mutate(row_id = row_number())
+```
+
+```{r}
+edges_tbl <- graph %>%
+  activate(edges) %>%
+  as_tibble()
+```
+
+```{r}
+sailor_id <- nodes %>%
+  filter(name == "Sailor Shift") %>%
+  pull(row_id)
+
+group_id <- edges %>%
+  filter(from == sailor_id, relation == "MemberOf") %>%
+  pull(to)
+
+```
+### Tab 1 : Overview
+
+#### Active Years
+```{r}
+sailor_releases <- edges %>%
+  filter(from == sailor_id, relation == "PerformerOf") %>%
+  pull(to)
+
+group_releases <- edges %>%
+  filter(from == group_id, relation == "PerformerOf") %>%
+  pull(to)
+
+all <- union(sailor_releases, group_releases)
+
+release_years <- nodes %>%
+  filter(row_id %in% all,
+    (
+      (type == "Song" & single == TRUE) |
+      (type == "Album")
+    )) %>%  
+  mutate(release_year = as.integer(release_date)) %>%
+  filter(!is.na(release_year)) %>%
+  pull(release_year) %>%
+  unique() %>%
+  sort()
+
+paste0(min(release_years), "–", max(release_years))
+```
+
+
+#### Total Releases
+
+```{r}
+total_releases <- nodes %>%
+  filter(
+    row_id %in% all,
+    (
+      (type == "Song" & single == TRUE) |
+      (type == "Album")
+    )
+  ) %>%
+  nrow()
+
+total_releases
+```
+#### Collaborators 
+
+```{r}
+collab_roles <- c("PerformerOf", "ComposerOf", "LyricistOf", "ProducerOf")
+
+sailor_songs <- graph %>%
+  activate(edges) %>%
+  filter(from == sailor_id, relation %in% collab_roles) %>%
+  pull(to)
+
+collab_edges <- graph %>%
+  activate(edges) %>%
+  filter(to %in% sailor_songs, relation %in% collab_roles, from != sailor_id) %>%
+  pull(from) %>%
+  unique()
+
+length(collab_edges)
+```
+
+#### Creatives Role Played
+
+```{r}
+roles <- graph %>%
+  activate(edges) %>%
+  as_tibble() %>%
+  filter(from == sailor_id) %>%
+  pull(relation) %>%
+  unique()
+length(roles)
+```
+
+#### Charted Songs or Albums
+
+```{r}
+charted <- nodes %>%
+  filter(
+    row_id %in% all,
+    (
+      (type == "Song" & single == TRUE) |
+      (type == "Album")
+    ),
+    notable == TRUE 
+)
+charted_count <- nrow(charted)
+charted_count
+```
+
+#### Chart Success Ratio
+```{r}
+ratio <- round((charted_count / total_releases) * 100)
+paste0(ratio,'%')
+```
+
+#### UI Design
+![](ui/ui1.png)
+
+### Tab 2 : Career Timeline
+
+#### Bar Plot
+
+```{r}
+release_summary <- nodes %>%
+  filter(
+    row_id %in% all,
+    (type == "Song" & single == TRUE) | type == "Album"
+  ) %>%
+  mutate(
+    year = as.integer(release_date)
+  ) %>%
+  filter(!is.na(year)) %>%
+  count(year, type, name = "n")
+
+ggplot(release_summary, aes(x = factor(year, levels = sort(unique(year), decreasing = TRUE)), y = n, fill = type)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c(
+      "Song" = "#466575",
+      "Album" = "#96b3c2"
+    )
+  ) +
+  labs(
+    title = "Sailor Shift's Releases by Year (Songs vs Albums)",
+    x = "Year",
+    y = "Number of Releases",
+    fill = "Release Type"
+  ) +
+  coord_flip() +
+  theme_minimal() +
+  theme(
+    plot.background = theme$background,
+    panel.background = theme$panel,
+    panel.grid.major = theme$grid,
+    text = element_text(size = theme$size),
+    plot.title = theme$title,
+  )
+```
+
+#### Table
+
+```{r}
+release_summary <- nodes %>%
+  filter(
+    row_id %in% all,
+    (type == "Song" & single == TRUE) | type == "Album"
+  ) %>%
+  mutate(
+    year = as.integer(release_date)
+  )
+kable(release_summary)
+```
+
+::: callout-tip
+### Ideas
+Based on the code above, the following variables can be exposed as user inputs:
+
+- Year (SliderInput)
+
+- Release Type (filter between Songs and Albums)
+
+:::
+
+#### UI Design
+
+![](ui/ui2.png)
+
+
 
