@@ -74,7 +74,13 @@ edge_colors <- c(
   "PerformerOf" = "#FFA500",  
   "ComposerOf"  = "#1E90FF",  
   "LyricistOf"  = "#32CD32", 
-  "ProducerOf"  = "#FFD700"   
+  "ProducerOf"  = "#FFD700",
+  
+  "CoverOf" = "#E69F00",
+  "InStyleOf" = "#56B4E9",
+  "InterpolatesFrom" = "#009E73",
+  "LyricalReferenceTo" = "#F0E442",
+  "DirectlySamples" = "#D55E00"
 )
 
 node_colors <- c(
@@ -150,19 +156,16 @@ graph <- tbl_graph(nodes = nodes, edges = edges, directed = data$directed)
 ## Sailor Shift’s Career Explorer
 
 ```{r}
+#| code-fold: true
 nodes <- graph %>%
   activate(nodes) %>%
   as_tibble() %>%
   mutate(row_id = row_number())
-```
 
-```{r}
 edges <- graph %>%
   activate(edges) %>%
   as_tibble()
-```
 
-```{r}
 sailor_id <- nodes %>%
   filter(name == "Sailor Shift") %>%
   pull(row_id)
@@ -170,7 +173,6 @@ sailor_id <- nodes %>%
 group_id <- edges %>%
   filter(from == sailor_id, relation == "MemberOf") %>%
   pull(to)
-
 ```
 
 ### Tab 1 : Overview
@@ -286,7 +288,7 @@ paste0(ratio,'%')
 release_summary <- nodes %>%
   filter(
     row_id %in% all,
-    (type == "Song" & single == TRUE) | type == "Album"
+    type == "Song"| type == "Album"
   ) %>%
   mutate(
     year = as.integer(release_date)
@@ -325,7 +327,7 @@ ggplot(release_summary, aes(x = factor(year, levels = sort(unique(year), decreas
 release_summary <- nodes %>%
   filter(
     row_id %in% all,
-    (type == "Song" & single == TRUE) | type == "Album"
+    type == "Song" | type == "Album"
   ) %>%
   mutate(
     year = as.integer(release_date)
@@ -496,7 +498,7 @@ performer_nodes <- nodes %>%
     id = row_id, 
     label = name, 
     group = "Performer", 
-    title = paste("Type: ", type),
+    title = paste("<b>Type:</b> ", type),
     level = 4,
     shape = "icon",
     icon.code = code,
@@ -510,7 +512,7 @@ edges1 <- edges %>%
   transmute(
     from = from,
     to = to,
-    title = paste("Relation:", relation),
+    title = paste("<b>Relation:</b> ", relation),
     relation = relation
   )
 
@@ -518,7 +520,7 @@ edges2 <- influenced_nodes %>%
   transmute(
     from = from,
     to = to,
-    title = paste("Relation:", relation),
+    title = paste("<b>Relation:</b> ", relation),
     relation = relation
   )
 
@@ -526,7 +528,7 @@ edges3 <- performer_edges %>%
   transmute(
     from = from,
     to = to,
-    title = paste("Relation:", relation),
+    title = paste("<b>Relation:</b> ", relation),
     relation = relation
   )
 
@@ -569,3 +571,258 @@ Based on the network structure, the following variables can be exposed as user i
 ![](ui/ui4.png)
 
 ## Oceanus Folk Influence Tracker
+
+### Tab 1 : Overview
+
+#### Creative Activity Oceanus Folk
+
+```{r}
+oceanus_releases <- nodes %>%
+  filter(
+    genre == "Oceanus Folk",
+    type == "Song" | type == "Album"
+  ) %>%
+  mutate(
+    year = as.integer(release_date)
+  ) %>%
+  filter(!is.na(year)) %>%
+  count(year, type, name = "n")
+
+totals_per_year <- oceanus_releases %>%
+  group_by(year) %>%
+  summarise(total = sum(n), .groups = "drop")
+
+ggplot(oceanus_releases, aes(x = factor(year), y = n, fill = type)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c(
+      "Song" = "#96b3c2",
+      "Album" = "#466575"
+    )
+  ) +
+  geom_text(aes(label = n),
+          position = position_stack(vjust = 0.5),
+          size = 2, color = "white") +
+  geom_text(data = totals_per_year,
+          aes(x = factor(year), y = total + 1, label = total),
+          inherit.aes = FALSE,
+          size = 3) +
+  labs(
+    title = "Number of Songs and Albums Released Over Time",
+    subtitle = "Oceanus Folk Genre",
+    x = "Year",
+    y = "Number of Releases",
+    fill = "Release Type"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.background = theme$background,
+    panel.background = theme$panel,
+    panel.grid.major = theme$grid,
+    text = element_text(size = theme$size),
+    plot.title = theme$title,
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 6)
+  )
+```
+
+#### Total Performers
+
+```{r}
+oceanus_songs <- nodes %>% 
+  filter(
+    genre == "Oceanus Folk",
+    type == "Song"| type == "Album"
+  )
+
+performer_edges <- edges %>%
+  filter(relation == "PerformerOf", to %in% oceanus_songs$row_id)
+
+performer_ids <- unique(performer_edges$from)
+
+unique_performers <- nodes %>%
+  filter(row_id %in% performer_ids, type %in% c("Person", "MusicalGroup")) %>% 
+  select(`Name`=name,`Type`=type)
+
+n_unique_performers <- nrow(unique_performers)
+n_unique_performers
+```
+#### Total Releases
+```{r}
+nrow(oceanus_releases)
+```
+
+#### Years Active
+```{r}
+paste(min(oceanus_releases$year),"-",max(oceanus_releases$year))
+```
+
+#### UI Design
+
+![](ui/ui5.png)
+
+### Tab 2 : Influence Timeline
+
+#### Influence Line Graph
+
+```{r}
+oceanus_songs <- nodes %>% 
+  filter(
+    genre == "Oceanus Folk",
+    type == "Song"| type == "Album"
+  ) %>% 
+  mutate(
+    year = as.integer(release_date)
+  )
+
+oceanus_edges <- edges %>%
+  filter(relation %in% influence_types, to %in% oceanus_songs$row_id)
+
+edges_with_year <- oceanus_edges %>%
+  left_join(oceanus_songs %>% select(row_id, year), by = c("to" = "row_id")) %>%
+  filter(!is.na(year))
+
+edge_counts <- edges_with_year %>%
+  group_by(year, relation) %>%
+  summarise(count = n(), .groups = "drop")
+
+ggplot(edge_counts, aes(x = year, y = count, color = relation)) +
+  geom_line(size = 1) +
+  geom_point(size = 1.5) +
+  labs(
+    title = "Oceanus Folk Influences Over Time",
+    x = "Year",
+    y = "Number of Songs",
+    color = "Edge Type"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.background = theme$background,
+    panel.background = theme$panel,
+    panel.grid.major = theme$grid,
+    text = element_text(size = theme$size),
+    plot.title = theme$title,
+  )
+```
+
+
+#### UI Design
+
+![](ui/ui6.png)
+
+### Tab 3 : Outward Impact
+
+#### Genres Influenced by Oceanus Folk Network Graph
+
+```{r}
+oceanus_nodes_subset <- nodes %>%
+  filter(row_id %in% unique(c(oceanus_edges$from, oceanus_edges$to))) %>%
+  mutate(
+    id = row_id,
+    label = name,
+    group = type,
+    title = genre,
+    shape = "icon",
+    icon.code = ifelse(genre == "Oceanus Folk", "f13d", "f111"),
+    icon.color = ifelse(genre == "Oceanus Folk", "#123456", "#e3a6ab")
+  )
+
+oceanus_edges_subset <- oceanus_edges %>%
+  mutate(
+    from = from,
+    to = to,
+    arrows = "to",
+    title = relation, 
+    color = edge_colors[relation] %>% unname()
+  )
+
+visNetwork(oceanus_nodes_subset, oceanus_edges_subset) %>%
+  visEdges(smooth = TRUE) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  addFontAwesome() %>% 
+  visLayout(randomSeed = 42)
+```
+
+#### Genres Influenced by Oceanus Folk Table
+```{r}
+influenced_songs <- oceanus_edges %>%
+  left_join(nodes %>% select(row_id, genre, type), by = c("from" = "row_id")) %>%
+  filter(!is.na(genre), genre != "Oceanus Folk")
+
+genre_influence_counts <- influenced_songs %>%
+  group_by(genre) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  arrange(desc(count))
+
+kable(genre_influence_counts, col.names = c("Genre", "Number of Songs Influenced by Oceanus Folk"))
+```
+
+#### Artists with Charted Songs Influenced by Oceanus Folk
+```{r}
+notable_influenced_songs <- oceanus_edges %>%
+  left_join(nodes %>% select(row_id, notable, type), by = c("from" = "row_id")) %>%
+  filter(notable == TRUE)
+
+notable_performers <- edges %>%
+  filter(relation == "PerformerOf", to %in% notable_influenced_songs$from) %>%
+  left_join(nodes %>% select(row_id, name, type), by = c("from" = "row_id")) %>%
+  filter(type %in% c("Person", "MusicalGroup")) %>%
+  count(name, sort = TRUE)
+
+kable(head(notable_performers, 10), col.names = c("Artist", "Number of Notable Songs Influenced by Oceanus Folk"))
+```
+
+#### UI Design
+
+![](ui/ui7.png)
+
+### Tab 4 : Roots
+
+#### Network Graph
+
+```{r}
+recent <- oceanus_songs %>%
+  filter(year >= 2023)
+
+influences <- edges %>%
+  filter(relation %in% influence_types, from %in% recent$row_id)
+
+node_ids <- unique(c(influences$from, influences$to))
+
+network_nodes <- nodes %>%
+  filter(row_id %in% node_ids) %>%
+  mutate(
+    id = row_id,
+    label = name,
+    group = ifelse(row_id %in% recent$row_id, "Oceanus Folk", "Influenced Song"),
+    title = paste0("<b> Type: </b>", type, "<br><b>Genre: </b>", genre)
+  )
+
+network_edges <- influences %>%
+  mutate(
+    from = from,
+    to = to,
+    arrows = "to",
+    title = relation,
+    color = edge_colors[relation] %>% unname()
+  )
+
+visNetwork(network_nodes, network_edges) %>%
+  visEdges(smooth = TRUE) %>% 
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLegend() %>% 
+  visLayout(randomSeed = 42) 
+```
+
+#### Which Genre is Most of the Oceanus Folk Songs Influenced By 
+```{r}
+influenced_genres <- influences %>%
+  left_join(nodes %>% select(row_id, genre, type), by = c("to" = "row_id")) %>%
+  filter(type == "Song", !is.na(genre), genre != "Oceanus Folk") %>%
+  count(genre, sort = TRUE)
+
+kable(influenced_genres)
+```
+
+#### UI Design
+
+![](ui/ui8.png)
