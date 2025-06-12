@@ -157,7 +157,7 @@ nodes <- graph %>%
 ```
 
 ```{r}
-edges_tbl <- graph %>%
+edges <- graph %>%
   activate(edges) %>%
   as_tibble()
 ```
@@ -172,10 +172,12 @@ group_id <- edges %>%
   pull(to)
 
 ```
+
 ### Tab 1 : Overview
 
 ::: panel-tabset
 #### Active Years
+
 ```{r}
 sailor_releases <- edges %>%
   filter(from == sailor_id, relation == "PerformerOf") %>%
@@ -413,18 +415,7 @@ visNetwork(nodes_df, edges_df) %>%
   visIgraphLayout(layout = "layout_with_fr") %>%
   visOptions(highlightNearest = TRUE, selectedBy = list(variable = "group", main = "Filter by Node Type"),) %>%
   visLayout(randomSeed = 123) %>%
-  visEdges(smooth = FALSE) %>% 
-  visInteraction(
-    tooltipStyle = "position: absolute;
-                    visibility: hidden;
-                    padding: 8px;
-                    font-size: 14px;
-                    background-color: #E3F2FA;
-                    color: #333333;
-                    border: 1px solid #333333;
-                    border-radius: 6px;
-                    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);"
-  )
+  visEdges(smooth = FALSE)
 ```
 
 #### Table
@@ -440,7 +431,7 @@ collab_table <- collab_edges %>%
     type,
     release_date
   ) %>%
-  arrange(release_date) 
+  arrange(release_date)
 
 kable(collab_table)
 ```
@@ -458,3 +449,123 @@ Based on the network structure, the following variables can be exposed as user i
 #### UI Design
 
 ![](ui/ui3.png)
+
+
+### Tab 4 : Influence Network
+
+#### Network Graph
+
+```{r}
+influence_types <- c("InStyleOf", "CoverOf", "LyricalReferenceTo", "InterpolatesFrom", "DirectlySamples")
+
+works <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
+
+sailor_works <- edges %>%
+  filter(from == sailor_id, relation %in% works) %>%
+  pull(to)
+
+influenced_nodes <- edges %>%
+  filter(from %in% sailor_works, relation %in% influence_types)
+
+influenced_works <- influenced_nodes$to
+
+performer_edges <- edges %>%
+  filter(relation == "PerformerOf", to %in% influenced_works)
+
+performer_ids <- performer_edges$from
+
+sailor_node <- nodes %>%
+  filter(row_id == sailor_id) %>%
+  transmute(id = row_id, label = name, group = "Sailor", level = 1)
+
+works_nodes <- nodes %>%
+  filter(row_id %in% sailor_works) %>%
+  transmute(id = row_id, label = name, group = "SailorWork", level = 2)
+
+influencer_nodes <- nodes %>%
+  filter(row_id %in% influenced_works) %>%
+  transmute(id = row_id, label = name, group = "InfluencedWork", title = paste0("Genre :", genre),level = 3)
+
+performer_nodes <- nodes %>%
+  filter(row_id %in% performer_ids) %>%  
+  mutate(
+    code = ifelse(type == "Person", "f007", "f0c0"),
+    color = ifelse(type == "Person", node_colors["Person"], node_colors["MusicalGroup"])
+  ) %>%
+  transmute(
+    id = row_id, 
+    label = name, 
+    group = "Performer", 
+    title = paste("Type: ", type),
+    level = 4,
+    shape = "icon",
+    icon.code = code,
+    icon.color = color
+    )
+
+all_nodes <- bind_rows(sailor_node, works_nodes, influencer_nodes, performer_nodes)
+
+edges1 <- edges %>%
+  filter(from == sailor_id, to %in% sailor_works, relation %in% works) %>% 
+  transmute(
+    from = from,
+    to = to,
+    title = paste("Relation:", relation),
+    relation = relation
+  )
+
+edges2 <- influenced_nodes %>%
+  transmute(
+    from = from,
+    to = to,
+    title = paste("Relation:", relation),
+    relation = relation
+  )
+
+edges3 <- performer_edges %>%
+  transmute(
+    from = from,
+    to = to,
+    title = paste("Relation:", relation),
+    relation = relation
+  )
+
+all_edges <- bind_rows(edges1, edges2, edges3)
+
+visNetwork(all_nodes, all_edges) %>%
+  visNodes(shape = "dot", size = 20) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>% 
+  addFontAwesome() %>% 
+  visLayout(randomSeed = 42)
+```
+
+
+```{r}
+influence_details <- influenced_nodes %>%
+  left_join(nodes %>% select(row_id, from_label = name), by = c("from" = "row_id")) %>%
+  left_join(nodes %>% select(row_id, to_label = name, to_genre = genre), by = c("to" = "row_id")) %>%
+  select(from_label, relation, to_label, to_genre) %>%
+  rename(
+    `Sailor Shift Work` = from_label, 
+    `Influence Type` = relation,
+    `Other Artist Work` = to_label, 
+    `Genre` = to_genre
+  )
+kable(influence_details)
+```
+::: callout-tip
+### Ideas
+Based on the network structure, the following variables can be exposed as user inputs:
+
+- Genre Filter (SelectInput / MultiSelect)
+
+- Influence Type (CheckboxGroupInput)
+
+:::
+
+#### UI Design
+
+![](ui/ui4.png)
+
+## Oceanus Folk Influence Tracker
