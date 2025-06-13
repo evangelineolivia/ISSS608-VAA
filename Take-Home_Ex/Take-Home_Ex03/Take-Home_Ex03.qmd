@@ -293,6 +293,8 @@ paste0(ratio,'%')
 #### Bar Plot
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 release_summary <- nodes %>%
   filter(
     row_id %in% all,
@@ -332,6 +334,8 @@ ggplot(release_summary, aes(x = factor(year, levels = sort(unique(year), decreas
 #### Table
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 release_summary <- nodes %>%
   filter(
     row_id %in% all,
@@ -364,6 +368,8 @@ Based on the code above, the following variables can be exposed as user inputs:
 #### Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
 
 sailor_works <- edges %>%
@@ -392,6 +398,8 @@ subgraph <- graph %>%
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 nodes_df <- subgraph %>%
   activate(nodes) %>%
   as_tibble() %>%
@@ -430,6 +438,8 @@ visNetwork(nodes_df, edges_df) %>%
 #### Table
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 collab_table <- collab_edges %>%
   left_join(nodes %>% select(row_id, collaborator_name = name), by = c("from" = "row_id")) %>%
   left_join(nodes %>% select(row_id, work_name = name, type, release_date), by = c("to" = "row_id")) %>%
@@ -465,6 +475,8 @@ Based on the network structure, the following variables can be exposed as user i
 #### Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 influence_types <- c("InStyleOf", "CoverOf", "LyricalReferenceTo", "InterpolatesFrom", "DirectlySamples")
 
 works <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
@@ -550,6 +562,8 @@ visNetwork(all_nodes, all_edges) %>%
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 influence_details <- influenced_nodes %>%
   left_join(nodes %>% select(row_id, from_label = name), by = c("from" = "row_id")) %>%
   left_join(nodes %>% select(row_id, to_label = name, to_genre = genre), by = c("to" = "row_id")) %>%
@@ -584,6 +598,8 @@ Based on the network structure, the following variables can be exposed as user i
 #### Creative Activity Oceanus Folk
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 oceanus_releases <- nodes %>%
   filter(
     genre == "Oceanus Folk",
@@ -677,6 +693,8 @@ paste(min(oceanus_releases$year),"-",max(oceanus_releases$year))
 #### Influence Line Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 oceanus_songs <- nodes %>% 
   filter(
     genre == "Oceanus Folk",
@@ -725,6 +743,8 @@ ggplot(edge_counts, aes(x = year, y = count, color = relation)) +
 #### Genres Influenced by Oceanus Folk Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 oceanus_nodes_subset <- nodes %>%
   filter(row_id %in% unique(c(oceanus_edges$from, oceanus_edges$to))) %>%
   mutate(
@@ -756,6 +776,8 @@ visNetwork(oceanus_nodes_subset, oceanus_edges_subset) %>%
 #### Genres Influenced by Oceanus Folk Table
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 influenced_songs <- oceanus_edges %>%
   left_join(nodes %>% select(row_id, genre, type), by = c("from" = "row_id")) %>%
   filter(!is.na(genre), genre != "Oceanus Folk")
@@ -771,6 +793,8 @@ kable(genre_influence_counts, col.names = c("Genre", "Number of Songs Influenced
 #### Artists with Charted Songs Influenced by Oceanus Folk
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 notable_influenced_songs <- oceanus_edges %>%
   left_join(nodes %>% select(row_id, notable, type), by = c("from" = "row_id")) %>%
   filter(notable == TRUE)
@@ -793,6 +817,8 @@ kable(head(notable_performers, 10), col.names = c("Artist", "Number of Notable S
 #### Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 recent <- oceanus_songs %>%
   filter(year >= 2023)
 
@@ -829,6 +855,8 @@ visNetwork(network_nodes, network_edges) %>%
 #### Which Genre is Most of the Oceanus Folk Songs Influenced By
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 influenced_genres <- influences %>%
   left_join(nodes %>% select(row_id, genre, type), by = c("to" = "row_id")) %>%
   filter(type == "Song", !is.na(genre), genre != "Oceanus Folk") %>%
@@ -848,6 +876,8 @@ kable(influenced_genres)
 #### Artist A Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_a <- "Sailor Shift"
  
 duplicates <- nodes %>%
@@ -951,6 +981,8 @@ visNetwork(a_nodes, a_edges) %>%
 #### Artist B Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_b <- "Yang Wan"
  
 duplicates <- nodes %>%
@@ -1053,6 +1085,8 @@ visNetwork(b_nodes, b_edges) %>%
 #### Artist C Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_c <- "Jay Walters"
  
 duplicates <- nodes %>%
@@ -1156,6 +1190,8 @@ visNetwork(c_nodes, c_edges) %>%
 #### Line Graph Comparison
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
 
 artist_nodes <- nodes %>%
@@ -1229,6 +1265,8 @@ Based on the network structure, the following variables can be exposed as user i
 #### Artist A Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_a <- "Sailor Shift"
  
 duplicates <- nodes %>%
@@ -1293,6 +1331,8 @@ visNetwork(contribution_nodes, contribution_edges_vis) %>%
 #### Artist B Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_b <- "Yang Wan"
  
 duplicates <- nodes %>%
@@ -1357,6 +1397,8 @@ visNetwork(contribution_nodes, contribution_edges_vis) %>%
 #### Artist C Network Graph
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_c <- "Jay Walters"
  
 duplicates <- nodes %>%
@@ -1421,6 +1463,8 @@ visNetwork(contribution_nodes, contribution_edges_vis) %>%
 #### Table 
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 contribution <- c("ComposerOf", "ProducerOf", "LyricistOf")
 artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
 
@@ -1454,6 +1498,8 @@ Based on the network structure, the following variables can be exposed as user i
 
 #### Artist A Network Graph
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_a <- "Sailor Shift"
  
 duplicates <- nodes %>%
@@ -1545,6 +1591,8 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
 
 #### Artist B Network Graph
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_b <- "Yang Wan"
  
 duplicates <- nodes %>%
@@ -1639,6 +1687,8 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
 
 #### Artist C Network Graph
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_name_c <- "Jay Walters"
  
 duplicates <- nodes %>%
@@ -1733,6 +1783,8 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
 
 #### Table 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
 artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
 
@@ -1783,6 +1835,8 @@ Based on the network structure, the following variables can be exposed as user i
 #### Stacked Bar Chart
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
 artist_nodes <- nodes %>%
   filter(type == "Person", name %in% artist_names)
@@ -1829,6 +1883,8 @@ ggplot(release_charted_summary, aes(x = artist, y = n, fill = charted_status)) +
 
 #### Table
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 release_charted_table <- map_dfr(artist_names, function(artist_label) {
   artist_id <- artist_nodes %>% 
     filter(name == artist_label) %>%
@@ -1862,11 +1918,14 @@ Based on the network structure, the following variables can be exposed as user i
 #### UI Design
 
 ![](ui/ui12.png)
+
 ### Tab 5 : Prediction
 
 #### Table
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 oceanus_nodes <- nodes %>%
   filter(genre == "Oceanus Folk", type %in% c("Song", "Album")) %>%
   pull(row_id)
