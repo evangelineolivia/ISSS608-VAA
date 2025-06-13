@@ -13,9 +13,10 @@ format:
 
 # Choropleth Mapping with R
 
-## Overview 
+## Overview
 
 ### Objectives
+
 In this in-class exercise, you will gain hands-on experience on using appropriate R methods to plot analytical maps.
 
 ### Learning Outcome

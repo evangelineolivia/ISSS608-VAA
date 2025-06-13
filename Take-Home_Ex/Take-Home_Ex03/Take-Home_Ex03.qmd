@@ -22,9 +22,9 @@ In this take-home exercise, we are required to select one of the modules of our 
 
 -   To include a section called UI design for the different components of the UIs for the proposed design.
 
-- We are required to prepare the prototype module report as Take-home Exercise 3 submission.
+-   We are required to prepare the prototype module report as Take-home Exercise 3 submission.
 
-- We are required to include a section called UI design for the different components of the UIs for the proposed design.
+-   We are required to include a section called UI design for the different components of the UIs for the proposed design.
 
 ## Getting Started
 
@@ -34,9 +34,9 @@ Specifically, our project will focus on Mini-Challenge 1, where participants are
 
 In addition, we plan to develop the following Shiny applications:
 
-- **Shiny App 1: Sailor Shift’s Career Explorer**
-- **Shiny App 2: Oceanus Folk Influence Tracker**
-- **Shiny App 3: Rising Star Prediction Dashboard**
+-   **Shiny App 1: Sailor Shift’s Career Explorer**
+-   **Shiny App 2: Oceanus Folk Influence Tracker**
+-   **Shiny App 3: Rising Star Prediction Dashboard**
 
 For this take-home exercise, I will be providing the prototype module report and the UIs designed for the above applications.
 
@@ -50,11 +50,13 @@ library(dplyr)
 ```
 
 ## Importing and Loading Data
+
 ```{r}
 data <- fromJSON("data/MC1_graph.json")
 ```
 
 ## Custom Theme
+
 ```{r}
 font_add_google("Montserrat", "montserrat")
 theme <- list(
@@ -98,12 +100,14 @@ node_colors <- c(
 
 ::: panel-tabset
 #### Edges
+
 ```{r}
 edges <- as_tibble(data$links)
 edge
 ```
 
 #### Nodes
+
 ```{r}
 nodes <- as_tibble(data$nodes)
 nodes
@@ -120,7 +124,6 @@ colnames(edges)[colnames(edges) == "Edge Type"] <- "relation"
 ```{r}
 colSums(is.na(nodes))
 ```
-
 
 ## Knowledge Graph
 
@@ -143,12 +146,14 @@ edges <- edges %>%
 ```
 
 ### Filtering Unmatched Edges
+
 ```{r}
 edges <- edges %>%
   filter(!is.na(from), !is.na(to))
 ```
 
 ### Plotting the Graph
+
 ```{r}
 graph <- tbl_graph(nodes = nodes, edges = edges, directed = data$directed)
 ```
@@ -206,7 +211,6 @@ release_years <- nodes %>%
 paste0(min(release_years), "–", max(release_years))
 ```
 
-
 #### Total Releases
 
 ```{r}
@@ -222,7 +226,8 @@ total_releases <- nodes %>%
 
 total_releases
 ```
-#### Collaborators 
+
+#### Collaborators
 
 ```{r}
 collab_roles <- c("PerformerOf", "ComposerOf", "LyricistOf", "ProducerOf")
@@ -270,6 +275,7 @@ charted_count
 ```
 
 #### Chart Success Ratio
+
 ```{r}
 ratio <- round((charted_count / total_releases) * 100)
 paste0(ratio,'%')
@@ -277,6 +283,7 @@ paste0(ratio,'%')
 :::
 
 #### UI Design
+
 ![](ui/ui1.png)
 
 ### Tab 2 : Career Timeline
@@ -338,18 +345,17 @@ kable(release_summary)
 
 ::: callout-tip
 ### Ideas
+
 Based on the code above, the following variables can be exposed as user inputs:
 
-- Year (SliderInput)
+-   Year (SliderInput)
 
-- Release Type (filter between Songs and Albums)
-
+-   Release Type (filter between Songs and Albums)
 :::
 
 #### UI Design
 
 ![](ui/ui2.png)
-
 
 ### Tab 3 : Collaborations
 
@@ -441,17 +447,17 @@ kable(collab_table)
 
 ::: callout-tip
 ### Ideas
+
 Based on the network structure, the following variables can be exposed as user inputs:
 
-- Node Type (checkboxGroupInput)
+-   Node Type (checkboxGroupInput)
 
-- Edge Type (Relation) (checkboxGroupInput)
+-   Edge Type (Relation) (checkboxGroupInput)
 :::
 
 #### UI Design
 
 ![](ui/ui3.png)
-
 
 ### Tab 4 : Influence Network
 
@@ -542,7 +548,6 @@ visNetwork(all_nodes, all_edges) %>%
   visLayout(randomSeed = 42)
 ```
 
-
 ```{r}
 influence_details <- influenced_nodes %>%
   left_join(nodes %>% select(row_id, from_label = name), by = c("from" = "row_id")) %>%
@@ -556,14 +561,15 @@ influence_details <- influenced_nodes %>%
   )
 kable(influence_details)
 ```
+
 ::: callout-tip
 ### Ideas
+
 Based on the network structure, the following variables can be exposed as user inputs:
 
-- Genre Filter (SelectInput / MultiSelect)
+-   Genre Filter (SelectInput / MultiSelect)
 
-- Influence Type (CheckboxGroupInput)
-
+-   Influence Type (CheckboxGroupInput)
 :::
 
 #### UI Design
@@ -625,6 +631,7 @@ ggplot(oceanus_releases, aes(x = factor(year), y = n, fill = type)) +
   )
 ```
 
+::: panel-tabset
 #### Total Performers
 
 ```{r}
@@ -646,15 +653,19 @@ unique_performers <- nodes %>%
 n_unique_performers <- nrow(unique_performers)
 n_unique_performers
 ```
+
 #### Total Releases
+
 ```{r}
 nrow(oceanus_releases)
 ```
 
 #### Years Active
+
 ```{r}
 paste(min(oceanus_releases$year),"-",max(oceanus_releases$year))
 ```
+:::
 
 #### UI Design
 
@@ -704,7 +715,6 @@ ggplot(edge_counts, aes(x = year, y = count, color = relation)) +
   )
 ```
 
-
 #### UI Design
 
 ![](ui/ui6.png)
@@ -743,6 +753,7 @@ visNetwork(oceanus_nodes_subset, oceanus_edges_subset) %>%
 ```
 
 #### Genres Influenced by Oceanus Folk Table
+
 ```{r}
 influenced_songs <- oceanus_edges %>%
   left_join(nodes %>% select(row_id, genre, type), by = c("from" = "row_id")) %>%
@@ -757,6 +768,7 @@ kable(genre_influence_counts, col.names = c("Genre", "Number of Songs Influenced
 ```
 
 #### Artists with Charted Songs Influenced by Oceanus Folk
+
 ```{r}
 notable_influenced_songs <- oceanus_edges %>%
   left_join(nodes %>% select(row_id, notable, type), by = c("from" = "row_id")) %>%
@@ -813,7 +825,8 @@ visNetwork(network_nodes, network_edges) %>%
   visLayout(randomSeed = 42) 
 ```
 
-#### Which Genre is Most of the Oceanus Folk Songs Influenced By 
+#### Which Genre is Most of the Oceanus Folk Songs Influenced By
+
 ```{r}
 influenced_genres <- influences %>%
   left_join(nodes %>% select(row_id, genre, type), by = c("to" = "row_id")) %>%
@@ -826,3 +839,46 @@ kable(influenced_genres)
 #### UI Design
 
 ![](ui/ui8.png)
+
+## Rising Star Prediction Dashboard
+
+### Tab 1 : Activity
+
+#### Artist A Network Graph
+
+# ```{r}
+# artist_name <- "Sailor Shift"
+# 
+# artist_index <- nodes %>%
+#   filter(name == artist_name) %>%
+#   pull(row_id)
+# 
+# member_of_groups <- graph %>%
+#   activate(edges) %>%
+#   filter(from == artist_index, relation == "MemberOf") %>%
+#   pull(to)
+# 
+# if (length(member_of_groups) > 0) {
+#   group_names <- nodes %>%
+#     filter(row_id %in% member_of_groups) %>%
+#     pull(name)
+# 
+#   group_id <- nodes %>%
+#     filter(row_id %in% group_names) %>%
+#     pull(row_id)
+# }
+# 
+# performer_ids <- c(artist_index, group_id)
+# 
+# performed_ids <- edges %>%
+#   filter(relation == "PerformerOf", from %in% performer_ids) %>%
+#   pull(to)
+# 
+# performed_works <- nodes %>%
+#   filter(row_id %in% performed_ids,
+#           (type == "Song" | type == "Album")) %>%
+#   mutate(year = as.integer(release_date)) %>% 
+#   select(name, year, type, row_id) %>%
+#   arrange(release_date)
+# 
+# ```
