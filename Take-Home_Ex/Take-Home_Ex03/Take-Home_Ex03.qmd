@@ -73,10 +73,11 @@ theme <- list(
 )
 
 edge_colors <- c(
-  "PerformerOf" = "#FFA500",  
-  "ComposerOf"  = "#1E90FF",  
-  "LyricistOf"  = "#32CD32", 
-  "ProducerOf"  = "#FFD700",
+  "PerformerOf" = "#E69F00",   
+  "ComposerOf"  = "#56B4E9",   
+  "LyricistOf"  = "#009E73",   
+  "ProducerOf"  = "#F0E442",   
+  "MemberOf"    = "#D55E00",
   
   "CoverOf" = "#E69F00",
   "InStyleOf" = "#56B4E9",
@@ -87,8 +88,8 @@ edge_colors <- c(
 
 node_colors <- c(
   "Person" = "#176BA0",
-  "Song"   = "#1B9ADE",
-  "Album"  = "#1AE8E9",
+  "Song"   = "#F1948A",  
+  "Album"  = "#C0392B",  
   "MusicalGroup" = "#9DF0E2",
   "RecordLabel" = "#CFF9F8"
 )
@@ -846,39 +847,1079 @@ kable(influenced_genres)
 
 #### Artist A Network Graph
 
-# ```{r}
-# artist_name <- "Sailor Shift"
-# 
-# artist_index <- nodes %>%
-#   filter(name == artist_name) %>%
-#   pull(row_id)
-# 
-# member_of_groups <- graph %>%
-#   activate(edges) %>%
-#   filter(from == artist_index, relation == "MemberOf") %>%
-#   pull(to)
-# 
-# if (length(member_of_groups) > 0) {
-#   group_names <- nodes %>%
-#     filter(row_id %in% member_of_groups) %>%
-#     pull(name)
-# 
-#   group_id <- nodes %>%
-#     filter(row_id %in% group_names) %>%
-#     pull(row_id)
-# }
-# 
-# performer_ids <- c(artist_index, group_id)
-# 
-# performed_ids <- edges %>%
-#   filter(relation == "PerformerOf", from %in% performer_ids) %>%
-#   pull(to)
-# 
-# performed_works <- nodes %>%
-#   filter(row_id %in% performed_ids,
-#           (type == "Song" | type == "Album")) %>%
-#   mutate(year = as.integer(release_date)) %>% 
-#   select(name, year, type, row_id) %>%
-#   arrange(release_date)
-# 
-# ```
+```{r}
+artist_name_a <- "Sailor Shift"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_a)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+artist_index <- nodes %>%
+   filter(name == artist_name_a) %>%
+   pull(row_id)
+
+
+member_of_groups <- edges %>%
+   filter(from == artist_index, relation == "MemberOf") %>%
+   pull(to)
+
+member_edges <- edges %>%
+  filter(relation == "MemberOf", from == artist_index)
+
+group_id <- if (length(member_of_groups) > 0) {
+  member_of_groups
+} else {
+  integer(0)
+}
+performer_ids <- c(artist_index, group_id)
+
+performed_ids <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids) %>%
+   pull(to)
+
+
+performed_works <- nodes %>%
+   filter(row_id %in% performed_ids,
+           (type == "Song" | type == "Album")) %>%
+   mutate(year = as.integer(release_date)) %>%
+   select(name, year, type, row_id, genre)
+
+a_nodes <- bind_rows(
+  nodes %>%
+    filter(row_id %in% c(artist_index, group_id)) %>%
+    mutate(id = row_id,
+           label = name,
+           group = type),
+
+  performed_works %>%
+    mutate(id = row_id,
+           title = paste0(
+             "<b>Name:</b> ", name,
+             "<br><b>Year:</b> ", year,
+             "<br><b>Type:</b> ", type,
+             "<br><b>Genre:</b> ", genre
+             ),
+           group = type,
+           color = node_colors[type])
+) %>%
+  mutate(
+    color = ifelse(name == artist_name_a, "gold", color),
+    shape = ifelse(name == artist_name_a, "star", "dot"),
+    size  = ifelse(name == artist_name_a, 30, 15)
+  )
+
+member_vis_edges <- member_edges %>%
+  mutate(label = "MemberOf",color = edge_colors[relation] %>% unname())
+
+performers <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids, to %in% performed_works$row_id)
+
+
+a_edges <- performers %>%
+   mutate(
+    from = from,
+    to = to,
+    arrows = "to",
+    title = relation)
+
+a_edges <- bind_rows(member_vis_edges, performers) %>%
+  mutate(
+    color = edge_colors[relation]
+  )
+
+visNetwork(a_nodes, a_edges) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+   visLayout(randomSeed = 123)
+```
+
+#### Artist B Network Graph
+
+```{r}
+artist_name_b <- "Yang Wan"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_b)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+artist_index <- nodes %>%
+   filter(name == artist_name_b) %>%
+   pull(row_id)
+
+
+member_of_groups <- edges %>%
+   filter(from == artist_index, relation == "MemberOf") %>%
+   pull(to)
+
+member_edges <- edges %>%
+  filter(relation == "MemberOf", from == artist_index)
+
+group_id <- if (length(member_of_groups) > 0) {
+  member_of_groups
+} else {
+  integer(0)
+}
+performer_ids <- c(artist_index, group_id)
+
+performed_ids <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids) %>%
+   pull(to)
+
+performed_works <- nodes %>%
+   filter(row_id %in% performed_ids,
+           (type == "Song" | type == "Album")) %>%
+   mutate(year = as.integer(release_date)) %>%
+   select(name, year, type, row_id, genre)
+
+b_nodes <- bind_rows(
+  nodes %>%
+    filter(row_id %in% c(artist_index, group_id)) %>%
+    mutate(id = row_id,
+           label = name,
+           group = type),
+
+  performed_works %>%
+    mutate(id = row_id,
+           title = paste0(
+             "<b>Name:</b> ", name,
+             "<br><b>Year:</b> ", year,
+             "<br><b>Type:</b> ", type,
+             "<br><b>Genre:</b> ", genre
+             ),
+           group = type,
+           color = node_colors[type])
+) %>%
+  mutate(
+    color = ifelse(name == artist_name_b, "gold", color),
+    shape = ifelse(name == artist_name_b, "star", "dot"),
+    size  = ifelse(name == artist_name_b, 30, 15)
+  )
+
+member_vis_edges <- member_edges %>%
+  mutate(label = "MemberOf",color = edge_colors[relation] %>% unname())
+
+performers <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids, to %in% performed_works$row_id)
+
+
+b_edges <- performers %>%
+   mutate(
+    from = from,
+    to = to,
+    arrows = "to",
+    title = relation)
+
+b_edges <- bind_rows(member_vis_edges, performers) %>%
+  mutate(
+    color = edge_colors[relation]
+  )
+
+visNetwork(b_nodes, b_edges) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+   visLayout(randomSeed = 123)
+```
+
+#### Artist C Network Graph
+
+```{r}
+artist_name_c <- "Jay Walters"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_c)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+artist_index <- nodes %>%
+   filter(name == artist_name_c) %>%
+   pull(row_id)
+
+
+member_of_groups <- edges %>%
+   filter(from == artist_index, relation == "MemberOf") %>%
+   pull(to)
+
+member_edges <- edges %>%
+  filter(relation == "MemberOf", from == artist_index)
+
+group_id <- if (length(member_of_groups) > 0) {
+  member_of_groups
+} else {
+  integer(0)
+}
+performer_ids <- c(artist_index, group_id)
+
+performed_ids <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids) %>%
+   pull(to)
+
+
+performed_works <- nodes %>%
+   filter(row_id %in% performed_ids,
+           (type == "Song" | type == "Album")) %>%
+   mutate(year = as.integer(release_date)) %>%
+   select(name, year, type, row_id, genre)
+
+c_nodes <- bind_rows(
+  nodes %>%
+    filter(row_id %in% c(artist_index, group_id)) %>%
+    mutate(id = row_id,
+           label = name,
+           group = type),
+
+  performed_works %>%
+    mutate(id = row_id,
+           title = paste0(
+             "<b>Name:</b> ", name,
+             "<br><b>Year:</b> ", year,
+             "<br><b>Type:</b> ", type,
+             "<br><b>Genre:</b> ", genre
+             ),
+           group = type,
+           color = node_colors[type])
+) %>%
+  mutate(
+    color = ifelse(name == artist_name_c, "gold", color),
+    shape = ifelse(name == artist_name_c, "star", "dot"),
+    size  = ifelse(name == artist_name_c, 30, 15)
+  )
+
+member_vis_edges <- member_edges %>%
+  mutate(label = "MemberOf",color = edge_colors[relation] %>% unname())
+
+performers <- edges %>%
+   filter(relation == "PerformerOf", from %in% performer_ids, to %in% performed_works$row_id)
+
+
+c_edges <- performers %>%
+   mutate(
+    from = from,
+    to = to,
+    arrows = "to",
+    title = relation)
+
+c_edges <- bind_rows(member_vis_edges, performers) %>%
+  mutate(
+    color = edge_colors[relation]
+  )
+
+visNetwork(c_nodes, c_edges) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+   visLayout(randomSeed = 123)
+```
+
+#### Line Graph Comparison
+
+```{r}
+artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
+
+artist_nodes <- nodes %>%
+  filter(type == "Person", name %in% artist_names)
+
+
+group_edges <- edges %>%
+  filter(relation == "MemberOf", from %in% artist_nodes$row_id)
+
+group_artist_map <- group_edges %>%
+  left_join(artist_nodes, by = c("from" = "row_id")) %>%
+  select(group_id = to, artist_name = name)
+
+performer_ids <- c(artist_nodes$row_id, group_artist_map$group_id)
+
+performed_works <- edges %>%
+  filter(relation == "PerformerOf", from %in% performer_ids) %>%
+  left_join(nodes, by = c("to" = "row_id")) %>%
+  filter(type %in% c("Song", "Album")) %>%
+  mutate(
+    release_year = as.integer(release_date),
+    artist_name = case_when(
+      from %in% artist_nodes$row_id ~ artist_nodes$name[match(from, artist_nodes$row_id)],
+      from %in% group_artist_map$group_id ~ group_artist_map$artist_name[match(from, group_artist_map$group_id)],
+      TRUE ~ NA_character_)
+  )
+
+release_counts <- performed_works %>%
+  filter(!is.na(release_year)) %>%
+  count(artist_name, release_year)
+
+ggplot(release_counts, aes(x = release_year, y = n)) +
+  geom_line(color = "#96b3c2", linewidth = 1.2) +
+  geom_point(color = "#466575", size = 2) +
+  facet_wrap(~ artist_name, nrow = 1, scales = "free_x") + 
+  labs(
+    title = "Songs or Albums Release Timeline",
+    x = "Year",
+    y = "Number of Releases"
+  ) +
+  scale_x_continuous(
+    breaks = pretty,
+    guide = guide_axis(angle = 45)
+  ) +
+  scale_y_continuous(breaks = seq(0, max(release_counts$n, na.rm = TRUE), by = 1)) +
+  theme_classic() +
+  theme(
+    strip.text = element_text(face = "bold", size = 12),
+    plot.background = theme$background,
+    panel.background = theme$panel,
+    panel.grid.major = theme$grid,
+    text = element_text(size = theme$size),
+    plot.title = theme$title
+  )
+```
+
+::: callout-tip
+### Ideas
+
+Based on the network structure, the following variables can be exposed as user inputs:
+
+-   Artist A, Artist B, Artist C (selectInput)
+:::
+
+#### UI Design
+
+![](ui/ui9.png)
+
+### Tab 2 : Contribution
+
+#### Artist A Network Graph
+
+```{r}
+artist_name_a <- "Sailor Shift"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_a)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+contribution <- c("ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_a) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% contribution) %>%
+  pull(to)
+
+contribution_edges <- edges %>%
+  filter(from == artist_index, relation %in% contribution, to %in% artist_works)
+
+contribution_nodes <- nodes %>%
+  filter(row_id %in% c(artist_index, artist_works)) %>%
+  mutate(
+    id = row_id,
+    label = ifelse(row_id == artist_index, name, NA),
+    group = type,
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type),
+    shape = ifelse(row_id == artist_index, "star", "dot"),
+    color = ifelse(row_id == artist_index, "gold", node_colors[type]),
+    size  = ifelse(row_id == artist_index, 30, 15)
+  )
+
+contribution_edges_vis <- contribution_edges %>%
+  mutate(
+    from = from,
+    to = to,
+    title = paste("<b>Relation: </b>",relation),
+    arrows = "to",
+    color = edge_colors[relation]
+  )
+
+visNetwork(contribution_nodes, contribution_edges_vis) %>%
+  visEdges(smooth = TRUE) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Artist B Network Graph
+
+```{r}
+artist_name_b <- "Yang Wan"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_b)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+contribution <- c("ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_b) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% contribution) %>%
+  pull(to)
+
+contribution_edges <- edges %>%
+  filter(from == artist_index, relation %in% contribution, to %in% artist_works)
+
+contribution_nodes <- nodes %>%
+  filter(row_id %in% c(artist_index, artist_works)) %>%
+  mutate(
+    id = row_id,
+    label = ifelse(row_id == artist_index, name, NA),
+    group = type,
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type),
+    shape = ifelse(row_id == artist_index, "star", "dot"),
+    color = ifelse(row_id == artist_index, "gold", node_colors[type]),
+    size  = ifelse(row_id == artist_index, 30, 15)
+  )
+
+contribution_edges_vis <- contribution_edges %>%
+  mutate(
+    from = from,
+    to = to,
+    title = paste("<b>Relation: </b>",relation),
+    arrows = "to",
+    color = edge_colors[relation]
+  )
+
+visNetwork(contribution_nodes, contribution_edges_vis) %>%
+  visEdges(smooth = TRUE) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Artist C Network Graph
+
+```{r}
+artist_name_c <- "Jay Walters"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_c)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+contribution <- c("ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_c) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% contribution) %>%
+  pull(to)
+
+contribution_edges <- edges %>%
+  filter(from == artist_index, relation %in% contribution, to %in% artist_works)
+
+contribution_nodes <- nodes %>%
+  filter(row_id %in% c(artist_index, artist_works)) %>%
+  mutate(
+    id = row_id,
+    label = ifelse(row_id == artist_index, name, NA),
+    group = type,
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type),
+    shape = ifelse(row_id == artist_index, "star", "dot"),
+    color = ifelse(row_id == artist_index, "gold", node_colors[type]),
+    size  = ifelse(row_id == artist_index, 30, 15)
+  )
+
+contribution_edges_vis <- contribution_edges %>%
+  mutate(
+    from = from,
+    to = to,
+    title = paste("<b>Relation: </b>",relation),
+    arrows = "to",
+    color = edge_colors[relation]
+  )
+
+visNetwork(contribution_nodes, contribution_edges_vis) %>%
+  visEdges(smooth = TRUE) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
+
+#### Table 
+
+```{r}
+contribution <- c("ComposerOf", "ProducerOf", "LyricistOf")
+artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
+
+artist_nodes <- nodes %>%
+  filter(type == "Person", name %in% artist_names)
+
+contribution_counts <- edges %>%
+  filter(from %in% artist_nodes$row_id, relation %in% contribution) %>%
+  left_join(artist_nodes %>% select(row_id, artist_name = name), by = c("from" = "row_id")) %>%
+  count(artist_name, relation) %>%
+  pivot_wider(names_from = relation, values_from = n, values_fill = 0)
+
+kable(contribution_counts)
+```
+
+::: callout-tip
+### Ideas
+
+Based on the network structure, the following variables can be exposed as user inputs:
+
+-   Artist A, Artist B, Artist C (selectInput)
+:::
+
+
+#### UI Design
+
+![](ui/ui10.png)
+
+
+### Tab 3 : Collaboration
+
+#### Artist A Network Graph
+```{r}
+artist_name_a <- "Sailor Shift"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_a)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_a) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% collab_types) %>%
+  pull(to)
+
+collab_edges <- edges %>%
+  filter(to %in% artist_works, relation %in% collab_types)
+
+artist_node <- nodes %>%
+  filter(row_id == artist_index) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Artist",
+    shape = "star",
+    color = "gold",
+    level = 1
+  )
+
+work_nodes <- nodes %>%
+  filter(row_id %in% artist_works) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Work",
+    shape = "dot",
+    level = 2,
+    color = node_colors[type],
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collaborator_ids <- setdiff(collab_edges$from, artist_index)
+
+collaborator_nodes <- nodes %>%
+  filter(row_id %in% collaborator_ids) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Collaborator",
+    shape = "icon",
+    color = node_colors[type],
+    level = 3,
+    icon.code = ifelse(type == "Person", "f007", "f0c0"),
+    icon.color = ifelse(type == "Person", node_colors["Person"], node_colors["MusicalGroup"]),
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collab_nodes <- bind_rows(artist_node, work_nodes, collaborator_nodes)
+
+collab_edges_vis <- collab_edges %>%
+  mutate(
+    arrows = "to",
+    color = edge_colors[relation] %>% unname()
+  )
+
+visNetwork(collab_nodes, collab_edges_vis) %>%
+  visNodes(shape = "dot", size = 20) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>% 
+  addFontAwesome() %>% 
+  visLayout(randomSeed = 42)
+```
+
+#### Artist B Network Graph
+```{r}
+artist_name_b <- "Yang Wan"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_b)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_b) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% collab_types) %>%
+  pull(to)
+
+collab_edges <- edges %>%
+  filter(to %in% artist_works, relation %in% collab_types)
+
+artist_node <- nodes %>%
+  filter(row_id == artist_index) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Artist",
+    shape = "icon",
+    level = 1,
+    color = "gold",
+    icon.code = "f005",
+    icon.color = "gold",
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+work_nodes <- nodes %>%
+  filter(row_id %in% artist_works) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Work",
+    shape = "dot",
+    level = 2,
+    color = node_colors[type],
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collaborator_ids <- setdiff(collab_edges$from, artist_index)
+
+collaborator_nodes <- nodes %>%
+  filter(row_id %in% collaborator_ids) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Collaborator",
+    shape = "icon",
+    color = node_colors[type],
+    level = 3,
+    icon.code = ifelse(type == "Person", "f007", "f0c0"),
+    icon.color = ifelse(type == "Person", node_colors["Person"], node_colors["MusicalGroup"]),
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collab_nodes <- bind_rows(artist_node, work_nodes, collaborator_nodes)
+
+collab_edges_vis <- collab_edges %>%
+  mutate(
+    arrows = "to",
+    color = edge_colors[relation] %>% unname()
+  )
+
+visNetwork(collab_nodes, collab_edges_vis) %>%
+  visNodes(shape = "dot", size = 20) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>% 
+  addFontAwesome() %>% 
+  visLayout(randomSeed = 42)
+```
+
+#### Artist C Network Graph
+```{r}
+artist_name_c <- "Jay Walters"
+ 
+duplicates <- nodes %>%
+  filter(name == artist_name_c)
+
+
+if (nrow(duplicates) > 1) {
+  canonical_id <- duplicates$row_id[1]
+  other_ids <- duplicates$row_id[-1]
+  other_ids
+
+  edges <- edges %>%
+    mutate(
+      from = ifelse(from %in% other_ids, canonical_id, from),
+      to   = ifelse(to   %in% other_ids, canonical_id, to)
+    )
+
+  nodes <- nodes %>%
+    filter(!(row_id %in% other_ids))
+}
+
+collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
+
+artist_index <- nodes %>%
+   filter(name == artist_name_c) %>%
+   pull(row_id)
+
+artist_works <- edges %>%
+  filter(from == artist_index, relation %in% collab_types) %>%
+  pull(to)
+
+collab_edges <- edges %>%
+  filter(to %in% artist_works, relation %in% collab_types)
+
+artist_node <- nodes %>%
+  filter(row_id == artist_index) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Artist",
+    shape = "icon",
+    level = 1,
+    color = "gold",
+    icon.code = "f005",
+    icon.color = "gold",
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+work_nodes <- nodes %>%
+  filter(row_id %in% artist_works) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Work",
+    shape = "dot",
+    level = 2,
+    color = node_colors[type],
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collaborator_ids <- setdiff(collab_edges$from, artist_index)
+
+collaborator_nodes <- nodes %>%
+  filter(row_id %in% collaborator_ids) %>%
+  transmute(
+    id = row_id,
+    label = name,
+    group = "Collaborator",
+    shape = "icon",
+    color = node_colors[type],
+    level = 3,
+    icon.code = ifelse(type == "Person", "f007", "f0c0"),
+    icon.color = ifelse(type == "Person", node_colors["Person"], node_colors["MusicalGroup"]),
+    title = paste0("<b>Name:</b> ", name, "<br><b>Type:</b> ", type)
+  )
+
+collab_nodes <- bind_rows(artist_node, work_nodes, collaborator_nodes)
+
+collab_edges_vis <- collab_edges %>%
+  mutate(
+    arrows = "to",
+    color = edge_colors[relation] %>% unname()
+  )
+
+visNetwork(collab_nodes, collab_edges_vis) %>%
+  visNodes(shape = "dot", size = 20) %>%
+  visEdges(arrows = "to") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>% 
+  addFontAwesome() %>% 
+  visLayout(randomSeed = 42)
+```
+
+#### Table 
+```{r}
+collab_types <- c("PerformerOf", "ComposerOf", "ProducerOf", "LyricistOf")
+artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
+
+artist_nodes <- nodes %>%
+  filter(type == "Person", name %in% artist_names)
+
+collab_summary <- map_dfr(artist_names, function(name) {
+  artist_id <- artist_nodes %>%
+    filter(name == !!name) %>%
+    pull(row_id)
+
+  works <- edges %>%
+    filter(from == artist_id, relation %in% collab_types) %>%
+    pull(to)
+
+  collab_ids <- edges %>%
+    filter(to %in% works, relation %in% collab_types, from != artist_id) %>%
+    pull(from) %>%
+    unique()
+
+  nodes %>%
+    filter(row_id %in% collab_ids) %>%
+    count(type) %>%
+    mutate(artist = name)
+})
+
+collab_summary <- collab_summary %>%
+  pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  select(artist, Person, MusicalGroup)
+
+kable(collab_summary)
+```
+
+::: callout-tip
+### Ideas
+
+Based on the network structure, the following variables can be exposed as user inputs:
+
+-   Artist A, Artist B, Artist C (selectInput)
+:::
+
+#### UI Design 
+
+![](ui/ui11.png)
+
+### Tab 4 : Public Recognition
+
+#### Stacked Bar Chart
+
+```{r}
+artist_names <- c(artist_name_a, artist_name_b, artist_name_c)
+artist_nodes <- nodes %>%
+  filter(type == "Person", name %in% artist_names)
+
+release_charted_summary <- map_dfr(artist_names, function(artist_label) {
+  artist_id <- artist_nodes %>% filter(name == artist_label) %>% pull(row_id)
+
+  works <- edges %>%
+    filter(from == artist_id, relation == "PerformerOf") %>%
+    pull(to)
+
+  nodes %>%
+    filter(row_id %in% works, type %in% c("Song", "Album")) %>%
+    mutate(
+      artist = artist_label,
+      charted_status = ifelse(notable, "Charted", "Uncharted")
+    ) %>%
+    count(artist, charted_status)
+})
+
+ggplot(release_charted_summary, aes(x = artist, y = n, fill = charted_status)) +
+  geom_bar(stat = "identity") + 
+  labs(
+    title = "Charted vs Uncharted Releases per Artist",
+    x = "Artist",
+    y = "Number of Releases",
+    fill = "Status"
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Charted" = "#466575",
+      "Uncharted" = "#96b3c2"
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    plot.background = theme$background,
+    panel.background = theme$panel,
+    panel.grid.major = theme$grid,
+    text = element_text(size = theme$size),
+    plot.title = theme$title
+  )
+```
+
+#### Table
+```{r}
+release_charted_table <- map_dfr(artist_names, function(artist_label) {
+  artist_id <- artist_nodes %>% 
+    filter(name == artist_label) %>%
+    pull(row_id)
+
+  works <- edges %>%
+    filter(from == artist_id, relation == "PerformerOf") %>%
+    pull(to)
+
+  nodes %>%
+    filter(row_id %in% works, type %in% c("Song", "Album")) %>%
+    mutate(
+      `Artist Name` = artist_label,
+      charted = ifelse(notable, "Yes", "No"),
+      Year = as.integer(release_date)
+    ) %>%
+    select(`Artist Name`, name, Year, type, charted)
+})
+
+kable(release_charted_table)
+```
+
+::: callout-tip
+### Ideas
+
+Based on the network structure, the following variables can be exposed as user inputs:
+
+-   Artist A, Artist B, Artist C (selectInput)
+:::
+
+#### UI Design
+
+![](ui/ui12.png)
+### Tab 5 : Prediction
+
+#### Table
+
+```{r}
+oceanus_nodes <- nodes %>%
+  filter(genre == "Oceanus Folk", type %in% c("Song", "Album")) %>%
+  pull(row_id)
+
+oceanus_performers <- edges %>%
+  filter(to %in% oceanus_nodes, relation == "PerformerOf") %>%
+  pull(from) %>% unique()
+
+collabs <- edges %>%
+  filter(relation %in% c("ComposerOf", "LyricistOf", "ProducerOf"),
+         from %in% oceanus_performers) %>%
+  group_by(from) %>%
+  summarise(Collabs = n_distinct(to), Creative = n(), .groups = "drop")
+
+release_info <- edges %>%
+  filter(from %in% oceanus_performers, relation == "PerformerOf", to %in% oceanus_nodes) %>%
+  left_join(nodes %>% select(row_id, release_date, notable), by = c("to" = "row_id")) %>%
+  mutate(release_year = as.integer(release_date)) %>%
+  filter(!is.na(release_year)) %>%
+  left_join(nodes %>% select(row_id, name, type) %>%
+              rename(artist_id = row_id, artist_name = name),
+            by = c("from" = "artist_id")) %>%
+  filter(type %in% c("Person", "MusicalGroup"))
+
+current_year <- 2040
+
+table <- release_info %>%
+  group_by(artist_name, from) %>%
+  summarise(
+    First = min(release_year, na.rm = TRUE),
+    Total = n(),
+    Active = n_distinct(release_year),
+    Charted = sum(notable == TRUE, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(First >= 2030, Total >= 3) %>%
+  left_join(collabs, by = "from") %>%
+  mutate(
+    Inactivity = (current_year - First + 1) - Active,
+    Collabs = replace_na(Collabs, 0),
+    Creative = replace_na(Creative, 0),
+    Freshness = exp(-Inactivity * 0.4),
+    ChartedRatio = Charted / Total,
+    Score = round(((Total * 1.0) + (ChartedRatio * 15) + (Collabs * 1.0) + (Creative * 1.2)) * Freshness, 2)
+  ) %>%
+  arrange(desc(Score))
+
+kable(table, col.names = c("Artist", "ID", "First Release", "Total Works", "Active Years",
+                           "Charted", "Collabs", "Creative", "Inactivity", "Freshness",
+                           "Charted Ratio", "Rising Star Score"))
+```
+
+#### UI Design
+
+![](ui/ui13.png)
+
