@@ -1,0 +1,75 @@
+---
+title: "Take Home Exercise 3"
+description: "Prototype Module for Shiny Application"
+format: 
+  html:
+    number-offset: 0
+---
+
+# Prototype Module for Shiny Application
+
+## The Task
+
+In this take-home exercise, we are required to select one of the modules of our proposed Shiny application (Group Project) and complete the following tasks
+
+-   To evaluate and determine the necessary R packages needed for our Shiny application are supported in R CRAN,
+
+-   To prepare and test that the specific R codes can run and returns the correct output as expected,
+
+-   To determine the parameters and outputs that will be exposed on the Shiny applications,
+
+-   To select the appropriate Shiny UI components for exposing the parameters determined above, and
+
+-   To include a section called UI design for the different components of the UIs for the proposed design.
+
+## Getting Started
+
+Our project will be using data from the [VAST Challenge 2025](https://vast-challenge.github.io/2025/index.html) Mini-Challenge 1.
+
+Specifically, our project will focus on Mini-Challenge 1, where participants are provided with a knowledge graph containing recording artists, albums, collaborations, concerts, influences, and more. The goal is to develop visual analytics approaches to trace the rise of one artist and predict who will be the next to break out.
+
+In addition, we plan to develop the following Shiny applications:
+
+-   **Shiny App 1: Sailor Shift’s Career Explorer**
+-   **Shiny App 2: Oceanus Folk Influence Tracker**
+-   **Shiny App 3: Rising Star Prediction Dashboard**
+
+For this take-home exercise, we will be providing the prototype module report and the UIs designed for the above applications.
+
+## R Packages
+
+```{r}
+pacman::p_load(tidyverse, jsonlite,
+               tidygraph, ggraph, igraph, plotly, visNetwork,ggtext, ggiraph,patchwork,
+               kableExtra, showtext,lubridate)
+```
+
+## Dataset
+
+```{r}
+data <- fromJSON("data/MC1_graph.json")
+```
+
+## Storyboard
+
+The storyboard is designed to visually represent the user's journey within the R Shiny dashboard applications. It acts as a bridge between research insights and user interaction, illustrating how findings are translated into visual and interactive elements. The UI design and interactive features are thoughtfully developed to enable seamless exploration and analysis of data including network components helping users identify key patterns and trace the rising of artist in the music industry.
+
+The prototype is organized into three main focus areas:
+
+-   Sailor Shift’s Career Explorer
+
+-   Oceanus Folk Influence Tracker
+
+-   Rising Star Prediction Dashboard
+
+## Section One - Sailor Shift’s Career Explorer
+
+This page provides an overview of Sailor Shift’s music career, summarizing key metrics such as active years, total releases, collaborators, creative roles, charted songs or albums, and chart success ratio. It serves as the entry point for exploring her timeline, collaborations, and influence network through the Shiny dashboard.
+
+![](ui/ui1.png)
+
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
+```{r}
+
+```

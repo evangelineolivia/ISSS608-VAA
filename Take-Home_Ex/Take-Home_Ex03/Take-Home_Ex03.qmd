@@ -22,9 +22,7 @@ In this take-home exercise, we are required to select one of the modules of our 
 
 -   To include a section called UI design for the different components of the UIs for the proposed design.
 
--   We are required to prepare the prototype module report as Take-home Exercise 3 submission.
 
--   We are required to include a section called UI design for the different components of the UIs for the proposed design.
 
 ## Getting Started
 
