@@ -1,5 +1,5 @@
 ---
-title: "Hands on Exercise 8c"
+title: "Hands on Exercise 9a"
 description : Creating Ternary Plot with R
 date: 2025-06-14
 date-modified: "last-modified"
