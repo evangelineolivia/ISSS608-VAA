@@ -22,8 +22,6 @@ In this take-home exercise, we are required to select one of the modules of our 
 
 -   To include a section called UI design for the different components of the UIs for the proposed design.
 
-
-
 ## Getting Started
 
 Our project will be using data from the [VAST Challenge 2025](https://vast-challenge.github.io/2025/index.html) Mini-Challenge 1.
@@ -1458,7 +1456,7 @@ visNetwork(contribution_nodes, contribution_edges_vis) %>%
   visLayout(randomSeed = 123)
 ```
 
-#### Table 
+#### Table
 
 ```{r}
 #| code-fold: true
@@ -1486,15 +1484,14 @@ Based on the network structure, the following variables can be exposed as user i
 -   Artist A, Artist B, Artist C (selectInput)
 :::
 
-
 #### UI Design
 
 ![](ui/ui10.png)
 
-
 ### Tab 3 : Collaboration
 
 #### Artist A Network Graph
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -1588,6 +1585,7 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
 ```
 
 #### Artist B Network Graph
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -1684,6 +1682,7 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
 ```
 
 #### Artist C Network Graph
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -1779,7 +1778,8 @@ visNetwork(collab_nodes, collab_edges_vis) %>%
   visLayout(randomSeed = 42)
 ```
 
-#### Table 
+#### Table
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -1824,7 +1824,7 @@ Based on the network structure, the following variables can be exposed as user i
 -   Artist A, Artist B, Artist C (selectInput)
 :::
 
-#### UI Design 
+#### UI Design
 
 ![](ui/ui11.png)
 
@@ -1880,6 +1880,7 @@ ggplot(release_charted_summary, aes(x = artist, y = n, fill = charted_status)) +
 ```
 
 #### Table
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -1979,4 +1980,3 @@ kable(table, col.names = c("Artist", "ID", "First Release", "Total Works", "Acti
 #### UI Design
 
 ![](ui/ui13.png)
-
