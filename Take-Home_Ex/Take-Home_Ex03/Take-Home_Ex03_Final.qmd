@@ -124,7 +124,7 @@ The Career Timeline tab enables users to interactively explore Sailor Shift's mu
 -   Examine a detailed data table of Sailor's works with attributes like title, release year, genre, and whether the work was notable
 
 ![](ui/ui2.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -168,7 +168,7 @@ Descriptive Panel: Offers a placeholder for dynamic text or analysis summaries.
 Data Table: Lists each collaborator with their name, relation to the work, work title, type (Album/Song), and release date.
 
 ![](ui/ui3.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -211,7 +211,7 @@ The Influence Network tab visualizes how Sailor Shift’s musical works relate t
 -   Examine a data table listing all pairwise influence relationships, their types, and associated genres
 
 ![](ui/ui4.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -261,7 +261,7 @@ Metric summary cards for:
 -   A stacked bar chart visualizing the number of songs vs albums released over time, helping users observe patterns in creative output (e.g., genre peaks, format preferences)
 
 ![](ui/ui5.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -304,7 +304,7 @@ The Influence Timeline tab visualizes how Oceanus Folk has contributed to musica
 -   A description box for narrative or insight generation
 
 ![](ui/ui6.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -347,6 +347,8 @@ Two tables:
 -   Another listing artists with the most notable songs influenced by the genre
 
 ![](ui/ui7.png)
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -401,7 +403,7 @@ Users can:
 -   Analyze a table summarizing which genres most frequently influenced Oceanus Folk tracks
 
 ![](ui/ui8.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -440,7 +442,7 @@ output$roots_network <- renderPlot({})
 output$roots_genre_table <- DT::renderDataTable({})
 ```
 
-##
+## Rising Star Prediction Dashboard
 
 ### Section One - Rising Star Prediction Dashboard
 
@@ -454,7 +456,7 @@ Users can:
 -   Track activity trends to identify peak creative periods and gaps across artist careers
 
 ![](ui/ui9.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -510,7 +512,7 @@ Users can:
 -   Identify key contributors to the genre’s development through their behind-the-scenes impact
 
 ![](ui/ui10.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -560,7 +562,7 @@ The **Artist’s Collaboration** tab showcases the collaborative relationships o
 -   Refer to a summary table that lists the number of collaborations with persons and musical groups per artist
 
 ![](ui/ui11.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -609,7 +611,7 @@ The **Public Recognition** tab compares how often each artist’s work charted i
 -   Analyze recognition trends and identify which artists consistently achieve public acclaim
 
 ![](ui/ui12.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -653,7 +655,7 @@ The **Predictions** tab identifies emerging talents most likely to become the ne
 -   Read a description that explains how the prediction model works and what each variable means
 
 ![](ui/ui13.png)
-
+Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
 ```{r}
 #| eval: false
 #| code-fold: true
