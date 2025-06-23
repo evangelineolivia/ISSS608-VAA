@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.6.40" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-<meta name="dcterms.date" content="2025-06-06" />
-<meta name="description" content="Choropleth Mapping with R" />
+<meta name="dcterms.date" content="2025-06-06">
+<meta name="description" content="Choropleth Mapping with R">
 
 <title>Hands on Exercise 8c – ISSS608</title>
 <style>
@@ -60,7 +58,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/minilogo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d4be639c637f3db3c684c66cefad7e0c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,173 +105,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="/index.html" class="navbar-brand navbar-brand-logo">
-    <img src="/images/navbar.png" alt="" class="navbar-logo" />
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/navbar.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false" >
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Hands on Exercise</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
  <span class="dropdown-text">Hands on Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
  <span class="dropdown-text">Hands on Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.html">
  <span class="dropdown-text">Hands on Exercise 3a</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.html">
  <span class="dropdown-text">Hands on Exercise 3b</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.html">
  <span class="dropdown-text">Hands on Exercise 4a</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.html">
  <span class="dropdown-text">Hands on Exercise 4b</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html">
  <span class="dropdown-text">Hands on Exercise 4c</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html">
  <span class="dropdown-text">Hands on Exercise 4d</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
  <span class="dropdown-text">Hands on Exercise 5</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html">
  <span class="dropdown-text">Hands on Exercise 6</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08a.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08a.html">
  <span class="dropdown-text">Hands on Exercise 8a</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08b.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08b.html">
  <span class="dropdown-text">Hands on Exercise 8b</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08c.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08c.html">
  <span class="dropdown-text">Hands on Exercise 8c</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09a.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09a.html">
  <span class="dropdown-text">Hands on Exercise 9a</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09b.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09b.html">
  <span class="dropdown-text">Hands on Exercise 9b</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09c.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09c.html">
  <span class="dropdown-text">Hands on Exercise 9c</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09d.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09d.html">
  <span class="dropdown-text">Hands on Exercise 9d</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html">
  <span class="dropdown-text">Hands on Exercise 9e</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html">
  <span class="dropdown-text">Hands on Exercise 10</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false" >
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Take Home Exercise</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="/Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html">
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html">
  <span class="dropdown-text">Take Home Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.html">
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.html">
  <span class="dropdown-text">Take Home Exercise 1 Feedback</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html">
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html">
  <span class="dropdown-text">Take Home Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03_Final.html">
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03_Final.html">
  <span class="dropdown-text">Take Home Exercise 3</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false" >
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">In Class Exercise</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
         <li>
-    <a class="dropdown-item" href="/In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html">
  <span class="dropdown-text">In Class Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html">
  <span class="dropdown-text">In Class Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="/In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html">
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html">
  <span class="dropdown-text">In Class Exercise 3</span></a>
   </li>  
     </ul>
   </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="/about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="cc5e645b30655c501a0f6cb0b18d8415" class="alert alert-light hidden"><i class="bi bi-megaphone quarto-announcement-icon"></i><div class="quarto-announcement-content">Update (05/17) - [**In Class Exercise 03**](https://isss608-evangelineolivia.netlify.app/in-class_ex/in-class_ex03/in-class_ex03) is published!</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+  <div id="quarto-announcement" data-announcement-id="cc5e645b30655c501a0f6cb0b18d8415" class="alert alert-light hidden"><i class="bi bi-megaphone quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Update (05/17) - <a href="https://isss608-evangelineolivia.netlify.app/in-class_ex/in-class_ex03/in-class_ex03"><strong>In Class Exercise 03</strong></a> is published!</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#choropleth-mapping-with-r" id="toc-choropleth-mapping-with-r" class="nav-link active" data-scroll-target="#choropleth-mapping-with-r"><span class="header-section-number">13</span> Choropleth Mapping with R</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">13.1</span> Overview</a>
+  <ul class="collapse">
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">13.1.1</span> Objectives</a></li>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link" data-scroll-target="#learning-outcome"><span class="header-section-number">13.1.2</span> Learning Outcome</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">13.2</span> Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#installing-and-loading-packages" id="toc-installing-and-loading-packages" class="nav-link" data-scroll-target="#installing-and-loading-packages"><span class="header-section-number">13.2.1</span> Installing and Loading Packages</a></li>
+  </ul></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data"><span class="header-section-number">13.3</span> Importing Data</a></li>
+  <li><a href="#basic-choropleth-mapping" id="toc-basic-choropleth-mapping" class="nav-link" data-scroll-target="#basic-choropleth-mapping"><span class="header-section-number">13.4</span> Basic Choropleth Mapping</a>
+  <ul class="collapse">
+  <li><a href="#visualising-distribution-of-non-functional-water-point" id="toc-visualising-distribution-of-non-functional-water-point" class="nav-link" data-scroll-target="#visualising-distribution-of-non-functional-water-point"><span class="header-section-number">13.4.1</span> Visualising distribution of non-functional water point</a></li>
+  </ul></li>
+  <li><a href="#choropleth-map-for-rates" id="toc-choropleth-map-for-rates" class="nav-link" data-scroll-target="#choropleth-map-for-rates"><span class="header-section-number">13.5</span> Choropleth Map for Rates</a>
+  <ul class="collapse">
+  <li><a href="#deriving-proportion-of-functional-water-points-and-non-functional-water-points" id="toc-deriving-proportion-of-functional-water-points-and-non-functional-water-points" class="nav-link" data-scroll-target="#deriving-proportion-of-functional-water-points-and-non-functional-water-points"><span class="header-section-number">13.5.1</span> Deriving Proportion of Functional Water Points and Non-Functional Water Points</a></li>
+  <li><a href="#plotting-map-of-rate" id="toc-plotting-map-of-rate" class="nav-link" data-scroll-target="#plotting-map-of-rate"><span class="header-section-number">13.5.2</span> Plotting map of rate</a></li>
+  </ul></li>
+  <li><a href="#extreme-value-maps" id="toc-extreme-value-maps" class="nav-link" data-scroll-target="#extreme-value-maps"><span class="header-section-number">13.6</span> Extreme Value Maps</a>
+  <ul class="collapse">
+  <li><a href="#percentile-map" id="toc-percentile-map" class="nav-link" data-scroll-target="#percentile-map"><span class="header-section-number">13.6.1</span> Percentile Map</a></li>
+  <li><a href="#box-map" id="toc-box-map" class="nav-link" data-scroll-target="#box-map"><span class="header-section-number">13.6.2</span> Box Map</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -296,49 +337,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#choropleth-mapping-with-r" id="toc-choropleth-mapping-with-r"><span class="header-section-number">13</span> Choropleth Mapping with R</a>
-  <ul>
-  <li><a href="#overview" id="toc-overview"><span class="header-section-number">13.1</span> Overview</a>
-  <ul>
-  <li><a href="#objectives" id="toc-objectives"><span class="header-section-number">13.1.1</span> Objectives</a></li>
-  <li><a href="#learning-outcome" id="toc-learning-outcome"><span class="header-section-number">13.1.2</span> Learning Outcome</a></li>
-  </ul></li>
-  <li><a href="#getting-started" id="toc-getting-started"><span class="header-section-number">13.2</span> Getting Started</a>
-  <ul>
-  <li><a href="#installing-and-loading-packages" id="toc-installing-and-loading-packages"><span class="header-section-number">13.2.1</span> Installing and Loading Packages</a></li>
-  </ul></li>
-  <li><a href="#importing-data" id="toc-importing-data"><span class="header-section-number">13.3</span> Importing Data</a></li>
-  <li><a href="#basic-choropleth-mapping" id="toc-basic-choropleth-mapping"><span class="header-section-number">13.4</span> Basic Choropleth Mapping</a>
-  <ul>
-  <li><a href="#visualising-distribution-of-non-functional-water-point" id="toc-visualising-distribution-of-non-functional-water-point"><span class="header-section-number">13.4.1</span> Visualising distribution of non-functional water point</a></li>
-  </ul></li>
-  <li><a href="#choropleth-map-for-rates" id="toc-choropleth-map-for-rates"><span class="header-section-number">13.5</span> Choropleth Map for Rates</a>
-  <ul>
-  <li><a href="#deriving-proportion-of-functional-water-points-and-non-functional-water-points" id="toc-deriving-proportion-of-functional-water-points-and-non-functional-water-points"><span class="header-section-number">13.5.1</span> Deriving Proportion of Functional Water Points and Non-Functional Water Points</a></li>
-  <li><a href="#plotting-map-of-rate" id="toc-plotting-map-of-rate"><span class="header-section-number">13.5.2</span> Plotting map of rate</a></li>
-  </ul></li>
-  <li><a href="#extreme-value-maps" id="toc-extreme-value-maps"><span class="header-section-number">13.6</span> Extreme Value Maps</a>
-  <ul>
-  <li><a href="#percentile-map" id="toc-percentile-map"><span class="header-section-number">13.6.1</span> Percentile Map</a></li>
-  <li><a href="#box-map" id="toc-box-map"><span class="header-section-number">13.6.2</span> Box Map</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
+
 <section id="choropleth-mapping-with-r" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> Choropleth Mapping with R</h1>
 <section id="overview" class="level2" data-number="13.1">
-<h2 data-number="13.1"><span class="header-section-number">13.1</span> Overview</h2>
+<h2 data-number="13.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">13.1</span> Overview</h2>
 <section id="objectives" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1"><span class="header-section-number">13.1.1</span> Objectives</h3>
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="objectives"><span class="header-section-number">13.1.1</span> Objectives</h3>
 <p>In this in-class exercise, you will gain hands-on experience on using appropriate R methods to plot analytical maps.</p>
 </section>
 <section id="learning-outcome" class="level3" data-number="13.1.2">
-<h3 data-number="13.1.2"><span class="header-section-number">13.1.2</span> Learning Outcome</h3>
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="learning-outcome"><span class="header-section-number">13.1.2</span> Learning Outcome</h3>
 <p>By the end of this in-class exercise, you will be able to use appropriate functions of tmap and tidyverse to perform the following tasks:</p>
 <ul>
 <li>Importing geospatial data in rds format into R environment.</li>
@@ -350,56 +359,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="getting-started" class="level2" data-number="13.2">
-<h2 data-number="13.2"><span class="header-section-number">13.2</span> Getting Started</h2>
+<h2 data-number="13.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">13.2</span> Getting Started</h2>
 <section id="installing-and-loading-packages" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1"><span class="header-section-number">13.2.1</span> Installing and Loading Packages</h3>
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="installing-and-loading-packages"><span class="header-section-number">13.2.1</span> Installing and Loading Packages</h3>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tmap, tidyverse, sf)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tmap, tidyverse, sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="importing-data" class="level2" data-number="13.3">
-<h2 data-number="13.3"><span class="header-section-number">13.3</span> Importing Data</h2>
+<h2 data-number="13.3" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">13.3</span> Importing Data</h2>
 <p>For the purpose of this hands-on exercise, a prepared data set called <em>NGA_wp.rds</em> will be used. The data set is a polygon feature data.frame providing information on water point of Nigeria at the LGA level. You can find the data set in the <em>rds</em> sub-direct of the hands-on <em>data</em> folder.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/rds/NGA_wp.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rds/NGA_wp.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-choropleth-mapping" class="level2" data-number="13.4">
-<h2 data-number="13.4"><span class="header-section-number">13.4</span> Basic Choropleth Mapping</h2>
+<h2 data-number="13.4" class="anchored" data-anchor-id="basic-choropleth-mapping"><span class="header-section-number">13.4</span> Basic Choropleth Mapping</h2>
 <section id="visualising-distribution-of-non-functional-water-point" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1"><span class="header-section-number">13.4.1</span> Visualising distribution of non-functional water point</h3>
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="visualising-distribution-of-non-functional-water-point"><span class="header-section-number">13.4.1</span> Visualising distribution of non-functional water point</h3>
 <p>Plot a choropleth map showing the distribution of non-function water point by LGA</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(NGA_wp) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">&quot;wp_functional&quot;</span>,</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(NGA_wp) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"wp_functional"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">style =</span> <span class="st">&quot;equal&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">style =</span> <span class="st">"equal"</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">n =</span> <span class="dv">10</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values =</span> <span class="st">&quot;brewer.blues&quot;</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values =</span> <span class="st">"brewer.blues"</span>),</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>))) <span class="sc">+</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill_alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">&quot;Distribution of functional water point by LGAs&quot;</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Distribution of functional water point by LGAs"</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(NGA_wp) <span class="sc">+</span> </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">&quot;total_wp&quot;</span>, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"total_wp"</span>, </span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">&quot;equal&quot;</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"equal"</span>,</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">10</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">&quot;brewer.blues&quot;</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">"brewer.blues"</span>),</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>))) <span class="sc">+</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, </span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill_alpha =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">&quot;Distribution of total  water point by LGAs&quot;</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Distribution of total  water point by LGAs"</span>)</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(p2, p1, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(p2, p1, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -407,36 +416,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="choropleth-map-for-rates" class="level2" data-number="13.5">
-<h2 data-number="13.5"><span class="header-section-number">13.5</span> Choropleth Map for Rates</h2>
+<h2 data-number="13.5" class="anchored" data-anchor-id="choropleth-map-for-rates"><span class="header-section-number">13.5</span> Choropleth Map for Rates</h2>
 <p>In much of our readings we have now seen the importance to map rates rather than counts of things, and that is for the simple reason that water points are not equally distributed in space. That means that if we do not account for how many water points are somewhere, we end up mapping total water point size rather than our topic of interest.</p>
 <section id="deriving-proportion-of-functional-water-points-and-non-functional-water-points" class="level3" data-number="13.5.1">
-<h3 data-number="13.5.1"><span class="header-section-number">13.5.1</span> Deriving Proportion of Functional Water Points and Non-Functional Water Points</h3>
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="deriving-proportion-of-functional-water-points-and-non-functional-water-points"><span class="header-section-number">13.5.1</span> Deriving Proportion of Functional Water Points and Non-Functional Water Points</h3>
 <p>We will tabulate the proportion of functional water points and the proportion of non-functional water points in each LGA. In the following code chunk, <code>mutate(</code>) from <strong>dplyr</strong> package is used to derive two fields, namely <em>pct_functional</em> and <em>pct_nonfunctional</em>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> NGA_wp <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> NGA_wp <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_functional =</span> wp_functional<span class="sc">/</span>total_wp) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_nonfunctional =</span> wp_nonfunctional<span class="sc">/</span>total_wp)</span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_nonfunctional =</span> wp_nonfunctional<span class="sc">/</span>total_wp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plotting-map-of-rate" class="level3" data-number="13.5.2">
-<h3 data-number="13.5.2"><span class="header-section-number">13.5.2</span> Plotting map of rate</h3>
+<h3 data-number="13.5.2" class="anchored" data-anchor-id="plotting-map-of-rate"><span class="header-section-number">13.5.2</span> Plotting map of rate</h3>
 <p>Plot a choropleth map showing the distribution of percentage functional water point by LGA</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(NGA_wp) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;pct_functional&quot;</span>,</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(NGA_wp) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"pct_functional"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">&quot;equal&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"equal"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">10</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">&quot;brewer.blues&quot;</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">"brewer.blues"</span>),</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))) <span class="sc">+</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>))) <span class="sc">+</span> </span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>,</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill_alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">&quot;Rate map of functional water point by LGAs&quot;</span>)</span></code></pre></div>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Rate map of functional water point by LGAs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -444,24 +453,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="extreme-value-maps" class="level2" data-number="13.6">
-<h2 data-number="13.6"><span class="header-section-number">13.6</span> Extreme Value Maps</h2>
+<h2 data-number="13.6" class="anchored" data-anchor-id="extreme-value-maps"><span class="header-section-number">13.6</span> Extreme Value Maps</h2>
 <p>Extreme value maps are variations of common choropleth maps where the classification is designed to highlight extreme values at the lower and upper end of the scale, with the goal of identifying outliers. These maps were developed in the spirit of spatializing EDA, i.e., adding spatial features to commonly used approaches in non-spatial EDA (Anselin 1994).</p>
 <section id="percentile-map" class="level3" data-number="13.6.1">
-<h3 data-number="13.6.1"><span class="header-section-number">13.6.1</span> Percentile Map</h3>
+<h3 data-number="13.6.1" class="anchored" data-anchor-id="percentile-map"><span class="header-section-number">13.6.1</span> Percentile Map</h3>
 <p>The percentile map is a special type of quantile map with six specific categories: 0-1%,1-10%, 10-50%,50-90%,90-99%, and 99-100%. The corresponding breakpoints can be derived by means of the base R quantile command, passing an explicit vector of cumulative probabilities as c(0,.01,.1,.5,.9,.99,1). Note that the begin and endpoint need to be included.</p>
 <section id="data-preparation" class="level4" data-number="13.6.1.1">
-<h4 data-number="13.6.1.1"><span class="header-section-number">13.6.1.1</span> Data Preparation</h4>
+<h4 data-number="13.6.1.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">13.6.1.1</span> Data Preparation</h4>
 <p>Step 1: Exclude records with NA by using the code chunk below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> NGA_wp <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>NGA_wp <span class="ot">&lt;-</span> NGA_wp <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Step 2: Creating customised classification and extracting values</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>percent <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">01</span>,.<span class="dv">1</span>,.<span class="dv">5</span>,.<span class="dv">9</span>,.<span class="dv">99</span>,<span class="dv">1</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> NGA_wp[<span class="st">&quot;pct_functional&quot;</span>] <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>percent <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">01</span>,.<span class="dv">1</span>,.<span class="dv">5</span>,.<span class="dv">9</span>,.<span class="dv">99</span>,<span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> NGA_wp[<span class="st">"pct_functional"</span>] <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(var[,<span class="dv">1</span>], percent)</span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(var[,<span class="dv">1</span>], percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       0%        1%       10%       50%       90%       99%      100% 
 0.0000000 0.0000000 0.2169811 0.4791667 0.8611111 1.0000000 1.0000000 </code></pre>
@@ -470,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
-<i class='callout-icon'></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
 <p>When variables are extracted from an sf data.frame, the geometry is extracted as well. For mapping and spatial manipulation, this is the expected behavior, but many base R functions cannot deal with the geometry. Specifically, the <code>quantile()</code> gives an error. As a result <code>st_set_geomtry(NULL)</code> is used to drop geomtry field.</p>
@@ -479,17 +488,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="why-writing-functions" class="level4" data-number="13.6.1.2">
-<h4 data-number="13.6.1.2"><span class="header-section-number">13.6.1.2</span> Why writing functions?</h4>
+<h4 data-number="13.6.1.2" class="anchored" data-anchor-id="why-writing-functions"><span class="header-section-number">13.6.1.2</span> Why writing functions?</h4>
 <p>Writing a function has three big advantages over using copy-and-paste:</p>
 <ul>
 <li>We can give a function an evocative name that makes your code easier to understand.</li>
 <li>As requirements change, we only need to update code in one place, instead of many.</li>
-<li>We eliminate the chance of making incidental mistakes when we copy and paste (i.e. updating a variable name in one place, but not in another).</li>
+<li>We eliminate the chance of making incidental mistakes when we copy and paste (i.e.&nbsp;updating a variable name in one place, but not in another).</li>
 </ul>
 </section>
 <section id="creating-the-get.var-function" class="level4" data-number="13.6.1.3">
-<h4 data-number="13.6.1.3"><span class="header-section-number">13.6.1.3</span> Creating the get.var function</h4>
-<p>Firstly, we will write an R function as shown below to extract a variable (i.e. <em>wp_nonfunctional</em>) as a vector out of an sf data.frame.</p>
+<h4 data-number="13.6.1.3" class="anchored" data-anchor-id="creating-the-get.var-function"><span class="header-section-number">13.6.1.3</span> Creating the get.var function</h4>
+<p>Firstly, we will write an R function as shown below to extract a variable (i.e.&nbsp;<em>wp_nonfunctional</em>) as a vector out of an sf data.frame.</p>
 <ul>
 <li>arguments:
 <ul>
@@ -502,19 +511,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>get.var <span class="ot">&lt;-</span> <span class="cf">function</span>(vname,df) {</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>get.var <span class="ot">&lt;-</span> <span class="cf">function</span>(vname,df) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> df[vname] <span class="sc">%&gt;%</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">unname</span>(v[,<span class="dv">1</span>])</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(v)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-percentile-mapping-function" class="level4" data-number="13.6.1.4">
-<h4 data-number="13.6.1.4"><span class="header-section-number">13.6.1.4</span> A percentile mapping function</h4>
+<h4 data-number="13.6.1.4" class="anchored" data-anchor-id="a-percentile-mapping-function"><span class="header-section-number">13.6.1.4</span> A percentile mapping function</h4>
 <p>Next, we will write a percentile mapping function by using the code chunk below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>percentmap <span class="ot">&lt;-</span> <span class="cf">function</span>(vnam, df, <span class="at">legtitle=</span><span class="cn">NA</span>, <span class="at">mtitle=</span><span class="st">&quot;Percentile Map&quot;</span>){</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>percentmap <span class="ot">&lt;-</span> <span class="cf">function</span>(vnam, df, <span class="at">legtitle=</span><span class="cn">NA</span>, <span class="at">mtitle=</span><span class="st">"Percentile Map"</span>){</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  percent <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">01</span>,.<span class="dv">1</span>,.<span class="dv">5</span>,.<span class="dv">9</span>,.<span class="dv">99</span>,<span class="dv">1</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  var <span class="ot">&lt;-</span> <span class="fu">get.var</span>(vnam, df)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  bperc <span class="ot">&lt;-</span> <span class="fu">quantile</span>(var, percent)</span>
@@ -524,23 +533,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tm_polygons</span>(vnam,</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title=</span>legtitle,</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks=</span>bperc,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette=</span><span class="st">&quot;Blues&quot;</span>,</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;&lt; 1%&quot;</span>, <span class="st">&quot;1% - 10%&quot;</span>, <span class="st">&quot;10% - 50%&quot;</span>, <span class="st">&quot;50% - 90%&quot;</span>, <span class="st">&quot;90% - 99%&quot;</span>, <span class="st">&quot;&gt; 99%&quot;</span>))  <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette=</span><span class="st">"Blues"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt; 1%"</span>, <span class="st">"1% - 10%"</span>, <span class="st">"10% - 50%"</span>, <span class="st">"50% - 90%"</span>, <span class="st">"90% - 99%"</span>, <span class="st">"&gt; 99%"</span>))  <span class="sc">+</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>() <span class="sc">+</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> mtitle, </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">&quot;right&quot;</span>,<span class="st">&quot;bottom&quot;</span>))</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">"right"</span>,<span class="st">"bottom"</span>))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-drive-the-percentile-mapping-function" class="level4" data-number="13.6.1.5">
-<h4 data-number="13.6.1.5"><span class="header-section-number">13.6.1.5</span> Test drive the percentile mapping function</h4>
+<h4 data-number="13.6.1.5" class="anchored" data-anchor-id="test-drive-the-percentile-mapping-function"><span class="header-section-number">13.6.1.5</span> Test drive the percentile mapping function</h4>
 <p>To run the function, type the code chunk as shown below.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">percentmap</span>(<span class="st">&quot;total_wp&quot;</span>, NGA_wp)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">percentmap</span>(<span class="st">"total_wp"</span>, NGA_wp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -549,17 +558,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="box-map" class="level3" data-number="13.6.2">
-<h3 data-number="13.6.2"><span class="header-section-number">13.6.2</span> Box Map</h3>
+<h3 data-number="13.6.2" class="anchored" data-anchor-id="box-map"><span class="header-section-number">13.6.2</span> Box Map</h3>
 <p>In essence, a box map is an augmented quartile map, with an additional lower and upper category. When there are lower outliers, then the starting point for the breaks is the minimum value, and the second break is the lower fence. In contrast, when there are no lower outliers, then the starting point for the breaks will be the lower fence, and the second break is the minimum value (there will be no observations that fall in the interval between the lower fence and the minimum value).</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> NGA_wp,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> NGA_wp,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> wp_nonfunctional)) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="384" /></p>
+<figure class="figure">
+<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>
@@ -569,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>To create a box map, a custom breaks specification will be used. However, there is a complication. The break points for the box map vary depending on whether lower or upper outliers are present.</p></li>
 </ul>
 <section id="creating-the-boxbreaks-function" class="level4" data-number="13.6.2.1">
-<h4 data-number="13.6.2.1"><span class="header-section-number">13.6.2.1</span> Creating the boxbreaks function</h4>
+<h4 data-number="13.6.2.1" class="anchored" data-anchor-id="creating-the-boxbreaks-function"><span class="header-section-number">13.6.2.1</span> Creating the boxbreaks function</h4>
 <p>The code chunk below is an R function that creating break points for a box map.</p>
 <ul>
 <li>arguments:
@@ -583,13 +592,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>boxbreaks <span class="ot">&lt;-</span> <span class="cf">function</span>(v,<span class="at">mult=</span><span class="fl">1.5</span>) {</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>boxbreaks <span class="ot">&lt;-</span> <span class="cf">function</span>(v,<span class="at">mult=</span><span class="fl">1.5</span>) {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  qv <span class="ot">&lt;-</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(v))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> qv[<span class="dv">4</span>] <span class="sc">-</span> qv[<span class="dv">2</span>]</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  upfence <span class="ot">&lt;-</span> qv[<span class="dv">4</span>] <span class="sc">+</span> mult <span class="sc">*</span> iqr</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  lofence <span class="ot">&lt;-</span> qv[<span class="dv">2</span>] <span class="sc">-</span> mult <span class="sc">*</span> iqr</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize break points vector</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  bb <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode=</span><span class="st">&quot;numeric&quot;</span>,<span class="at">length=</span><span class="dv">7</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  bb <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode=</span><span class="st">"numeric"</span>,<span class="at">length=</span><span class="dv">7</span>)</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># logic for lower and upper fences</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (lofence <span class="sc">&lt;</span> qv[<span class="dv">1</span>]) {  <span class="co"># no lower outliers</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    bb[<span class="dv">1</span>] <span class="ot">&lt;-</span> lofence</span>
@@ -607,11 +616,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  bb[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> qv[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bb)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-the-get.var-function-1" class="level4" data-number="13.6.2.2">
-<h4 data-number="13.6.2.2"><span class="header-section-number">13.6.2.2</span> Creating the get.var function</h4>
+<h4 data-number="13.6.2.2" class="anchored" data-anchor-id="creating-the-get.var-function-1"><span class="header-section-number">13.6.2.2</span> Creating the get.var function</h4>
 <p>The code chunk below is an R function to extract a variable as a vector out of an sf data frame.</p>
 <ul>
 <li>arguments:
@@ -625,31 +634,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>get.var <span class="ot">&lt;-</span> <span class="cf">function</span>(vname,df) {</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>get.var <span class="ot">&lt;-</span> <span class="cf">function</span>(vname,df) {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> df[vname] <span class="sc">%&gt;%</span> <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">unname</span>(v[,<span class="dv">1</span>])</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(v)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-drive-the-newly-created-function" class="level4" data-number="13.6.2.3">
-<h4 data-number="13.6.2.3"><span class="header-section-number">13.6.2.3</span> Test drive the newly created function</h4>
+<h4 data-number="13.6.2.3" class="anchored" data-anchor-id="test-drive-the-newly-created-function"><span class="header-section-number">13.6.2.3</span> Test drive the newly created function</h4>
 <p>Let’s test the newly created function</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">get.var</span>(<span class="st">&quot;wp_nonfunctional&quot;</span>, NGA_wp) </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxbreaks</span>(var)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">get.var</span>(<span class="st">"wp_nonfunctional"</span>, NGA_wp) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxbreaks</span>(var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -56.5   0.0  14.0  34.0  61.0 131.5 278.0</code></pre>
 </div>
 </div>
 </section>
 <section id="boxmap-function" class="level4" data-number="13.6.2.4">
-<h4 data-number="13.6.2.4"><span class="header-section-number">13.6.2.4</span> Boxmap function</h4>
+<h4 data-number="13.6.2.4" class="anchored" data-anchor-id="boxmap-function"><span class="header-section-number">13.6.2.4</span> Boxmap function</h4>
 <p>The code chunk below is an R function to create a box map. - arguments: - vnam: variable name (as character, in quotes) - df: simple features polygon layer - legtitle: legend title - mtitle: map title - mult: multiplier for IQR - returns: - a tmap-element (plots a map)</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>boxmap <span class="ot">&lt;-</span> <span class="cf">function</span>(vnam, df, </span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>boxmap <span class="ot">&lt;-</span> <span class="cf">function</span>(vnam, df, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">legtitle=</span><span class="cn">NA</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mtitle=</span><span class="st">&quot;Box Map&quot;</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mtitle=</span><span class="st">"Box Map"</span>,</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mult=</span><span class="fl">1.5</span>){</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  var <span class="ot">&lt;-</span> <span class="fu">get.var</span>(vnam,df)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  bb <span class="ot">&lt;-</span> <span class="fu">boxbreaks</span>(var)</span>
@@ -658,46 +667,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(df) <span class="sc">+</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tm_fill</span>(vnam,<span class="at">title=</span>legtitle,</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks=</span>bb,</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette=</span><span class="st">&quot;Blues&quot;</span>,</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;lower outlier&quot;</span>, </span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;&lt; 25%&quot;</span>, </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;25% - 50%&quot;</span>, </span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;50% - 75%&quot;</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;&gt; 75%&quot;</span>, </span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;upper outlier&quot;</span>))  <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette=</span><span class="st">"Blues"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"lower outlier"</span>, </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"&lt; 25%"</span>, </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"25% - 50%"</span>, </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"50% - 75%"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"&gt; 75%"</span>, </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"upper outlier"</span>))  <span class="sc">+</span></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>() <span class="sc">+</span></span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">main.title =</span> mtitle, </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>,</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;top&quot;</span>))</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">"left"</span>,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"top"</span>))</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;plot&quot;</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxmap</span>(<span class="st">&quot;wp_nonfunctional&quot;</span>, NGA_wp)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxmap</span>(<span class="st">"wp_nonfunctional"</span>, NGA_wp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="Hands-on_Ex08c_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2U=">Hands on Exercise</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgMQ==">Hands on Exercise 1</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDEvSGFuZHMtb25fRXgwMS5odG1s">/Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgMg==">Hands on Exercise 2</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDIvSGFuZHMtb25fRXgwMi5odG1s">/Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgM2E=">Hands on Exercise 3a</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDMvSGFuZHMtb25fRXgwM2EuaHRtbA==">/Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03a.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgM2I=">Hands on Exercise 3b</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDMvSGFuZHMtb25fRXgwM2IuaHRtbA==">/Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03b.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNGE=">Hands on Exercise 4a</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDQvSGFuZHMtb25fRXgwNGEuaHRtbA==">/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04a.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNGI=">Hands on Exercise 4b</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDQvSGFuZHMtb25fRXgwNGIuaHRtbA==">/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04b.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNGM=">Hands on Exercise 4c</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDQvSGFuZHMtb25fRXgwNGMuaHRtbA==">/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNGQ=">Hands on Exercise 4d</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDQvSGFuZHMtb25fRXgwNGQuaHRtbA==">/Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNQ==">Hands on Exercise 5</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDUvSGFuZHMtb25fRXgwNS5odG1s">/Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgNg==">Hands on Exercise 6</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDYvSGFuZHMtb25fRXgwNi5odG1s">/Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOGE=">Hands on Exercise 8a</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDgvSGFuZHMtb25fRXgwOGEuaHRtbA==">/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08a.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOGI=">Hands on Exercise 8b</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDgvSGFuZHMtb25fRXgwOGIuaHRtbA==">/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08b.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOGM=">Hands on Exercise 8c</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDgvSGFuZHMtb25fRXgwOGMuaHRtbA==">/Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08c.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOWE=">Hands on Exercise 9a</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDkvSGFuZHMtb25fRXgwOWEuaHRtbA==">/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09a.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOWI=">Hands on Exercise 9b</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDkvSGFuZHMtb25fRXgwOWIuaHRtbA==">/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09b.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOWM=">Hands on Exercise 9c</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDkvSGFuZHMtb25fRXgwOWMuaHRtbA==">/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09c.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOWQ=">Hands on Exercise 9d</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDkvSGFuZHMtb25fRXgwOWQuaHRtbA==">/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09d.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgOWU=">Hands on Exercise 9e</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MDkvSGFuZHMtb25fRXgwOWUuaHRtbA==">/Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09e.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SGFuZHMgb24gRXhlcmNpc2UgMTA=">Hands on Exercise 10</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0hhbmRzLW9uX0V4L0hhbmRzLW9uX0V4MTAvSGFuZHMtb25fRXgxMC5odG1s">/Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6VGFrZSBIb21lIEV4ZXJjaXNl">Take Home Exercise</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6VGFrZSBIb21lIEV4ZXJjaXNlIDE=">Take Home Exercise 1</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L1Rha2UtSG9tZV9FeC9UYWtlLUhvbWVfRXgwMS9UYWtlLUhvbWVfRXgwMS5odG1s">/Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6VGFrZSBIb21lIEV4ZXJjaXNlIDEgRmVlZGJhY2s=">Take Home Exercise 1 Feedback</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L1Rha2UtSG9tZV9FeC9UYWtlLUhvbWVfRXgwMS9UYWtlLUhvbWVfRXgwMUZlZWRiYWNrLmh0bWw=">/Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01Feedback.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6VGFrZSBIb21lIEV4ZXJjaXNlIDI=">Take Home Exercise 2</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L1Rha2UtSG9tZV9FeC9UYWtlLUhvbWVfRXgwMi9UYWtlLUhvbWVfRXgwMi5odG1s">/Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6VGFrZSBIb21lIEV4ZXJjaXNlIDM=">Take Home Exercise 3</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L1Rha2UtSG9tZV9FeC9UYWtlLUhvbWVfRXgwMy9UYWtlLUhvbWVfRXgwM19GaW5hbC5odG1s">/Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03_Final.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SW4gQ2xhc3MgRXhlcmNpc2U=">In Class Exercise</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SW4gQ2xhc3MgRXhlcmNpc2UgMQ==">In Class Exercise 1</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0luLUNsYXNzX0V4L0luLUNsYXNzX0V4MDEvSW4tQ2xhc3NfRXgwMS5odG1s">/In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SW4gQ2xhc3MgRXhlcmNpc2UgMg==">In Class Exercise 2</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0luLUNsYXNzX0V4L0luLUNsYXNzX0V4MDIvSW4tQ2xhc3NfRXgwMi5odG1s">/In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6SW4gQ2xhc3MgRXhlcmNpc2UgMw==">In Class Exercise 3</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L0luLUNsYXNzX0V4L0luLUNsYXNzX0V4MDMvSW4tQ2xhc3NfRXgwMy5odG1s">/In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6QWJvdXQ=">About</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXI6L2Fib3V0Lmh0bWw=">/about.html</span></p>
-<div class="hidden quarto-markdown-envelope-contents" data-render-id="YW5ub3VuY2VtZW50">
-<p>Update (05/17) - <a href="https://isss608-evangelineolivia.netlify.app/in-class_ex/in-class_ex03/in-class_ex03"><strong>In Class Exercise 03</strong></a> is published!</p>
-</div>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ==">Hands on Exercise 8c – ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU=">Hands on Exercise 8c – ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl">Hands on Exercise 8c – ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">ISSS608</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw==">Choropleth Mapping with R</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj">Choropleth Mapping with R</span></p>
-</div>
+
+
 </section>
 </section>
 </section>
 </section>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1116,6 +1118,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>

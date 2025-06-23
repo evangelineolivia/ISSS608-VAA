@@ -30,7 +30,7 @@ listing:
     
   type: grid
   fields: [title, date, description]
-  sort: date
+  sort: date-modified
   page-size: 3
   date-format: "MMM DD, YYYY"
 ---
