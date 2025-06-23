@@ -123,7 +123,6 @@ treemap(realis2018_selected,
     -   If multiple column names are provided, such as the code chunk above, the first name is the highest aggregation level, the second name the second highest aggregation level, and so on.
 -   vSize
     -   The column must not contain negative values. This is because it's vaues will be used to map the sizes of the rectangles of the treemaps.
-    
 :::
 
 ::: {.callout-warning appearance="simple"}
@@ -196,9 +195,7 @@ treemap(realis2018_selected,
 ```
 
 ::: {.callout-note appearance="simple"}
-
 -   The colour scheme used is very copnfusing. This is because mapping = (min(values), mean(range(values)), max(values)). It is not wise to use diverging colour palette such as *RdYlBu* if the values are all positive or negative
-
 :::
 
 To overcome this problem, a single colour palette such as Blues should be used.
@@ -315,14 +312,14 @@ ggplot(data=realis2018_selected,
 
 ### Installing *d3treeR* package
 
-1. Load the *devtools* library and install the package found in github by using the codes below.
+1.  Load the *devtools* library and install the package found in github by using the codes below.
 
 ```{r, echo=TRUE, eval=FALSE}
 library(devtools)
 install_github("timelyportfolio/d3treeR")
 ```
 
-2. Now we are ready to launch *d3treeR* package
+2.  Now we are ready to launch *d3treeR* package
 
 ```{r, echo=TRUE}
 library(d3treeR)

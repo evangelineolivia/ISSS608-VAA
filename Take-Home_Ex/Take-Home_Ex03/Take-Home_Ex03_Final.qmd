@@ -3,7 +3,7 @@ title: "Take Home Exercise 3"
 description: "Prototype Module for Shiny Application"
 author: Evangeline Olivia, Patricia Trisno, Xu Xinyi
 format: 
-  html:
+  docx:
     number-offset: 0
 ---
 
