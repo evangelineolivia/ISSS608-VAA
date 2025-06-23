@@ -3,7 +3,7 @@ title: "Take Home Exercise 3"
 description: "Prototype Module for Shiny Application"
 author: Evangeline Olivia, Patricia Trisno, Xu Xinyi
 format: 
-  docx:
+  html:
     number-offset: 0
 ---
 
@@ -71,12 +71,12 @@ This tab serves as the landing page for Sailor Shift’s Career Explorer module.
 
 Career metrics display, showing:
 
-- Years active
-- Number of releases
-- Number of collaborators
-- Number of creative roles
-- Number of charted works
-- Chart success ratio
+-   Years active
+-   Number of releases
+-   Number of collaborators
+-   Number of creative roles
+-   Number of charted works
+-   Chart success ratio
 
 ![](ui/ui1.png)
 
@@ -172,6 +172,7 @@ Data Table: Lists each collaborator with their name, relation to the work, work 
 ![](ui/ui3.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -216,6 +217,7 @@ The Influence Network tab visualizes how Sailor Shift’s musical works relate t
 ![](ui/ui4.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -267,6 +269,7 @@ Metric summary cards for:
 ![](ui/ui5.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -311,6 +314,7 @@ The Influence Timeline tab visualizes how Oceanus Folk has contributed to musica
 ![](ui/ui6.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -348,9 +352,7 @@ The Outward Impact tab explores the ripple effect of the Oceanus Folk genre acro
 -   A central network graph visualizing songs/albums influenced by Oceanus Folk across different genres and artists
 -   A description box for contextual notes or automated narrative summaries
 
-Two tables:
--   One summarizing the number of songs per genre influenced by Oceanus Folk
--   Another listing artists with the most notable songs influenced by the genre
+Two tables: - One summarizing the number of songs per genre influenced by Oceanus Folk - Another listing artists with the most notable songs influenced by the genre
 
 ![](ui/ui7.png)
 
@@ -412,6 +414,7 @@ Users can:
 ![](ui/ui8.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -466,6 +469,7 @@ Users can:
 ![](ui/ui9.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -523,6 +527,7 @@ Users can:
 ![](ui/ui10.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -574,6 +579,7 @@ The **Artist’s Collaboration** tab showcases the collaborative relationships o
 ![](ui/ui11.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -624,6 +630,7 @@ The **Public Recognition** tab compares how often each artist’s work charted i
 ![](ui/ui12.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -669,6 +676,7 @@ The **Predictions** tab identifies emerging talents most likely to become the ne
 ![](ui/ui13.png)
 
 Code chunk below shows the simplified version of UI and Server components in R Shiny application for Overview sub-tab.
+
 ```{r}
 #| eval: false
 #| code-fold: true
@@ -698,4 +706,3 @@ PredictionsTab <- fluidPage(
 output$rising_star_table <- DT::renderDataTable({}) # Table with columns like: Artist, ID, First Release, Total Works, etc.
 output$rising_star_description <- renderText({}) # Explanation of the Rising Star Score and what users should interpret
 ```
-
