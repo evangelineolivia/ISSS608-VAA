@@ -2,6 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap');
 
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
 #quarto-announcement.alert-light {
   background-color: #FFFACD !important;  /* custom background */
   color: black !important;             /* white text */
