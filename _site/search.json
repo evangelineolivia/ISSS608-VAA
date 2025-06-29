@@ -355,5 +355,26 @@
     "title": "In Class Exercise 3",
     "section": "3.3 Visualising the knowledge graph",
     "text": "3.3 Visualising the knowledge graph\n\nset.seed(1234)\n\n\n3.3.1 Visualising the Whole Graph\n\nggraph(graph,layout = \"fr\")+\n  geom_edge_link(alpha = 0.3,\n                 colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`),\n                  size = 4) +\n  geom_node_text(aes(label = name),\n                 repel = TRUE,\n                 size = 2.5) +\n  theme_void()\n\n\n\n3.3.2 Visualising The Sub Graph\n\n3.3.2.1 Step 1 : Filter Edges to only “MemberOf”\n\ngraph_memberof &lt;- graph %&gt;% \n  activate(edges) %&gt;%\n  filter(`Edge Type` == \"MemberOf\")\n\n\n\n3.3.2.2 Step 2 : Extract only connected nodes (i.e., used in these edges)\n\nused_node_indices &lt;- graph_memberof %&gt;%\n  activate(edges) %&gt;%\n  as_tibble() %&gt;% \n  select(from, to) %&gt;%\n  unlist() %&gt;%\n  unique()\n\n\n\n\n3.3.3 Step 3 : Keep only those nodes\n\ngraph_memberof &lt;- graph_memberof %&gt;%\n  activate(nodes) %&gt;% \n  mutate(row_id = row_number()) %&gt;% \n  filter(row_id %in% used_node_indices) %&gt;% \n  select(-row_id)\n\n\n\n3.3.4 Plot the sub-graph\n\nggraph(graph_memberof,\n       layout = \"fr\") +\n  geom_edge_link(alpha = 0.5,\n                 color = \"gray\")+\n  geom_node_point(aes(color = `Node Type`),\n                  size = 1) +\n  geom_node_text(aes(label = name),\n                 repel = TRUE,\n                 size = 2.5) + \n  theme_void()\n\nWarning: ggrepel: 789 unlabeled data points (too many overlaps). Consider\nincreasing max.overlaps"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html",
+    "href": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html",
+    "title": "Investment Vis",
+    "section": "",
+    "text": "Joining with `by = join_by(Symbol)`"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html#row",
+    "href": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html#row",
+    "title": "Investment Vis",
+    "section": "1.1 Row",
+    "text": "1.1 Row\n\n\n$color\n[1] \"primary\"\n\n$value\n[1] 44.59\n\n\n\n\n$color\n[1] \"primary\"\n\n$value\n[1] 44.86\n\n\n\n\n$color\n[1] \"primary\"\n\n$value\n[1] 44.86\n\n\n\n\n$color\n[1] \"primary\"\n\n$value\n[1] 44.5"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html#row-1",
+    "href": "In-Class_Ex/In-Class_Ex10/In-Class_Ex10.html#row-1",
+    "title": "Investment Vis",
+    "section": "1.2 Row",
+    "text": "1.2 Row\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n\n\n\n\n\n\nWarning: 'scatter' objects don't have these attributes: 'open', 'high', 'low', 'close'\nValid attributes include:\n'cliponaxis', 'connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'fill', 'fillcolor', 'fillpattern', 'groupnorm', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertemplate', 'hovertemplatesrc', 'hovertext', 'hovertextsrc', 'ids', 'idssrc', 'legendgroup', 'legendgrouptitle', 'legendrank', 'line', 'marker', 'meta', 'metasrc', 'mode', 'name', 'opacity', 'orientation', 'selected', 'selectedpoints', 'showlegend', 'stackgaps', 'stackgroup', 'stream', 'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'texttemplate', 'texttemplatesrc', 'transforms', 'type', 'uid', 'uirevision', 'unselected', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xhoverformat', 'xperiod', 'xperiod0', 'xperiodalignment', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'yhoverformat', 'yperiod', 'yperiod0', 'yperiodalignment', 'ysrc', 'key', 'set', 'frame', 'transforms', '_isNestedKey', '_isSimpleKey', '_isGraticule', '_bbox'\nWarning: 'scatter' objects don't have these attributes: 'open', 'high', 'low', 'close'\nValid attributes include:\n'cliponaxis', 'connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'fill', 'fillcolor', 'fillpattern', 'groupnorm', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertemplate', 'hovertemplatesrc', 'hovertext', 'hovertextsrc', 'ids', 'idssrc', 'legendgroup', 'legendgrouptitle', 'legendrank', 'line', 'marker', 'meta', 'metasrc', 'mode', 'name', 'opacity', 'orientation', 'selected', 'selectedpoints', 'showlegend', 'stackgaps', 'stackgroup', 'stream', 'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'texttemplate', 'texttemplatesrc', 'transforms', 'type', 'uid', 'uirevision', 'unselected', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xhoverformat', 'xperiod', 'xperiod0', 'xperiodalignment', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'yhoverformat', 'yperiod', 'yperiod0', 'yperiodalignment', 'ysrc', 'key', 'set', 'frame', 'transforms', '_isNestedKey', '_isSimpleKey', '_isGraticule', '_bbox'"
   }
 ]
